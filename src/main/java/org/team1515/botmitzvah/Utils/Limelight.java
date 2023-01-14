@@ -14,11 +14,9 @@ public class Limelight {
     private NetworkTableEntry ta;
     private NetworkTableEntry pipeline;
 
-    private NetworkTableEntry xcorners, ycorners;
-
-
     /**
-     * Offset in degrees for the camera (use if the camera isn't perfectly centered on the robot)
+     * Offset in degrees for the camera (use if the camera isn't perfectly centered
+     * on the robot)
      */
     private double txOffset = 0;
 
@@ -28,27 +26,26 @@ public class Limelight {
         ty = table.getEntry("ty");
         ta = table.getEntry("ta");
         pipeline = table.getEntry("pipeline");
-
-        xcorners = table.getEntry("tcornx");
-        ycorners = table.getEntry("tcorny");
     }
 
-    /** 
-     * @return double Horizontal Offset From Crosshair To Target (-27 degrees to 27 degrees)
+    /**
+     * @return double Horizontal Offset From Crosshair To Target (-27 degrees to 27
+     *         degrees)
      */
     public double getTX() {
         return tx.getDouble(0.0) + txOffset;
     }
-    
-    /** 
+
+    /**
      * @return double Target Area (0% of image to 100% of image)
      */
     public double getTA() {
         return ta.getDouble(0.0);
     }
-    
-    /** 
-     * @return double Vertical Offset From Crosshair To Target (-20.5 degrees to 20.5 degrees)
+
+    /**
+     * @return double Vertical Offset From Crosshair To Target (-20.5 degrees to
+     *         20.5 degrees)
      */
     public double getTY() {
         return ty.getDouble(0.0);
@@ -59,11 +56,13 @@ public class Limelight {
      */
     public double getDistance() {
         double deltaHeight = RobotMap.HEIGHT_OF_TARGET - RobotMap.HEIGHT_OF_LIMELIGHT;
-        return (deltaHeight / Math.tan(Math.toRadians(getTY() + RobotMap.ANGLE_OF_LIMELIGHT))) + RobotMap.DISTANCE_OFFSET;
+        return (deltaHeight / Math.tan(Math.toRadians(getTY() + RobotMap.ANGLE_OF_LIMELIGHT)))
+                + RobotMap.DISTANCE_OFFSET;
     }
 
     /**
      * Set the limelight's vision tracking pipeline
+     * 
      * @param pipeline pipeline number
      */
     public void setPipeline(int pipeline) {
