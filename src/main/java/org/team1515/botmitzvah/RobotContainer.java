@@ -9,6 +9,7 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
+
 import org.team1515.botmitzvah.Subsystems.*;
 import org.team1515.botmitzvah.Controls;
 
@@ -55,6 +56,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new AutoCommand(drivetrain);
+    return new AutoCommandScore(drivetrain);
   }
 }
