@@ -3,7 +3,7 @@ package org.team1515.botmitzvah.Commands.Autonomous;
 import org.team1515.botmitzvah.RobotContainer;
 import org.team1515.botmitzvah.Robot;
 
-import org.team1515.botmitzvah.Commands.AutoAlign;
+import org.team1515.botmitzvah.Commands.Align;
 import org.team1515.botmitzvah.Commands.DriveDist;
 
 import org.team1515.botmitzvah.Subsystems.Drivetrain;

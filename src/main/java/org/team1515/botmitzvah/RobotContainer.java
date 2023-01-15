@@ -45,7 +45,7 @@ public class RobotContainer {
 
     // Controls.RESET_GYRO.onTrue(drivetrain::zeroGyroscope);
 
-    Controls.ALIGN.onTrue(new AutoAlign(/* drivetrain */));
+    Controls.ALIGN.onTrue(new Align(/* drivetrain */));
 
     if (claw.getExtended()) {
       Controls.GRAB.onTrue(new ClawOpen(claw));
