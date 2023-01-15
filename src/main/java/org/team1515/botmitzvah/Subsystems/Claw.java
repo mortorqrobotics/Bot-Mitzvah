@@ -33,4 +33,8 @@ public class Claw extends SubsystemBase {
         m_piston.toggle();
     }
 
+    public boolean getExtended() {
+        return extended;
+    }
+
 }
