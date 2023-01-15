@@ -1,5 +1,7 @@
 package org.team1515.botmitzvah.Commands;
 
-public class DriveDist {
-    
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+public class DriveDist extends CommandBase {
+
 }
