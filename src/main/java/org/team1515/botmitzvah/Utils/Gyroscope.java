@@ -25,4 +25,12 @@ public class Gyroscope {
          // We have to invert the angle of the NavX so that rotating the robot counter-clockwise makes the angle increase.
         return Rotation2d.fromDegrees(360.0 - m_navx.getYaw() + offset); // Add offset to make the shooter the front instead of the intake
     }
+
+    public void reset(){
+        m_navx.reset();
+    }
+
+    public float getYaw() {
+        return m_navx.getYaw();
+    }
 }
