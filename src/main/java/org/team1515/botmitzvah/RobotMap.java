@@ -17,9 +17,15 @@ public class RobotMap {
     public final static int CLAW_REVERSE_ID = -1;// replace
 
     // Limelight
-    public final static double HEIGHT_OF_TARGET = -1;// replace
+    public final static double HEIGHT_OF_TAPE = -1;// replace
     public final static double HEIGHT_OF_LIMELIGHT = -1;// replace
     public final static double ANGLE_OF_LIMELIGHT = -1;// replace
-    public final static double DISTANCE_OFFSET = -1;// replace
+    public final static double LIMELIGHT_OFFSET = -1;// replace
+
+    // Limelight
+    public final static double HEIGHT_OF_TAG = -1;// replace
+    public final static double HEIGHT_OF_WEBCAM = -1;// replace
+    public final static double ANGLE_OF_WEBCAM = -1;// replace
+    public final static double WEBCAM_OFFSET = -1;// replace
 
 }
