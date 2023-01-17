@@ -4,12 +4,11 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.Utils.Limelight;
+import org.team1515.botmitzvah.Utils.*;
 
 import com.team364.swervelib.util.CTREConfigs;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 
@@ -24,6 +23,7 @@ public class Robot extends TimedRobot {
   public RobotContainer robotContainer;
 
   public static Limelight limelight;
+  public static AprilTag apriltag;
   public static PowerDistribution PDH;
 
   @Override
@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
 
     robotContainer = new RobotContainer();
     limelight = new Limelight();
+    apriltag = new AprilTag();
 
     PDH = new PowerDistribution(RobotMap.PDH_ID, ModuleType.kRev); // ???
     PDH.clearStickyFaults();

@@ -2,7 +2,7 @@ package org.team1515.botmitzvah.Commands;
 
 import org.team1515.botmitzvah.Robot;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
-import org.team1515.botmitzvah.Utils.Limelight;
+import org.team1515.botmitzvah.Utils.AprilTag;
 
 import com.team364.swervelib.util.SwerveConstants;
 
@@ -11,7 +11,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
-public class AlignLight extends CommandBase {
+public class AlignTag extends CommandBase {
     private Drivetrain drivetrainSubsystem;
     private PIDController angleController;
     private double maxSpeed = 0.75 * SwerveConstants.Swerve.maxAngularVelocity;
@@ -22,7 +22,7 @@ public class AlignLight extends CommandBase {
      * @param drivetrainSubsystem
      * @param limelight
      */
-    public AlignLight(Drivetrain drivetrainSubsystem) {
+    public AlignTag(Drivetrain drivetrainSubsystem) {
         this.drivetrainSubsystem = drivetrainSubsystem;
 
         angleController = new PIDController(5, 6.5, 0);
@@ -36,7 +36,7 @@ public class AlignLight extends CommandBase {
 
     @Override
     public void execute() {
-        double error = Math.toRadians(Robot.limelight.getTX());
+        double error = Math.toRadians(Robot.apriltag.getTX());
         if (error == 0) // Stop auto align if limelight has no target in view
             this.end(true);
         double speed = MathUtil.clamp(angleController.calculate(error, 0.0), -maxSpeed, maxSpeed);
