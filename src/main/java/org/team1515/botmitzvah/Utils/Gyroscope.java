@@ -6,31 +6,33 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.SPI;
 
 public class Gyroscope {
-    public final AHRS m_navx;
-    public double offset = 0;
+    private final AHRS navx;
+    private double offset = 0;
 
     public Gyroscope() {
-        m_navx = new AHRS(SPI.Port.kMXP, (byte) 200);
+        navx = new AHRS(SPI.Port.kMXP, (byte) 200);
     }
 
     /**
      * @return Rotation2d representing the angle the robot is facing
      */
-    public Rotation2d getGyroscopeRotation() {  
-        if (m_navx.isMagnetometerCalibrated()) {
-           // We will only get valid fused headings if the magnetometer is calibrated
-          return Rotation2d.fromDegrees(m_navx.getFusedHeading());
+    public Rotation2d getGyroscopeRotation() {
+        if (navx.isMagnetometerCalibrated()) {
+            // We will only get valid fused headings if the magnetometer is calibrated
+            return Rotation2d.fromDegrees(navx.getFusedHeading());
         }
-     
-         // We have to invert the angle of the NavX so that rotating the robot counter-clockwise makes the angle increase.
-        return Rotation2d.fromDegrees(360.0 - m_navx.getYaw() + offset); // Add offset to make the shooter the front instead of the intake
+
+        // We have to invert the angle of the NavX so that rotating the robot
+        // counter-clockwise makes the angle increase.
+        return Rotation2d.fromDegrees(360.0 - navx.getYaw() + offset); // Add offset to make the shooter the front
+                                                                       // instead of the intake
     }
 
-    public void reset(){
-        m_navx.reset();
+    public void zeroYaw() {
+        navx.zeroYaw();
     }
 
     public float getYaw() {
-        return m_navx.getYaw();
+        return navx.getYaw();
     }
 }
