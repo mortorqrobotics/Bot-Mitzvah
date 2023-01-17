@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class Controls {
     // change botton maps later
     public static final Trigger GRAB = new Trigger(RobotContainer.mainController::getXButton);
-    public static final Trigger ALIGN = new Trigger(RobotContainer.mainController::getStartButton); // will limelight and apriltag overlap?
+    public static final Trigger ALIGN = new Trigger(RobotContainer.mainController::getStartButton); // will limelight
+                                                                                                    // and apriltag
+                                                                                                    // overlap?
     public static final Trigger RESET_GYRO = new Trigger(RobotContainer.mainController::getBackButton);
     public static final BooleanSupplier DRIVE_ROBOT_ORIENTED = () -> RobotContainer.mainController.getLeftBumper();
 

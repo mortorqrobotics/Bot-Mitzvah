@@ -21,6 +21,5 @@ public class RobotMap {
     public final static double HEIGHT_OF_LIMELIGHT = -1;// replace
     public final static double ANGLE_OF_LIMELIGHT = -1;// replace
     public final static double DISTANCE_OFFSET = -1;// replace
-    
 
 }

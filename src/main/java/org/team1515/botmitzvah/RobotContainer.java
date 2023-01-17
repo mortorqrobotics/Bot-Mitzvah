@@ -48,16 +48,15 @@ public class RobotContainer {
   private void configureBindings() {
 
     drivetrain.setDefaultCommand(
-      new DefaultDriveCommand(drivetrain, 
-          () -> -modifyAxis(-mainController.getLeftY() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
-          () -> -modifyAxis(-mainController.getLeftX() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
-          () -> -modifyAxis(mainController.getRightX() * getRobotSpeed()) * SwerveConstants.Swerve.maxAngularVelocity,
-          () -> Controls.DRIVE_ROBOT_ORIENTED.getAsBoolean())
-    );
+        new DefaultDriveCommand(drivetrain,
+            () -> -modifyAxis(-mainController.getLeftY() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
+            () -> -modifyAxis(-mainController.getLeftX() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
+            () -> -modifyAxis(mainController.getRightX() * getRobotSpeed()) * SwerveConstants.Swerve.maxAngularVelocity,
+            () -> Controls.DRIVE_ROBOT_ORIENTED.getAsBoolean()));
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
 
-    //Controls.ALIGN.onTrue(new Align(drivetrain));
+    // Controls.ALIGN.onTrue(new Align(drivetrain));
 
     if (claw.getExtended()) {
       Controls.GRAB.onTrue(new ClawOpen(claw));
@@ -74,7 +73,7 @@ public class RobotContainer {
   public static double getRobotSpeed() {
     return Controls.getLeftTrigger() ? 0.45 : 0.7;
     // return 0.7;
-  } 
+  }
 
   private static double modifyAxis(double value) {
     value = Utilities.deadband(value, 0.08);
