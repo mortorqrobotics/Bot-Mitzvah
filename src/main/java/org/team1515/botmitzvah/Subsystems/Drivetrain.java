@@ -8,9 +8,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
-import org.team1515.botmitzvah.RobotMap;
+import org.team1515.botmitzvah.RobotContainer;
 import org.team1515.botmitzvah.Utils.Gyroscope;
-
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -40,19 +39,18 @@ public class Drivetrain extends SubsystemBase {
         swerveOdometry = new SwerveDriveOdometry(SwerveConstants.Swerve.swerveKinematics, getYaw(), getModulePositions());
     }
 
-    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
+    public void drive(Translation2d translation, double rotation, boolean robotRelative, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates =
             SwerveConstants.Swerve.swerveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                                    translation.getX(), 
-                                    translation.getY(), 
-                                    rotation, 
-                                    getYaw()
-                                )
-                                : new ChassisSpeeds(
+                robotRelative ? new ChassisSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
                                     rotation)
+                                : ChassisSpeeds.fromFieldRelativeSpeeds(
+                                    translation.getX(), 
+                                    translation.getY(), 
+                                    rotation, 
+                                    getYaw())
                                 );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, SwerveConstants.Swerve.maxSpeed);
 
@@ -95,7 +93,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void zeroGyro(){
-        gyro.reset();
+        RobotContainer.gyro.m_navx.zeroYaw();
     }
 
     public Rotation2d getYaw() {
