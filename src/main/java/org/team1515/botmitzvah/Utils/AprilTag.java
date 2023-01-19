@@ -6,13 +6,12 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class Limelight {
+public class AprilTag {
 
     private NetworkTable table;
     private NetworkTableEntry tx;
     private NetworkTableEntry ty;
     private NetworkTableEntry ta;
-    private NetworkTableEntry pipeline;
 
     /**
      * Offset in degrees for the camera (use if the camera isn't perfectly centered
@@ -20,16 +19,15 @@ public class Limelight {
      */
     private double txOffset = 0;
 
-    public Limelight() {
-        table = NetworkTableInstance.getDefault().getTable("limelight");
+    public AprilTag() {
+        table = NetworkTableInstance.getDefault().getTable("apriltag");
         tx = table.getEntry("tx");
         ty = table.getEntry("ty");
         ta = table.getEntry("ta");
-        pipeline = table.getEntry("pipeline");
     }
 
     /**
-     * @return double Horizontal Offset From Crosshair To TAPE (-27 degrees to 27
+     * @return double Horizontal Offset From Crosshair To Target (-27 degrees to 27
      *         degrees)
      */
     public double getTX() {
@@ -37,14 +35,14 @@ public class Limelight {
     }
 
     /**
-     * @return double TAPE Area (0% of image to 100% of image)
+     * @return double Target Area (0% of image to 100% of image)
      */
     public double getTA() {
         return ta.getDouble(0.0);
     }
 
     /**
-     * @return double Vertical Offset From Crosshair To TAPE (-20.5 degrees to
+     * @return double Vertical Offset From Crosshair To Target (-20.5 degrees to
      *         20.5 degrees)
      */
     public double getTY() {
@@ -55,17 +53,9 @@ public class Limelight {
      * @return double Get distance in inches
      */
     public double getDistance() {
-        double deltaHeight = RobotMap.HEIGHT_OF_TAPE - RobotMap.HEIGHT_OF_LIMELIGHT;
-        return (deltaHeight / Math.tan(Math.toRadians(getTY() + RobotMap.ANGLE_OF_LIMELIGHT)))
-                + RobotMap.LIMELIGHT_OFFSET;
+        double deltaHeight = RobotMap.HEIGHT_OF_TAG - RobotMap.HEIGHT_OF_WEBCAM;
+        return (deltaHeight / Math.tan(Math.toRadians(getTY() + RobotMap.ANGLE_OF_WEBCAM)))
+                + RobotMap.WEBCAM_OFFSET;
     }
 
-    /**
-     * Set the limelight's vision tracking pipeline
-     * 
-     * @param pipeline pipeline number
-     */
-    public void setPipeline(int pipeline) {
-        this.pipeline.setNumber(pipeline);
-    }
 }
