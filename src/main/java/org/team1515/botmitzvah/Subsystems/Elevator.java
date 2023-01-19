@@ -13,22 +13,22 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 
 public class Elevator extends SubsystemBase{
-    private TalonFX m_elevator;
+    private TalonFX elevator;
     public static final double speed = 0.5;
 
     public Elevator(){
-        m_elevator = new TalonFX(RobotMap.ELEVATOR_ID);
+        elevator = new TalonFX(RobotMap.ELEVATOR_ID);
     }
     
     public void extend() {
-        m_elevator.set(ControlMode.PercentOutput, speed);
+        elevator.set(ControlMode.PercentOutput, speed);
     }
 
     public void retract() {
-        m_elevator.set(ControlMode.PercentOutput, -speed);
+        elevator.set(ControlMode.PercentOutput, -speed);
     }
 
     public void end() {
-        m_elevator.set(ControlMode.PercentOutput, 0);
+        elevator.set(ControlMode.PercentOutput, 0);
     }
 }
