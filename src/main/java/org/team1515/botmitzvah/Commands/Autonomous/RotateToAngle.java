@@ -1,5 +1,7 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
-public class RotateToAngle {
-    
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+public class RotateToAngle extends CommandBase {
+
 }

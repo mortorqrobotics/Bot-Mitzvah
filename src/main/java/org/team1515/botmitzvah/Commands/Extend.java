@@ -2,20 +2,20 @@ package org.team1515.botmitzvah.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import org.team1515.botmitzvah.Subsystems.Claw;
+import org.team1515.botmitzvah.Subsystems.Arm;
 
 /** An example command that uses an example subsystem. */
-public class ClawClose extends CommandBase {
-    private final Claw claw;
+public class Extend extends CommandBase {
+    private final Arm arm;
 
-    public ClawClose(Claw claw) {
-        this.claw = claw;
-        addRequirements(claw);
+    public Extend(Arm arm) {
+        this.arm = arm;
+        addRequirements(arm);
     }
 
     @Override
     public void execute() {
-        claw.extend();
+        arm.extend();
     }
 
     @Override
