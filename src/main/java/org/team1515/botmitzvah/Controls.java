@@ -14,10 +14,10 @@ public class Controls {
     public static final Trigger HIGH = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger MID = new Trigger(RobotContainer.secondController::getBButton);
     public static final Trigger LOW = new Trigger(RobotContainer.secondController::getAButton);
-    public static final Trigger MANUAL_UP = new Trigger(Controls::getLSUp());
-    public static final Trigger MANUAL_DOWN = new Trigger(Controls::getLSDown());
-    public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRSUp());
-    public static final Trigger MANUAL_BACK = new Trigger(Controls::getRSDown());
+    public static final Trigger MANUAL_UP = new Trigger(Controls::getLSUp);
+    public static final Trigger MANUAL_DOWN = new Trigger(Controls::getLSDown);
+    public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRSUp);
+    public static final Trigger MANUAL_BACK = new Trigger(Controls::getRSDown);
     
     public static boolean getRightTrigger() {
         return RobotContainer.mainController.getRightTriggerAxis() >= 0.250;
