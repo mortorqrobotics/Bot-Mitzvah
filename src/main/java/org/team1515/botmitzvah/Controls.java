@@ -14,10 +14,10 @@ public class Controls {
     public static final Trigger HIGH = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger MID = new Trigger(RobotContainer.secondController::getBButton);
     public static final Trigger LOW = new Trigger(RobotContainer.secondController::getAButton);
-    public static final Trigger MANUAL_UP = new Trigger(Controls::getLSUp);
-    public static final Trigger MANUAL_DOWN = new Trigger(Controls::getLSDown);
-    public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRSUp);
-    public static final Trigger MANUAL_BACK = new Trigger(Controls::getRSDown);
+    public static final Trigger MANUAL_UP = new Trigger(Controls::getLeftStickUp);
+    public static final Trigger MANUAL_DOWN = new Trigger(Controls::getLeftStickDown);
+    public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRightStickUp);
+    public static final Trigger MANUAL_BACKWARD = new Trigger(Controls::getRightStickDown);
     
     public static boolean getRightTrigger() {
         return RobotContainer.mainController.getRightTriggerAxis() >= 0.250;
@@ -31,16 +31,16 @@ public class Controls {
         return RobotContainer.secondController.getRightTriggerAxis() >= 0.250;
     }
 
-    public static boolean getLSUp(){
+    public static boolean getLeftStickUp() {
         return RobotContainer.secondController.getLeftY()>0;
     }
-    public static boolean getLSDown(){
+    public static boolean getLeftStickDown() {
         return RobotContainer.secondController.getLeftY()<0;
     }
-    public static boolean getRSUp(){
+    public static boolean getRightStickUp() {
         return RobotContainer.secondController.getLeftY()>0;
     }
-    public static boolean getRSDown(){
+    public static boolean getRightStickDown() {
         return RobotContainer.secondController.getLeftY()<0;
     }
 }
