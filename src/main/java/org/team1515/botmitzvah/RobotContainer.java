@@ -29,6 +29,8 @@ public class RobotContainer {
   public Drivetrain drivetrain;
   public Gyroscope gyro;
   public Claw claw;
+  public Elevator elevator;
+  public Arm arm;
 
   public RobotContainer() {
     mainController = new XboxController(0);
@@ -47,11 +49,14 @@ public class RobotContainer {
 
     Controls.ALIGN.onTrue(new Align(/* drivetrain */));
 
-    if (claw.getExtended()) {
-      Controls.GRAB.onTrue(new ClawOpen(claw));
-    } else {
-      Controls.GRAB.onTrue(new ClawClose(claw));
-    }
+    Controls.GRAB.onTrue(new ClawClose(claw));
+    Controls.RELEASE.onTrue(new ClawOpen(claw));
+
+    Controls.MANUAL_UP.onTrue(new Elevate(elevator));
+    Controls.MANUAL_DOWN.onTrue(new Lower(elevator));
+    Controls.MANUAL_FORWARD.onTrue(new Extend(arm));
+    Controls.MANUAL_BACKWARD.onTrue(new Retract(arm));
+
 
   }
 
