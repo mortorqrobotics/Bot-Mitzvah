@@ -40,9 +40,10 @@ public class RobotContainer {
     mainController = new XboxController(0);
     secondController = new XboxController(1);
 
+    gyro = new Gyroscope();
+
     drivetrain = new Drivetrain();
 
-    gyro = new Gyroscope();
     claw = new Claw(RobotMap.CLAW_FORWARD_ID, RobotMap.CLAW_REVERSE_ID);
 
     configureBindings();

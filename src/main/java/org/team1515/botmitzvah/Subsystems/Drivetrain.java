@@ -22,11 +22,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
     private SwerveDriveOdometry swerveOdometry;
     private SwerveModule[] mSwerveMods;
-    private Gyroscope gyro;
 
     public Drivetrain() {
-        gyro = new Gyroscope();
-        // gyro.configFactoryDefault();
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
@@ -42,15 +39,15 @@ public class Drivetrain extends SubsystemBase {
 
     public void drive(Translation2d translation, double rotation, boolean robotRelative, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates = SwerveConstants.Swerve.swerveKinematics.toSwerveModuleStates(
-                robotRelative ? new ChassisSpeeds(
-                        translation.getX(),
-                        translation.getY(),
-                        rotation)
-                        : ChassisSpeeds.fromFieldRelativeSpeeds(
+                robotRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                                 translation.getX(),
                                 translation.getY(),
                                 rotation,
-                                getYaw()));
+                                getYaw())
+                        : new ChassisSpeeds(
+                                translation.getX(),
+                                translation.getY(),
+                                rotation));
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, SwerveConstants.Swerve.maxSpeed);
 
         for (SwerveModule mod : mSwerveMods) {
@@ -96,8 +93,8 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public Rotation2d getYaw() {
-        return (SwerveConstants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw())
-                : Rotation2d.fromDegrees(gyro.getYaw());
+        return (SwerveConstants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - RobotContainer.gyro.getYaw())
+                : Rotation2d.fromDegrees(RobotContainer.gyro.getYaw());
     }
 
     public void resetModulesToAbsolute() {
