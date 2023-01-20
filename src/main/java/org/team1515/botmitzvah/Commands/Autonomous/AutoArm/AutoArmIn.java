@@ -1,9 +1,8 @@
-package org.team1515.botmitzvah.Commands.Autonomous;
+package org.team1515.botmitzvah.Commands.Autonomous.AutoArm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
-import org.team1515.botmitzvah.Subsystems.Claw;
 
 /** An example command that uses an example subsystem. */
 public class AutoArmIn extends CommandBase {
@@ -28,6 +27,9 @@ public class AutoArmIn extends CommandBase {
 
     @Override
     public boolean isFinished() {
+        if(arm.getInner()){
+            Arm.setIsOut(false);
+        }
         return arm.getInner();
     }
 }

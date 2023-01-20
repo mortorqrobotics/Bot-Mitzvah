@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
     private TalonFX arm;
-    private boolean isOut;
+    private static boolean isOut;
     private DigitalInput outerSwitch;
     private DigitalInput middleSwitch;
     private DigitalInput innerSwitch;
@@ -28,15 +28,11 @@ public class Arm extends SubsystemBase {
     }
 
     public void extend() {
-        if (!outerSwitch.get()) {
-            arm.set(ControlMode.PercentOutput, speed);
-        }
+        arm.set(ControlMode.PercentOutput, speed);
     }
 
     public void retract() {
-        if (!innerSwitch.get()) {
-            arm.set(ControlMode.PercentOutput, -speed);
-        }
+        arm.set(ControlMode.PercentOutput, -speed);
     }
 
     public void end() {
@@ -55,11 +51,11 @@ public class Arm extends SubsystemBase {
         return middleSwitch.get();
     }
 
-    public boolean getIsOut() {
+    public static boolean getIsOut() {
         return isOut;
     }
 
-    public boolean setIsOut(boolean out) {
+    public static boolean setIsOut(boolean out) {
         return isOut = out;
     }
 }

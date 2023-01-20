@@ -9,7 +9,8 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
-
+import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.AutoElevatorUp;
 import org.team1515.botmitzvah.Subsystems.*;
 import org.team1515.botmitzvah.Controls;
 
@@ -53,6 +54,9 @@ public class RobotContainer {
     Controls.RELEASE.onTrue(new ClawOpen(claw));
 
     Controls.HIGH.onTrue(new AutoArmOut(arm));
+    Controls.MID.onTrue(new AutoArmMid(arm));
+    Controls.LOW.onTrue(new AutoArmIn(arm));
+    // how do i link commands so elevator moves with arm?
 
     Controls.MANUAL_UP.whileTrue(new Elevate(elevator));
     Controls.MANUAL_DOWN.whileTrue(new Lower(elevator));
