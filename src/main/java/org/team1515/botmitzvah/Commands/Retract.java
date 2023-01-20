@@ -15,16 +15,16 @@ public class Retract extends CommandBase {
 
     @Override
     public void execute() {
-        arm.retract();
+        if(!arm.getInner()){
+            arm.retract();
+        }
+        else{
+            end(true);
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
         arm.end();
-    }
-
-    @Override
-    public boolean isFinished() {
-        return arm.getInner();
     }
 }
