@@ -16,9 +16,14 @@ public class RobotMap {
     public final static int CLAW_FORWARD_ID = -1;// replace
     public final static int CLAW_REVERSE_ID = -1;// replace
 
-    //Arm
-    public final static int ARM_ID = -1;//replace
-    public final static int ELEVATOR_ID = -1;//replace
+    // Arm
+    public final static int ARM_ID = -1;// replace
+    public final static int ELEVATOR_ID = -1;// replace
+
+    // Arm limit Switches
+    public static final int OUTER_SWITCH_ID = -1;// replace
+    public static final int MIDDLE_SWITCH_ID = -1;// replace
+    public static final int INNER_SWITCH_ID = -1;// replace
 
     // Limelight
     public final static double HEIGHT_OF_TARGET = -1;// replace

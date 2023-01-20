@@ -11,7 +11,8 @@ public class Claw extends SubsystemBase {
     boolean extended = false;
 
     public Claw(int forwardID, int reverseID) {
-        m_piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, forwardID, reverseID); // add parameter if we change PCM ID
+        m_piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, forwardID, reverseID); // add parameter if we change
+                                                                                           // PCM ID
         m_piston.set(Value.kReverse); // check if this runs in robotInit
     }
 

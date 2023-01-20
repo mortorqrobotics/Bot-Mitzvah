@@ -9,14 +9,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Elevator extends SubsystemBase{
+public class Elevator extends SubsystemBase {
     private TalonFX elevator;
     public static final double speed = 0.5;
 
-    public Elevator(){
+    public Elevator() {
         elevator = new TalonFX(RobotMap.ELEVATOR_ID);
     }
-    
+
     public void extend() {
         elevator.set(ControlMode.PercentOutput, speed);
     }

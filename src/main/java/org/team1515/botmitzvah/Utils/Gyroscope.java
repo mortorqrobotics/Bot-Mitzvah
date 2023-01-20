@@ -16,13 +16,15 @@ public class Gyroscope {
     /**
      * @return Rotation2d representing the angle the robot is facing
      */
-    public Rotation2d getGyroscopeRotation() {  
+    public Rotation2d getGyroscopeRotation() {
         if (m_navx.isMagnetometerCalibrated()) {
-           // We will only get valid fused headings if the magnetometer is calibrated
-          return Rotation2d.fromDegrees(m_navx.getFusedHeading());
+            // We will only get valid fused headings if the magnetometer is calibrated
+            return Rotation2d.fromDegrees(m_navx.getFusedHeading());
         }
-     
-         // We have to invert the angle of the NavX so that rotating the robot counter-clockwise makes the angle increase.
-        return Rotation2d.fromDegrees(360.0 - m_navx.getYaw() + offset); // Add offset to make the shooter the front instead of the intake
+
+        // We have to invert the angle of the NavX so that rotating the robot
+        // counter-clockwise makes the angle increase.
+        return Rotation2d.fromDegrees(360.0 - m_navx.getYaw() + offset); // Add offset to make the shooter the front
+                                                                         // instead of the intake
     }
 }
