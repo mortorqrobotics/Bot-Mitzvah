@@ -1,21 +1,24 @@
-package org.team1515.botmitzvah.Commands;
+package org.team1515.botmitzvah.Commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
+import org.team1515.botmitzvah.Subsystems.Claw;
 
 /** An example command that uses an example subsystem. */
-public class Retract extends CommandBase {
+public class AutoArmOut extends CommandBase {
     private final Arm arm;
 
-    public Retract(Arm arm) {
+    public AutoArmOut(Arm arm) {
         this.arm = arm;
         addRequirements(arm);
     }
 
     @Override
     public void execute() {
-        arm.retract();
+        // if (!arm.getOuter()) {
+        arm.extend();
+        // }
     }
 
     @Override
@@ -25,6 +28,6 @@ public class Retract extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return arm.getInner();
+        return arm.getOuter();
     }
 }

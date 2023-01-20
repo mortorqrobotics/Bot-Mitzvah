@@ -19,7 +19,12 @@ public class Extend extends CommandBase {
     }
 
     @Override
+    public void end(boolean interrupted) {
+        arm.end();
+    }
+
+    @Override
     public boolean isFinished() {
-        return true;
+        return arm.getOuter();
     }
 }

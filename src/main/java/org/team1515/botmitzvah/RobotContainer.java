@@ -59,10 +59,12 @@ public class RobotContainer {
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
 
-    Controls.MANUAL_UP.onTrue(new Elevate(elevator));
-    Controls.MANUAL_DOWN.onTrue(new Lower(elevator));
-    Controls.MANUAL_FORWARD.onTrue(new Extend(arm));
-    Controls.MANUAL_BACKWARD.onTrue(new Retract(arm));
+    Controls.HIGH.onTrue(new AutoArmOut(arm));
+
+    Controls.MANUAL_UP.whileTrue(new Elevate(elevator));
+    Controls.MANUAL_DOWN.whileTrue(new Lower(elevator));
+    Controls.MANUAL_FORWARD.whileTrue(new Extend(arm));
+    Controls.MANUAL_BACKWARD.whileTrue(new Retract(arm));
 
   }
 
