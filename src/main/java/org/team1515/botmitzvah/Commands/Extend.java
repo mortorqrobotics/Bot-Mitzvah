@@ -15,16 +15,16 @@ public class Extend extends CommandBase {
 
     @Override
     public void execute() {
-        arm.extend();
+        if(!arm.getOuter()){
+            arm.extend();
+        }
+        else{
+            end(true);
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
         arm.end();
-    }
-
-    @Override
-    public boolean isFinished() {
-        return arm.getOuter();
     }
 }
