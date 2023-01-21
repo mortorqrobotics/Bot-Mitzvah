@@ -1,11 +1,8 @@
 package org.team1515.botmitzvah.Subsystems;
 
-import java.security.DigestInputStream;
-
 import org.team1515.botmitzvah.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -13,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
     private TalonFX arm;
-    private static boolean isOut;
+    private boolean isOut;
     private DigitalInput outerSwitch;
     private DigitalInput middleSwitch;
     private DigitalInput innerSwitch;
@@ -51,11 +48,11 @@ public class Arm extends SubsystemBase {
         return middleSwitch.get();
     }
 
-    public static boolean getIsOut() {
+    public boolean getIsOut() {
         return isOut;
     }
 
-    public static boolean setIsOut(boolean out) {
+    public boolean setIsOut(boolean out) {
         return isOut = out;
     }
 }

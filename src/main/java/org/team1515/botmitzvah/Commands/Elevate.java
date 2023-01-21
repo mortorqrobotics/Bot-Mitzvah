@@ -19,6 +19,11 @@ public class Elevate extends CommandBase {
     }
 
     @Override
+    public void end(boolean interrupted) {
+        elevator.end();
+    }
+
+    @Override
     public boolean isFinished() {
         return true;
     }

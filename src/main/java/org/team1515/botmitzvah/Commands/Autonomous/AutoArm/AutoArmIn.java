@@ -22,14 +22,14 @@ public class AutoArmIn extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        if(arm.getInner()){
+            arm.setIsOut(false);
+        }
         arm.end();
     }
 
     @Override
     public boolean isFinished() {
-        if(arm.getInner()){
-            Arm.setIsOut(false);
-        }
         return arm.getInner();
     }
 }
