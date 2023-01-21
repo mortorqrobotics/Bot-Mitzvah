@@ -25,6 +25,6 @@ public class Lower extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return elevator.getLower();
     }
 }
