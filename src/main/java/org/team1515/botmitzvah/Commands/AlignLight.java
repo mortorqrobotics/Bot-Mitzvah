@@ -39,7 +39,7 @@ public class AlignLight extends CommandBase {
         if (error == 0) // Stop auto align if limelight has no target in view
             this.end(true);
         double rotation = MathUtil.clamp(angleController.calculate(error, 0.0), -maxSpeed, maxSpeed);
-        drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, false, false);
+        drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, false, true);
     }
 
     @Override
