@@ -1,29 +1,32 @@
-package org.team1515.botmitzvah.Commands;
+package org.team1515.botmitzvah.Commands.Autonomous.AutoArm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
-public class Extend extends CommandBase {
+public class AutoArmIn extends CommandBase {
     private final Arm arm;
 
-    public Extend(Arm arm) {
+    public AutoArmIn(Arm arm) {
         this.arm = arm;
         addRequirements(arm);
     }
 
     @Override
     public void execute() {
-        arm.extend();
+        arm.retract();
     }
 
     @Override
     public void end(boolean interrupted) {
+        if (arm.getInner()) {
+            arm.setIsOut(false);
+        }
         arm.end();
     }
 
     @Override
     public boolean isFinished() {
-        return arm.getOuter();
+        return arm.getInner();
     }
 }

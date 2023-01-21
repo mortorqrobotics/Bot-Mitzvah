@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
-/** An example command that uses an example subsystem. */
 public class Retract extends CommandBase {
     private final Arm arm;
 
@@ -19,7 +18,12 @@ public class Retract extends CommandBase {
     }
 
     @Override
+    public void end(boolean interrupted) {
+        arm.end();
+    }
+
+    @Override
     public boolean isFinished() {
-        return true;
+        return arm.getInner();
     }
 }

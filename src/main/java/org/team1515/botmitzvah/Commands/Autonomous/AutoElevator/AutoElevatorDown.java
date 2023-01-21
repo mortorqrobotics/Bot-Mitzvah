@@ -1,13 +1,14 @@
-package org.team1515.botmitzvah.Commands;
-
-import edu.wpi.first.wpilibj2.command.CommandBase;
+package org.team1515.botmitzvah.Commands.Autonomous.AutoElevator;
 
 import org.team1515.botmitzvah.Subsystems.Elevator;
 
-public class Lower extends CommandBase {
+import edu.wpi.first.wpilibj2.command.CommandBase;
+
+public class AutoElevatorDown extends CommandBase {
+
     private final Elevator elevator;
 
-    public Lower(Elevator elevator) {
+    public AutoElevatorDown(Elevator elevator) {
         this.elevator = elevator;
         addRequirements(elevator);
     }
@@ -19,6 +20,9 @@ public class Lower extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        if (elevator.getLower()) {
+            elevator.setIsOut(false);
+        }
         elevator.end();
     }
 
@@ -26,4 +30,5 @@ public class Lower extends CommandBase {
     public boolean isFinished() {
         return elevator.getLower();
     }
+
 }
