@@ -54,12 +54,12 @@ public class RobotContainer {
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
 
-    //automized arm and elevator
+    // automized arm and elevator
     Controls.HIGH.onTrue(Commands.parallel(new AutoArmOut(arm), new AutoElevatorUp(elevator)));
-    Controls.MID.onTrue(Commands.parallel(new AutoArmMid(arm), new AutoElevatorMid(elevator)));
+    Controls.MID.onTrue(Commands.parallel(new AutoArmMid(arm), new AutoElevatorDown(elevator)));
     Controls.LOW.onTrue(Commands.parallel(new AutoArmIn(arm), new AutoElevatorDown(elevator)));
 
-    //manual arm and elevator
+    // manual arm and elevator
     Controls.MANUAL_UP.whileTrue(new Elevate(elevator));
     Controls.MANUAL_DOWN.whileTrue(new Lower(elevator));
     Controls.MANUAL_FORWARD.whileTrue(new Extend(arm));

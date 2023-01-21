@@ -21,7 +21,7 @@ public class Arm extends SubsystemBase {
         isOut = false;
         outerSwitch = new DigitalInput(RobotMap.OUTER_SWITCH_ID);
         innerSwitch = new DigitalInput(RobotMap.INNER_SWITCH_ID);
-        middleSwitch = new DigitalInput(RobotMap.MIDDLE_SWITCH_ID);
+        middleSwitch = new DigitalInput(RobotMap.H_MIDDLE_SWITCH_ID);
     }
 
     public void extend() {
