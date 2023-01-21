@@ -11,17 +11,11 @@ import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
 
 import org.team1515.botmitzvah.Subsystems.*;
-import org.team1515.botmitzvah.Controls;
 
 import com.team364.swervelib.util.SwerveConstants;
 
-import java.util.function.BooleanSupplier;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -34,7 +28,6 @@ public class RobotContainer {
   public static Claw claw;
   public static Elevator elevator;
   public static Arm arm;
-
 
   public RobotContainer() {
     mainController = new XboxController(0);
@@ -60,7 +53,8 @@ public class RobotContainer {
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
 
-    // Controls.ALIGN.onTrue(new Align(drivetrain));
+    Controls.ALIGN_LIGHT.onTrue(new AlignLight(drivetrain));
+    Controls.ALIGN_TAG.onTrue(new AlignLight(drivetrain));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
@@ -69,7 +63,6 @@ public class RobotContainer {
     Controls.MANUAL_DOWN.onTrue(new Lower(elevator));
     Controls.MANUAL_FORWARD.onTrue(new Extend(arm));
     Controls.MANUAL_BACKWARD.onTrue(new Retract(arm));
-
 
   }
 

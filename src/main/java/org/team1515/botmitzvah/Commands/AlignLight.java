@@ -2,14 +2,13 @@ package org.team1515.botmitzvah.Commands;
 
 import org.team1515.botmitzvah.Robot;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
-import org.team1515.botmitzvah.Utils.Limelight;
 
 import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.geometry.Translation2d;
 
 public class AlignLight extends CommandBase {
     private Drivetrain drivetrainSubsystem;
@@ -39,10 +38,8 @@ public class AlignLight extends CommandBase {
         double error = Math.toRadians(Robot.limelight.getTX());
         if (error == 0) // Stop auto align if limelight has no target in view
             this.end(true);
-        double speed = MathUtil.clamp(angleController.calculate(error, 0.0), -maxSpeed, maxSpeed);
-
-        ChassisSpeeds speeds = new ChassisSpeeds(0.0, 0.0, speed);
-        // drivetrainSubsystem.drive(speeds); figure out params
+        double rotation = MathUtil.clamp(angleController.calculate(error, 0.0), -maxSpeed, maxSpeed);
+        drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, false, false);
     }
 
     @Override

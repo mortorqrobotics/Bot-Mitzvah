@@ -9,7 +9,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import org.team1515.botmitzvah.RobotContainer;
-import org.team1515.botmitzvah.Utils.Gyroscope;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -37,13 +36,13 @@ public class Drivetrain extends SubsystemBase {
                 getModulePositions());
     }
 
-    public void drive(Translation2d translation, double rotation, boolean robotRelative, boolean isOpenLoop) {
+    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates = SwerveConstants.Swerve.swerveKinematics.toSwerveModuleStates(
-                robotRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
-                                translation.getX(),
-                                translation.getY(),
-                                rotation,
-                                getYaw())
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
+                        translation.getX(),
+                        translation.getY(),
+                        rotation,
+                        getYaw())
                         : new ChassisSpeeds(
                                 translation.getX(),
                                 translation.getY(),
