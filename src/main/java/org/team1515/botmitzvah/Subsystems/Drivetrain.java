@@ -14,13 +14,13 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
-    private SwerveDriveOdometry swerveOdometry;
-    private SwerveModule[] mSwerveMods;
+    public SwerveDriveOdometry swerveOdometry;
+    public SwerveModule[] mSwerveMods;
 
     public Drivetrain() {
         zeroGyro();
@@ -31,6 +31,14 @@ public class Drivetrain extends SubsystemBase {
                 new SwerveModule(2, SwerveConstants.Swerve.Mod2.constants),
                 new SwerveModule(3, SwerveConstants.Swerve.Mod3.constants)
         };
+
+        /*
+         * By pausing init for a second before setting module offsets, we avoid a bug
+         * with inverting motors.
+         * See https://github.com/Team364/BaseFalconSwerve/issues/8 for more info.
+         */
+        Timer.delay(1.0);
+        resetModulesToAbsolute();
 
         swerveOdometry = new SwerveDriveOdometry(SwerveConstants.Swerve.swerveKinematics, getYaw(),
                 getModulePositions());
@@ -104,10 +112,6 @@ public class Drivetrain extends SubsystemBase {
 
     @Override
     public void periodic() {
-        if (DriverStation.isDisabled()) {
-            resetModulesToAbsolute();
-        }
-
         swerveOdometry.update(getYaw(), getModulePositions());
 
         for (SwerveModule mod : mSwerveMods) {
