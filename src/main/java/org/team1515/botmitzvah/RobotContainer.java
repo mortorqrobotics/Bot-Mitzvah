@@ -12,14 +12,12 @@ import org.team1515.botmitzvah.Commands.Autonomous.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
 import org.team1515.botmitzvah.Subsystems.*;
-import org.team1515.botmitzvah.Controls;
 
-import java.util.function.BooleanSupplier;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -39,7 +37,6 @@ public class RobotContainer {
 
     gyro = new Gyroscope();
     drivetrain = new Drivetrain();
-
     claw = new Claw(RobotMap.CLAW_FORWARD_ID, RobotMap.CLAW_REVERSE_ID);
 
     configureBindings();
@@ -47,9 +44,17 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    // Controls.RESET_GYRO.onTrue(drivetrain::zeroGyroscope);
+    drivetrain.setDefaultCommand(
+        new DefaultDriveCommand(drivetrain,
+            () -> -modifyAxis(-mainController.getLeftY() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
+            () -> -modifyAxis(-mainController.getLeftX() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
+            () -> -modifyAxis(mainController.getRightX() * getRobotSpeed()) * SwerveConstants.Swerve.maxAngularVelocity,
+            () -> Controls.DRIVE_ROBOT_ORIENTED.getAsBoolean()));
 
-    // Controls.ALIGN.onTrue(new Align(/* drivetrain */));
+    Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
+
+    Controls.ALIGN_LIGHT.onTrue(new AlignLight(drivetrain));
+    Controls.ALIGN_TAG.onTrue(new AlignLight(drivetrain));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
@@ -70,4 +75,19 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return new AutoCommandScore(drivetrain);
   }
+
+  public static double getRobotSpeed() {
+    return Controls.getLeftTrigger() ? 0.45 : 0.7;
+    // return 0.7;
+  }
+
+  private static double modifyAxis(double value) {
+    value = Utilities.deadband(value, 0.08);
+
+    // Square the axis
+    value = Math.copySign(value * value, value);
+
+    return value;
+  }
+
 }

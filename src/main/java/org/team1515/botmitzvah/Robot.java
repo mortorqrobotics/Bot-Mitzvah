@@ -4,7 +4,9 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.Utils.Limelight;
+import org.team1515.botmitzvah.Utils.*;
+
+import com.team364.swervelib.util.CTREConfigs;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 
@@ -14,13 +16,20 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  public static CTREConfigs config;
+
+  public RobotContainer robotContainer;
+
   public static Limelight limelight;
+  public static AprilTag apriltag;
 
   @Override
   public void robotInit() {
-    m_robotContainer = new RobotContainer();
+    config = new CTREConfigs();
+
+    robotContainer = new RobotContainer();
     limelight = new Limelight();
+    apriltag = new AprilTag();
   }
 
   @Override
@@ -42,7 +51,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class Controls {
     // change botton maps later
+
     public static final Trigger GRAB = new Trigger(RobotContainer.secondController::getRightBumper);
     public static final Trigger RELEASE = new Trigger(RobotContainer.secondController::getLeftBumper);
     public static final Trigger ALIGN = new Trigger(RobotContainer.mainController::getStartButton); // will limelight
@@ -22,6 +23,9 @@ public class Controls {
     public static final Trigger MANUAL_DOWN = new Trigger(Controls::getLeftStickDown);
     public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRightStickUp);
     public static final Trigger MANUAL_BACKWARD = new Trigger(Controls::getRightStickDown);
+
+    public static final Trigger ALIGN_TAG = new Trigger(RobotContainer.mainController::getStartButton);
+    public static final Trigger ALIGN_LIGHT = new Trigger(RobotContainer.mainController::getStartButton);
 
     public static boolean getRightTrigger() {
         return RobotContainer.mainController.getRightTriggerAxis() >= 0.250;
