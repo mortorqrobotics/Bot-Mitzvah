@@ -3,7 +3,7 @@ package org.team1515.botmitzvah.Utils;
 public class Utilities {
 
     /**
-     * @param value input value
+     * @param value    input value
      * @param deadband amount of deadband
      * @return double value accounted for base error
      */
