@@ -15,9 +15,7 @@ public class AutoElevatorUp extends CommandBase {
 
     @Override
     public void execute() {
-        // if (!elevator.getOuter()) {
         elevator.extend();
-        // }
     }
 
     @Override

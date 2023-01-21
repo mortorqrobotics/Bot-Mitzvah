@@ -15,9 +15,7 @@ public class AutoElevatorDown extends CommandBase {
 
     @Override
     public void execute() {
-        // if (!elevator.getInner()) {
         elevator.retract();
-        // }
     }
 
     @Override

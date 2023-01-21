@@ -9,7 +9,6 @@ import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
 
 import org.team1515.botmitzvah.Subsystems.*;
-//add other subsystems
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;

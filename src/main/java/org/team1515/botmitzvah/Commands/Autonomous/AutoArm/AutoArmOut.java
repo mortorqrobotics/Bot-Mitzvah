@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
-/** An example command that uses an example subsystem. */
 public class AutoArmOut extends CommandBase {
     private final Arm arm;
 
@@ -15,14 +14,12 @@ public class AutoArmOut extends CommandBase {
 
     @Override
     public void execute() {
-        // if (!arm.getOuter()) {
         arm.extend();
-        // }
     }
 
     @Override
     public void end(boolean interrupted) {
-        if (arm.getOuter()){
+        if (arm.getOuter()) {
             arm.setIsOut(true);
         }
         arm.end();

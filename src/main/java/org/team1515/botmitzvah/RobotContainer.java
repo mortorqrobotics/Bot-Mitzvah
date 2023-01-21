@@ -49,7 +49,7 @@ public class RobotContainer {
 
     // Controls.RESET_GYRO.onTrue(drivetrain::zeroGyroscope);
 
-    Controls.ALIGN.onTrue(new Align(/* drivetrain */));
+    // Controls.ALIGN.onTrue(new Align(/* drivetrain */));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
