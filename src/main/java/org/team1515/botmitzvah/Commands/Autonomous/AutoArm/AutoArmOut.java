@@ -22,12 +22,14 @@ public class AutoArmOut extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        if (arm.getOuter()){
+            arm.setIsOut(true);
+        }
         arm.end();
     }
 
     @Override
     public boolean isFinished() {
-        Arm.setIsOut(true);
         return arm.getOuter();
     }
 }
