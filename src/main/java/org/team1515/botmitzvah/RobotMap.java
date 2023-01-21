@@ -18,12 +18,15 @@ public class RobotMap {
 
     // Arm
     public final static int ARM_ID = -1;// replace
-    public final static int ELEVATOR_ID = -1;// replace
-
-    // Arm limit Switches
     public static final int OUTER_SWITCH_ID = -1;// replace
-    public static final int MIDDLE_SWITCH_ID = -1;// replace
+    public static final int H_MIDDLE_SWITCH_ID = 0;// replace
     public static final int INNER_SWITCH_ID = -1;// replace
+
+    // Elevator
+    public final static int ELEVATOR_ID = -1;// replace
+    public static final int UPPER_SWITCH_ID = -1;// replace
+    public static final int LOWER_SWITCH_ID = -1;// replace
+    public static final int V_MIDDLE_SWITCH_ID = -1;// replace
 
     // Limelight
     public final static double HEIGHT_OF_TAPE = -1;// replace
@@ -36,5 +39,8 @@ public class RobotMap {
     public final static double HEIGHT_OF_WEBCAM = -1;// replace
     public final static double ANGLE_OF_WEBCAM = -1;// replace
     public final static double WEBCAM_OFFSET = -1;// replace
+    public final static double DISTANCE_OFFSET = -1;// replace
+
+    // Drivetrain
 
 }
