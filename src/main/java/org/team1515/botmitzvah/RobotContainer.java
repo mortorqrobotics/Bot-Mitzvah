@@ -73,7 +73,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new AutoCommandScore(drivetrain);
+    return new AutoCommandScore(drivetrain, arm, elevator, claw);
   }
 
   public static double getRobotSpeed() {

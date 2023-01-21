@@ -1,21 +1,13 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
-import org.team1515.botmitzvah.RobotContainer;
-import org.team1515.botmitzvah.Robot;
-
 import org.team1515.botmitzvah.Commands.*;
-import org.team1515.botmitzvah.Commands.Autonomous.*;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
 
 import org.team1515.botmitzvah.Subsystems.*;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-//j
+// import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutoCommandBalance extends SequentialCommandGroup {
 
@@ -27,7 +19,9 @@ public class AutoCommandBalance extends SequentialCommandGroup {
      */
     public AutoCommandBalance(Drivetrain drivetrain) { // add params
         addCommands(
-        // add commands in order and wait when needed
-        );
+                new InstantCommand(() -> drivetrain.zeroGyro()),
+                new DriveDist(drivetrain, Units.feetToMeters(12.5), 1, 0.5),
+                new DriveDist(drivetrain, Units.feetToMeters(2.5), -1, 0.5),
+                new AutoBalance(drivetrain, 0.5));
     }
 }

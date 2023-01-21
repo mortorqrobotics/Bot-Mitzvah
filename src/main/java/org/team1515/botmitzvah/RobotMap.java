@@ -41,6 +41,11 @@ public class RobotMap {
     public final static double WEBCAM_OFFSET = -1;// replace
     public final static double DISTANCE_OFFSET = -1;// replace
 
+    // balance PID
+    public static final double BALANCE_KP = -1;// replace
+    public static final double BALANCE_KI = -1;// replace
+    public static final double BALANCE_KD = -1;// replace
+
     // Drivetrain
 
 }
