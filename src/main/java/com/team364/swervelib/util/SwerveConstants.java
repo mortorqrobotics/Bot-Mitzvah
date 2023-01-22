@@ -1,16 +1,12 @@
 package com.team364.swervelib.util;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.team364.swervelib.util.COTSFalconSwerveConstants;
-import com.team364.swervelib.util.SwerveModuleConstants;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-
-import org.team1515.botmitzvah.RobotMap;
 
 public final class SwerveConstants {
         public static final double stickDeadband = 0.1;

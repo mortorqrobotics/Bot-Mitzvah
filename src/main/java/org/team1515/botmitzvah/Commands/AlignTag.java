@@ -13,7 +13,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 public class AlignTag extends CommandBase {
     private Drivetrain drivetrainSubsystem;
     // l
-    private PIDController angleController;
+    private PIDController controller;
     private double maxSpeed = 0.75 * SwerveConstants.Swerve.maxAngularVelocity;
 
     /**
@@ -25,26 +25,26 @@ public class AlignTag extends CommandBase {
     public AlignTag(Drivetrain drivetrainSubsystem) {
         this.drivetrainSubsystem = drivetrainSubsystem;
 
-        angleController = new PIDController(5, 6.5, 0);
+        controller = new PIDController(5, 6.5, 0);
         // TODO retune PID
-        angleController.setTolerance(0.025);
-        angleController.enableContinuousInput(-Math.PI, Math.PI);
-        angleController.setSetpoint(0.0);
+        controller.setTolerance(0.025);
+        controller.enableContinuousInput(-Math.PI, Math.PI);
+        controller.setSetpoint(0.0);
 
         addRequirements(drivetrainSubsystem);
     }
 
     @Override
     public void execute() {
-        double error = Math.toRadians(Robot.apriltag.getTX());
+        double error = Robot.apriltag.getTX(); //TX should be in meters
         if (error == 0) // Stop auto align if limelight has no target in view
             this.end(true);
-        double rotation = MathUtil.clamp(angleController.calculate(error, 0.0), -maxSpeed, maxSpeed);
-        drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, false, true);
+        double speed = MathUtil.clamp(controller.calculate(error, 0.0), -maxSpeed, maxSpeed);
+        drivetrainSubsystem.drive(new Translation2d(0.0, speed), 0.0, false, true);
     }
 
     @Override
     public boolean isFinished() {
-        return angleController.atSetpoint();
+        return controller.atSetpoint();
     }
 }
