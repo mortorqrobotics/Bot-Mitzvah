@@ -38,11 +38,11 @@ public class AlignTag extends CommandBase {
 
     @Override
     public void execute() {
-        double error = Math.toRadians(Robot.apriltag.getTX());
+        double error = Robot.apriltag.getTX(); // TX should be in meters
         if (error == 0) // Stop auto align if limelight has no target in view
             this.end(true);
-        double rotation = MathUtil.clamp(controller.calculate(error, 0.0), -maxSpeed, maxSpeed);
-        drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, false, true);
+        double speed = MathUtil.clamp(controller.calculate(error, 0.0), -maxSpeed, maxSpeed);
+        drivetrainSubsystem.drive(new Translation2d(0.0, speed), 0.0, false, true);
     }
 
     @Override

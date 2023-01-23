@@ -1,5 +1,8 @@
 package org.team1515.botmitzvah;
 
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 
 public class RobotMap {
@@ -58,4 +61,10 @@ public class RobotMap {
 
     // Drivetrain
 
+
+
+    //photonVision
+    public static final String CAMERA_NAME = "name";
+    public static final Transform3d ROBOT_TO_CAM = new Transform3d(new Translation3d(0.5,0.0,0.5), new Rotation3d(0,0,0));
+    //TODO replace transform values
 }

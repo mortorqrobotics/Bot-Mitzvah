@@ -17,7 +17,9 @@ import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -53,8 +55,8 @@ public class RobotContainer {
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
 
-    Controls.ALIGN_LIGHT.onTrue(new AlignLight(drivetrain));
-    Controls.ALIGN_TAG.onTrue(new AlignLight(drivetrain));
+    Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
+    Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));

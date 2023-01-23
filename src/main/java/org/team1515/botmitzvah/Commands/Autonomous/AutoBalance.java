@@ -8,6 +8,7 @@ import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -16,6 +17,7 @@ public class AutoBalance extends CommandBase {
     private PIDController controller;
     private Drivetrain drivetrain;
     private double maxSpeed;
+    private LinearFilter filter = LinearFilter.movingAverage(5);
 
     public AutoBalance(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
@@ -31,7 +33,7 @@ public class AutoBalance extends CommandBase {
 
     @Override
     public void execute() {
-        double error = Math.toRadians(RobotContainer.gyro.getPitch());
+        double error = Math.toRadians(filter.calculate(RobotContainer.gyro.getPitch()));
         double speed = MathUtil.clamp(controller.calculate(error, 0.0), -maxSpeed, maxSpeed);
         drivetrain.drive(new Translation2d(speed, 0.0), 0.0, false, true);
     }

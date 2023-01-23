@@ -26,7 +26,7 @@ public class AlignLight extends CommandBase {
         this.drivetrainSubsystem = drivetrainSubsystem;
         this.maxSpeed = RobotMap.ALIGN_POS_LIMIT * SwerveConstants.Swerve.maxAngularVelocity;
 
-        controller = new PIDController(RobotMap.ALIGN_POS_KP, RobotMap.ALIGN_POS_KI, RobotMap.ALIGN_POS_KD);
+        angleController = new PIDController(5, 6.5, 0);
         // TODO retune PID
         controller.setTolerance(0.025);
         controller.enableContinuousInput(-Math.PI, Math.PI);
@@ -37,10 +37,10 @@ public class AlignLight extends CommandBase {
 
     @Override
     public void execute() {
-        double error = Math.toRadians(Robot.limelight.getTX());
+        double error = Robot.limelight.getTX(); // TX should be in meters
         if (error == 0) // Stop auto align if limelight has no target in view
             this.end(true);
-        double rotation = MathUtil.clamp(controller.calculate(error, 0.0), -maxSpeed, maxSpeed);
+        double rotation = MathUtil.clamp(angleController.calculate(error, 0.0), -maxSpeed, maxSpeed);
         drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, false, true);
     }
 
