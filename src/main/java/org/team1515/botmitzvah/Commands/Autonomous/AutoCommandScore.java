@@ -3,7 +3,7 @@ package org.team1515.botmitzvah.Commands.Autonomous;
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
-
+import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Subsystems.*;
 
 import edu.wpi.first.math.util.Units;
@@ -28,7 +28,7 @@ public class AutoCommandScore extends SequentialCommandGroup {
                 new ClawOpen(claw),
                 Commands.parallel(new AutoArmIn(arm),
                         new AutoElevatorUp(elevator),
-                        new DriveDist(drivetrain, Units.feetToMeters(12.5), -1, 0.5)));
+                        new DriveDist(drivetrain, Units.feetToMeters(12.5), -1)));
         // might seperate if tipping
     }
 }
