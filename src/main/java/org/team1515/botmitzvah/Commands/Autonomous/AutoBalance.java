@@ -4,6 +4,8 @@ import org.team1515.botmitzvah.RobotContainer;
 import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
 
+import com.team364.swervelib.util.SwerveConstants;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -11,19 +13,13 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class AutoBalance extends CommandBase {
-    // PID Controller
-    // input -> gyro angle
-    // setpoint -> 0
-    // position tolerance within rules (if within rules, drivtrain should break)
-    // (+/- 1.5 deg, need to convert)
-    // output -> drivetrain speeds (or poistion if you wanna be field relative,
-    // dependent on drift & odometry)\
     private PIDController controller;
     private Drivetrain drivetrain;
     private double maxSpeed;
 
-    public AutoBalance(Drivetrain drivetrain, double maxSpeed) {
+    public AutoBalance(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
+        this.maxSpeed = RobotMap.BALANCE_LIMIT * SwerveConstants.Swerve.maxSpeed;
 
         controller = new PIDController(RobotMap.BALANCE_KP, RobotMap.BALANCE_KI, RobotMap.BALANCE_KD); // retun PID
         controller.setTolerance(Units.degreesToRadians(1.5));

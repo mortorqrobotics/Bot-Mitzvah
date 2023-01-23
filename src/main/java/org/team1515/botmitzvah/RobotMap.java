@@ -46,6 +46,16 @@ public class RobotMap {
     public static final double BALANCE_KI = -1;// replace
     public static final double BALANCE_KD = -1;// replace
 
+    // align pos PID
+    public static final double ALIGN_POS_KP = -1;// replace
+    public static final double ALIGN_POS_KI = -1;// replace
+    public static final double ALIGN_POS_KD = -1;// replace
+
+    // speed limits
+    public static final double SWERVE_LIMIT = 0.5;// replace
+    public static final double BALANCE_LIMIT = 0.5;// replace
+    public static final double ALIGN_POS_LIMIT = 0.5;// replace
+
     // Drivetrain
 
 }
