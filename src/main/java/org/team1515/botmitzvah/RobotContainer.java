@@ -11,6 +11,7 @@ import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
+import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.RotateToAngle;
 import org.team1515.botmitzvah.Subsystems.*;
 
 import com.team364.swervelib.util.SwerveConstants;
@@ -55,8 +56,10 @@ public class RobotContainer {
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
 
-    Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
-    Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
+    Controls.ALIGN_LIGHT
+        .onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
+    Controls.ALIGN_TAG
+        .onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
