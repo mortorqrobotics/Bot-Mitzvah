@@ -19,8 +19,8 @@ public class Elevator extends SubsystemBase {
     public Elevator() {
         elevator = new TalonFX(RobotMap.ELEVATOR_ID);
         isOut = false;
-        lowerSwitch = new DigitalInput(RobotMap.LOWER_SWITCH_ID);
-        upperSwitch = new DigitalInput(RobotMap.UPPER_SWITCH_ID);
+        lowerSwitch = new DigitalInput(RobotMap.V_LOWER_SWITCH_ID);
+        upperSwitch = new DigitalInput(RobotMap.V_UPPER_SWITCH_ID);
         middleSwitch = new DigitalInput(RobotMap.V_MIDDLE_SWITCH_ID);
     }
 

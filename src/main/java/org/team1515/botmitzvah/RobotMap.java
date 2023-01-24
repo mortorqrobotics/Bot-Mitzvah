@@ -21,14 +21,14 @@ public class RobotMap {
 
     // Arm
     public final static int ARM_ID = -1;// replace
-    public static final int OUTER_SWITCH_ID = -1;// replace
-    public static final int H_MIDDLE_SWITCH_ID = 0;// replace
-    public static final int INNER_SWITCH_ID = -1;// replace
+    public static final int H_OUTER_SWITCH_ID = -1;// replace
+    public static final int H_MIDDLE_SWITCH_ID = -1;// replace
+    public static final int H_INNER_SWITCH_ID = -1;// replace
 
     // Elevator
     public final static int ELEVATOR_ID = -1;// replace
-    public static final int UPPER_SWITCH_ID = -1;// replace
-    public static final int LOWER_SWITCH_ID = -1;// replace
+    public static final int V_UPPER_SWITCH_ID = -1;// replace
+    public static final int V_LOWER_SWITCH_ID = -1;// replace
     public static final int V_MIDDLE_SWITCH_ID = -1;// replace
 
     // Limelight
@@ -59,12 +59,8 @@ public class RobotMap {
     public static final double BALANCE_LIMIT = 0.5;// replace
     public static final double ALIGN_POS_LIMIT = 0.5;// replace
 
-    // Drivetrain
-
-
-
     //photonVision
-    public static final String CAMERA_NAME = "name";
+    public static final String CAMERA_NAME = "";
     public static final Transform3d ROBOT_TO_CAM = new Transform3d(new Translation3d(0.5,0.0,0.5), new Rotation3d(0,0,0));
     //TODO replace transform values
 }

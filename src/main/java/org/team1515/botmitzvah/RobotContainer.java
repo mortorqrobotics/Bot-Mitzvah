@@ -12,13 +12,8 @@ import org.team1515.botmitzvah.Commands.Autonomous.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.RotateToAngle;
-import org.team1515.botmitzvah.Commands.ManualArmElevator.Elevate;
-import org.team1515.botmitzvah.Commands.ManualArmElevator.Extend;
-import org.team1515.botmitzvah.Commands.ManualArmElevator.Lower;
-import org.team1515.botmitzvah.Commands.ManualArmElevator.Retract;
+import org.team1515.botmitzvah.Commands.ManualArmElevator.*;
 import org.team1515.botmitzvah.Subsystems.*;
-
-import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -43,8 +38,11 @@ public class RobotContainer {
     secondController = new XboxController(1);
 
     gyro = new Gyroscope();
+    
     drivetrain = new Drivetrain();
     claw = new Claw();
+    arm = new Arm();
+    elevator = new Elevator();
 
     configureBindings();
   }
@@ -53,17 +51,15 @@ public class RobotContainer {
 
     drivetrain.setDefaultCommand(
         new DefaultDriveCommand(drivetrain,
-            () -> -modifyAxis(-mainController.getLeftY() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
-            () -> -modifyAxis(-mainController.getLeftX() * getRobotSpeed()) * SwerveConstants.Swerve.maxSpeed,
-            () -> -modifyAxis(mainController.getRightX() * getRobotSpeed()) * SwerveConstants.Swerve.maxAngularVelocity,
+            () -> -modifyAxis(-mainController.getLeftY() * getRobotSpeed()),
+            () -> -modifyAxis(-mainController.getLeftX() * getRobotSpeed()),
+            () -> -modifyAxis(mainController.getRightX() * getRobotSpeed()),
             () -> Controls.DRIVE_ROBOT_ORIENTED.getAsBoolean()));
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
 
-    Controls.ALIGN_LIGHT
-        .onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
-    Controls.ALIGN_TAG
-        .onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
+    Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
+    Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
