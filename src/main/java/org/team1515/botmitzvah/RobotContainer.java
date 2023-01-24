@@ -12,6 +12,10 @@ import org.team1515.botmitzvah.Commands.Autonomous.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.RotateToAngle;
+import org.team1515.botmitzvah.Commands.ManualArmElevator.Elevate;
+import org.team1515.botmitzvah.Commands.ManualArmElevator.Extend;
+import org.team1515.botmitzvah.Commands.ManualArmElevator.Lower;
+import org.team1515.botmitzvah.Commands.ManualArmElevator.Retract;
 import org.team1515.botmitzvah.Subsystems.*;
 
 import com.team364.swervelib.util.SwerveConstants;
@@ -40,7 +44,7 @@ public class RobotContainer {
 
     gyro = new Gyroscope();
     drivetrain = new Drivetrain();
-    claw = new Claw(RobotMap.CLAW_FORWARD_ID, RobotMap.CLAW_REVERSE_ID);
+    claw = new Claw();
 
     configureBindings();
   }

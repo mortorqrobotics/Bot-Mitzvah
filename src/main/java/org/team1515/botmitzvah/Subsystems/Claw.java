@@ -1,6 +1,9 @@
 package org.team1515.botmitzvah.Subsystems;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
+import org.team1515.botmitzvah.RobotMap;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
@@ -10,9 +13,14 @@ public class Claw extends SubsystemBase {
     private DoubleSolenoid piston;
     private boolean extended = false;
 
-    public Claw(int forwardID, int reverseID) {
-        piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, forwardID, reverseID); // add parameter if we change
-                                                                                         // PCM ID
+    public Claw() {
+
+        piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.CLAW_FORWARD_ID, RobotMap.CLAW_REVERSE_ID); // add
+                                                                                                                       // parameter
+                                                                                                                       // if
+                                                                                                                       // we
+                                                                                                                       // change
+        // PCM ID
         piston.set(Value.kReverse); // check if this runs in robotInit
     }
 

@@ -1,4 +1,4 @@
-package org.team1515.botmitzvah.Commands;
+package org.team1515.botmitzvah.Commands.ManualArmElevator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
