@@ -24,7 +24,7 @@ public class AprilTag {
             yaw = result.getBestTarget().getYaw();
             Transform3d camToTarget = result.getBestTarget().getBestCameraToTarget();
             distance = camToTarget.getX();
-            h_offset = camToTarget.getY();
+            h_offset = camToTarget.getZ();
         }
     }
 
@@ -41,7 +41,7 @@ public class AprilTag {
     public double getDistance() {
         return distance;
     }
-    public double getOffset() {
+    public double getHOffset() {
         return h_offset;
     }
 }

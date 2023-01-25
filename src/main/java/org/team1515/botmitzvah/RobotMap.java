@@ -59,6 +59,8 @@ public class RobotMap {
     public static double ALIGN_ANGLE_KI = -1;// replace
     public static double ALIGN_ANGLE_KD = -1;// replace
 
+    public static double ALIGN_ANGLE_LIMIT;
+
     // speed limits
     public static final double SWERVE_LIMIT = 0.5;// replace
     public static final double BALANCE_LIMIT = 0.5;// replace

@@ -36,7 +36,7 @@ public class AlignLight extends CommandBase {
         posController.setSetpoint(0.0);
 
         angleController = new PIDController(RobotMap.ALIGN_ANGLE_KP, RobotMap.ALIGN_ANGLE_KI, RobotMap.ALIGN_ANGLE_KD);
-        // TODO retune PI
+        // TODO retune PID
         angleController.setTolerance(0.025);
         angleController.enableContinuousInput(-Math.PI, Math.PI);
         angleController.setSetpoint(0.0);
