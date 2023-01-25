@@ -1,61 +1,47 @@
 package org.team1515.botmitzvah.Utils;
 
+import org.photonvision.PhotonCamera;
+import org.photonvision.targeting.PhotonPipelineResult;
 import org.team1515.botmitzvah.RobotMap;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.util.Units;
 
 public class AprilTag {
-
-    private NetworkTable table;
-    private NetworkTableEntry tx;
-    private NetworkTableEntry ty;
-    private NetworkTableEntry ta;
-
-    /**
-     * Offset in degrees for the camera (use if the camera isn't perfectly centered
-     * on the robot)
-     */
-    private double txOffset = 0;
+    private PhotonCamera camera;
+    PhotonPipelineResult result;
+    private double yaw;
+    private double h_offset;
+    private double distance;
 
     public AprilTag() {
-        table = NetworkTableInstance.getDefault().getTable("apriltag");
-        tx = table.getEntry("tx");
-        ty = table.getEntry("ty");
-        ta = table.getEntry("ta");
+        camera = new PhotonCamera(RobotMap.CAMERA_NAME);
+    }
+
+    public void update() {
+        result = camera.getLatestResult();
+        if(result.hasTargets()) {
+            yaw = result.getBestTarget().getYaw();
+            Transform3d camToTarget = result.getBestTarget().getBestCameraToTarget();
+            distance = camToTarget.getX();
+            h_offset = camToTarget.getY();
+        }
     }
 
     /**
-     * @return double Horizontal Offset From Crosshair To Target (-27 degrees to 27
-     *         degrees)
+     * Returns yaw in radians
      */
-    public double getTX() {
-        return tx.getDouble(0.0) + txOffset;
+    public double getYaw() {
+        return Units.degreesToRadians(yaw);
     }
 
     /**
-     * @return double Target Area (0% of image to 100% of image)
-     */
-    public double getTA() {
-        return ta.getDouble(0.0);
-    }
-
-    /**
-     * @return double Vertical Offset From Crosshair To Target (-20.5 degrees to
-     *         20.5 degrees)
-     */
-    public double getTY() {
-        return ty.getDouble(0.0);
-    }
-
-    /**
-     * @return double Get distance in inches
+     * Returns distance in meters
      */
     public double getDistance() {
-        double deltaHeight = RobotMap.HEIGHT_OF_TAG - RobotMap.HEIGHT_OF_WEBCAM;
-        return (deltaHeight / Math.tan(Math.toRadians(getTY() + RobotMap.ANGLE_OF_WEBCAM)))
-                + RobotMap.WEBCAM_OFFSET;
+        return distance;
     }
-
+    public double getOffset() {
+        return h_offset;
+    }
 }

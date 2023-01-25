@@ -13,8 +13,10 @@ import edu.wpi.first.math.geometry.Translation2d;
 
 public class AlignLight extends CommandBase {
     private Drivetrain drivetrainSubsystem;
-    private PIDController controller;
+    private PIDController posController;
     private double maxSpeed;
+    private PIDController angleController;
+    private double maxRotate;
 
     /**
      * Align robot with the target using the limelight
@@ -24,14 +26,21 @@ public class AlignLight extends CommandBase {
      */
     public AlignLight(Drivetrain drivetrainSubsystem) {
         this.drivetrainSubsystem = drivetrainSubsystem;
-        this.maxSpeed = RobotMap.ALIGN_POS_LIMIT * SwerveConstants.Swerve.maxAngularVelocity;
+        this.maxSpeed = RobotMap.ALIGN_POS_LIMIT * SwerveConstants.Swerve.maxSpeed;
+        this.maxRotate = RobotMap.ALIGN_POS_LIMIT * SwerveConstants.Swerve.maxAngularVelocity;
 
-        controller = new PIDController(5, 6.5, 0);
+        posController = new PIDController(RobotMap.ALIGN_POS_KP, RobotMap.ALIGN_POS_KI, RobotMap.ALIGN_POS_KD);
         // TODO retune PID
-        controller.setTolerance(0.025);
-        controller.enableContinuousInput(-Math.PI, Math.PI);
-        controller.setSetpoint(0.0);
+        posController.setTolerance(0.025);
+        posController.enableContinuousInput(-Math.PI, Math.PI);
+        posController.setSetpoint(0.0);
 
+        angleController = new PIDController(RobotMap.ALIGN_ANGLE_KP, RobotMap.ALIGN_ANGLE_KI, RobotMap.ALIGN_ANGLE_KD);
+        // TODO retune PI
+        angleController.setTolerance(0.025);
+        angleController.enableContinuousInput(-Math.PI, Math.PI);
+        angleController.setSetpoint(0.0);
+        
         addRequirements(drivetrainSubsystem);
     }
 
@@ -40,12 +49,13 @@ public class AlignLight extends CommandBase {
         double error = Robot.limelight.getTX(); // TX should be in meters
         if (error == 0) // Stop auto align if limelight has no target in view
             this.end(true);
-        double rotation = MathUtil.clamp(controller.calculate(error, 0.0), -maxSpeed, maxSpeed);
-        drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, false, true);
+        double speed = MathUtil.clamp(posController.calculate(error, 0.0), -maxSpeed, maxSpeed);
+        double rotation = MathUtil.clamp(angleController.calculate(error, 0.0), -maxRotate, maxRotate);
+        drivetrainSubsystem.drive(new Translation2d(0.0, speed), rotation, true, true);
     }
 
     @Override
     public boolean isFinished() {
-        return controller.atSetpoint();
+        return posController.atSetpoint() && angleController.atSetpoint();
     }
 }

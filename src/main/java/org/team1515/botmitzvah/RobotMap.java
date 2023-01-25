@@ -54,6 +54,11 @@ public class RobotMap {
     public static final double ALIGN_POS_KI = -1;// replace
     public static final double ALIGN_POS_KD = -1;// replace
 
+    //align angle PID
+    public static double ALIGN_ANGLE_KP = -1;// replace
+    public static double ALIGN_ANGLE_KI = -1;// replace
+    public static double ALIGN_ANGLE_KD = -1;// replace
+
     // speed limits
     public static final double SWERVE_LIMIT = 0.5;// replace
     public static final double BALANCE_LIMIT = 0.5;// replace
@@ -63,4 +68,5 @@ public class RobotMap {
     public static final String CAMERA_NAME = "";
     public static final Transform3d ROBOT_TO_CAM = new Transform3d(new Translation3d(0.5,0.0,0.5), new Rotation3d(0,0,0));
     //TODO replace transform values
+
 }
