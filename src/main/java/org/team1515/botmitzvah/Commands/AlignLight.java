@@ -32,7 +32,6 @@ public class AlignLight extends CommandBase {
         posController = new PIDController(RobotMap.ALIGN_POS_KP, RobotMap.ALIGN_POS_KI, RobotMap.ALIGN_POS_KD);
         // TODO retune PID
         posController.setTolerance(0.025);
-        posController.enableContinuousInput(-Math.PI, Math.PI);
         posController.setSetpoint(0.0);
 
         angleController = new PIDController(RobotMap.ALIGN_ANGLE_KP, RobotMap.ALIGN_ANGLE_KI, RobotMap.ALIGN_ANGLE_KD);
@@ -40,7 +39,7 @@ public class AlignLight extends CommandBase {
         angleController.setTolerance(0.025);
         angleController.enableContinuousInput(-Math.PI, Math.PI);
         angleController.setSetpoint(0.0);
-        
+
         addRequirements(drivetrainSubsystem);
     }
 

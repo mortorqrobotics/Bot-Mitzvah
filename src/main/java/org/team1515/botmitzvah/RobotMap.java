@@ -22,7 +22,7 @@ public class RobotMap {
     // Arm
     public final static int ARM_ID = -1;// replace
     public static final int H_OUTER_SWITCH_ID = -1;// replace
-    public static final int H_MIDDLE_SWITCH_ID = -1;// replace
+    public static final int H_MIDDLE_SWITCH_ID = 0;// replace
     public static final int H_INNER_SWITCH_ID = -1;// replace
 
     // Elevator
@@ -54,21 +54,24 @@ public class RobotMap {
     public static final double ALIGN_POS_KI = -1;// replace
     public static final double ALIGN_POS_KD = -1;// replace
 
-    //align angle PID
-    public static double ALIGN_ANGLE_KP = -1;// replace
-    public static double ALIGN_ANGLE_KI = -1;// replace
-    public static double ALIGN_ANGLE_KD = -1;// replace
-
-    public static double ALIGN_ANGLE_LIMIT;
-
     // speed limits
     public static final double SWERVE_LIMIT = 0.5;// replace
     public static final double BALANCE_LIMIT = 0.5;// replace
     public static final double ALIGN_POS_LIMIT = 0.5;// replace
+    public static final double ALIGN_ANGLE_LIMIT = 0;
 
-    //photonVision
-    public static final String CAMERA_NAME = "";
-    public static final Transform3d ROBOT_TO_CAM = new Transform3d(new Translation3d(0.5,0.0,0.5), new Rotation3d(0,0,0));
-    //TODO replace transform values
+    // pids
+    public static final double SWERVE_KP = 0;
+    public static final double SWERVE_KI = 0;
+    public static final double SWERVE_KD = 0;
 
+    public static final double ALIGN_ANGLE_KP = 0;
+    public static final double ALIGN_ANGLE_KI = 0;
+    public static final double ALIGN_ANGLE_KD = 0;
+
+    // photonVision
+    public static final String CAMERA_NAME = "name";
+    public static final Transform3d ROBOT_TO_CAM = new Transform3d(new Translation3d(0.5, 0.0, 0.5),
+            new Rotation3d(0, 0, 0));
+    // TODO replace transform values
 }

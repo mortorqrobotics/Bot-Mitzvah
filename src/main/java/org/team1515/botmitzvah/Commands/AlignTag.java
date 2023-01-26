@@ -33,7 +33,6 @@ public class AlignTag extends CommandBase {
         posController = new PIDController(RobotMap.ALIGN_POS_KP, RobotMap.ALIGN_POS_KI, RobotMap.ALIGN_POS_KD);
         // TODO retune PID
         posController.setTolerance(0.025);
-        posController.enableContinuousInput(-Math.PI, Math.PI);
         posController.setSetpoint(0.0);
 
         angleController = new PIDController(RobotMap.ALIGN_ANGLE_KP, RobotMap.ALIGN_ANGLE_KI, RobotMap.ALIGN_ANGLE_KD);
@@ -47,12 +46,11 @@ public class AlignTag extends CommandBase {
 
     @Override
     public void execute() {
-        double errorH = Robot.apriltag.getHOffset(); // TX should be in meters
-        double errorYaw = Robot.apriltag.getYaw();
-        if (errorH == 0) // Stop auto align if camera has no target in view
+        double error = Robot.apriltag.getHOffset(); // HOffset should be in meters
+        if (error == 0) // Stop auto align if camera has no target in view
             this.end(true);
-        double speed = MathUtil.clamp(posController.calculate(errorH, 0.0), -maxSpeed, maxSpeed);
-        double rotation = MathUtil.clamp(angleController.calculate(errorYaw, 0.0), -maxRotate, maxRotate);
+        double speed = MathUtil.clamp(posController.calculate(error, 0.0), -maxSpeed, maxSpeed);
+        double rotation = MathUtil.clamp(angleController.calculate(error, 0.0), -maxRotate, maxRotate);
         drivetrainSubsystem.drive(new Translation2d(0.0, speed), rotation, true, true);
     }
 
