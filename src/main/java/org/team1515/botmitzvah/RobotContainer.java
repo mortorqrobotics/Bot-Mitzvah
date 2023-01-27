@@ -32,12 +32,14 @@ public class RobotContainer {
   public static Claw claw;
   public static Elevator elevator;
   public static Arm arm;
+  public static PhotonVisionWrapper pvw;
 
   public RobotContainer() {
     mainController = new XboxController(0);
     secondController = new XboxController(1);
 
     gyro = new Gyroscope();
+    pvw = new PhotonVisionWrapper();
     
     drivetrain = new Drivetrain();
     claw = new Claw();
