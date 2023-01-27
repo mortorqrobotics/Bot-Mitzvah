@@ -5,7 +5,6 @@ import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import java.util.Optional;
@@ -25,11 +24,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
     public SwerveModule[] mSwerveMods;
 
-    public SwerveDrivePoseEstimator m_poseEstimator;
+    private SwerveDrivePoseEstimator poseEstimator;
 
-    public Drivetrain() {
+    public Drivetrain(Pose2d initialPos) {
         zeroGyro();
 
+        poseEstimator = new SwerveDrivePoseEstimator(SwerveConstants.Swerve.swerveKinematics, Rotation2d.fromRadians(0), getModulePositions(), initialPos);
         mSwerveMods = new SwerveModule[] {
                 new SwerveModule(0, SwerveConstants.Swerve.Mod0.constants),
                 new SwerveModule(1, SwerveConstants.Swerve.Mod1.constants),
@@ -93,6 +93,10 @@ public class Drivetrain extends SubsystemBase {
         RobotContainer.gyro.zeroYaw();
     }
 
+    public Pose2d getPose(){
+        return poseEstimator.getEstimatedPosition();
+    }
+
     public Rotation2d getYaw() {
         return (SwerveConstants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - RobotContainer.gyro.getYaw())
                 : Rotation2d.fromDegrees(RobotContainer.gyro.getYaw());
@@ -105,25 +109,25 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void updateOdometry() {
-        m_poseEstimator.update(
+        poseEstimator.update(
                 RobotContainer.gyro.getGyroscopeRotation(), getModulePositions());
 
         // Also apply vision measurements. We use 0.3 seconds in the past as an example
         // -- on
         // a real robot, this must be calculated based either on latency or timestamps.
         Optional<EstimatedRobotPose> result =
-                RobotContainer.pvw.getEstimatedGlobalPose(m_poseEstimator.getEstimatedPosition());
+                RobotContainer.pvw.getEstimatedGlobalPose(poseEstimator.getEstimatedPosition());
 
         if (result.isPresent()) {
             EstimatedRobotPose camPose = result.get();
-            m_poseEstimator.addVisionMeasurement(
+            poseEstimator.addVisionMeasurement(
                     camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
         }
     }
 
     @Override
     public void periodic() {
-        m_poseEstimator.update(getYaw(), getModulePositions());
+        poseEstimator.update(getYaw(), getModulePositions());
 
         for (SwerveModule mod : mSwerveMods) {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());

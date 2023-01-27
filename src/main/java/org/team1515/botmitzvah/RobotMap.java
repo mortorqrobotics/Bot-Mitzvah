@@ -1,5 +1,9 @@
 package org.team1515.botmitzvah;
 
+import java.util.HashMap;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
@@ -74,4 +78,12 @@ public class RobotMap {
     public static final Transform3d ROBOT_TO_CAM = new Transform3d(new Translation3d(0.5, 0.0, 0.5),
             new Rotation3d(0, 0, 0));
     // TODO replace transform values
+    
+    // starting values for pose estimator
+    public static final Pose2d[] STARTING = {
+        new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(3), Rotation2d.fromRadians(0.0)), 
+        new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(9), Rotation2d.fromRadians(0.0)), 
+        new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(15), Rotation2d.fromRadians(0.0))
+    };
+    public static final int POSE_MODE = 1;
 }

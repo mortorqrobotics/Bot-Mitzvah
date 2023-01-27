@@ -29,10 +29,10 @@ public class RobotContainer {
 
   public static Drivetrain drivetrain;
   public static Gyroscope gyro;
+  public static PhotonVisionWrapper pvw;
   public static Claw claw;
   public static Elevator elevator;
   public static Arm arm;
-  public static PhotonVisionWrapper pvw;
 
   public RobotContainer() {
     mainController = new XboxController(0);
@@ -41,7 +41,7 @@ public class RobotContainer {
     gyro = new Gyroscope();
     pvw = new PhotonVisionWrapper();
     
-    drivetrain = new Drivetrain();
+    drivetrain = new Drivetrain(RobotMap.STARTING[RobotMap.POSE_MODE]);
     claw = new Claw();
     arm = new Arm();
     elevator = new Elevator();
@@ -60,8 +60,9 @@ public class RobotContainer {
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
 
-    Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
-    Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
+    //Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
+    //Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
+    Controls.ZERO_ROBOT.onTrue(new ZeroRobot(drivetrain));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));

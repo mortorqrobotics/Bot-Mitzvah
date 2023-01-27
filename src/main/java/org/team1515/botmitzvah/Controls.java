@@ -24,8 +24,9 @@ public class Controls {
     public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRightStickUp);
     public static final Trigger MANUAL_BACKWARD = new Trigger(Controls::getRightStickDown);
 
-    public static final Trigger ALIGN_TAG = new Trigger(RobotContainer.mainController::getStartButton);
-    public static final Trigger ALIGN_LIGHT = new Trigger(RobotContainer.mainController::getStartButton);
+    //public static final Trigger ALIGN_TAG = new Trigger(RobotContainer.mainController::getStartButton);
+    //public static final Trigger ALIGN_LIGHT = new Trigger(RobotContainer.mainController::getStartButton);
+    public static final Trigger ZERO_ROBOT = new Trigger(RobotContainer.mainController::getStartButton);
 
     public static boolean getRightTrigger() {
         return RobotContainer.mainController.getRightTriggerAxis() >= 0.250;
