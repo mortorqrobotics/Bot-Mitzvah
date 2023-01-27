@@ -11,7 +11,6 @@ import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
-import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.RotateToAngle;
 import org.team1515.botmitzvah.Commands.ManualArmElevator.*;
 import org.team1515.botmitzvah.Subsystems.*;
 
