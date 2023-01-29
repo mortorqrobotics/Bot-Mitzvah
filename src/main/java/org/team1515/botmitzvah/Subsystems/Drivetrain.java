@@ -18,6 +18,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -25,6 +26,7 @@ public class Drivetrain extends SubsystemBase {
     public SwerveModule[] mSwerveMods;
 
     private SwerveDrivePoseEstimator poseEstimator;
+    private final Field2d field2d = new Field2d();
 
     public Drivetrain(Pose2d initialPos) {
         zeroGyro();
@@ -123,6 +125,8 @@ public class Drivetrain extends SubsystemBase {
             poseEstimator.addVisionMeasurement(
                     camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
         }
+        
+        field2d.setRobotPose(getPose());
     }
 
     @Override
