@@ -46,6 +46,8 @@ public class Drivetrain extends SubsystemBase {
          */
         Timer.delay(1.0);
         resetModulesToAbsolute();
+
+        SmartDashboard.putData("Field", field2d);
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
