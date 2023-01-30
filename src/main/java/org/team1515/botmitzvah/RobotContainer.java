@@ -44,7 +44,7 @@ public class RobotContainer {
 
     if (DriverStation.getAlliance().name().equals("kRed")) {
       drivetrain = new Drivetrain(RobotMap.STARTING_RED[DriverStation.getLocation() - 1]);
-    } else if (DriverStation.getAlliance().name().equals("kRed")) {
+    } else if (DriverStation.getAlliance().name().equals("kBlue")) {
       drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[DriverStation.getLocation() - 1]);
     } else {
       drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[0]);
