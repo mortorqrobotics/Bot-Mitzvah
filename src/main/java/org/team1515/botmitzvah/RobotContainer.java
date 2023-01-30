@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -38,8 +39,16 @@ public class RobotContainer {
 
     gyro = new Gyroscope();
     pvw = new PhotonVisionWrapper();
-    
-    drivetrain = new Drivetrain(RobotMap.STARTING[RobotMap.POSE_MODE]);
+
+    System.out.print(DriverStation.getAlliance().name());
+
+    if (DriverStation.getAlliance().name().equals("kRed")) {
+      drivetrain = new Drivetrain(RobotMap.STARTING_RED[DriverStation.getLocation() - 1]);
+    } else if (DriverStation.getAlliance().name().equals("kRed")) {
+      drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[DriverStation.getLocation() - 1]);
+    } else {
+      drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[0]);
+    }
     claw = new Claw();
     arm = new Arm();
     elevator = new Elevator();
@@ -58,8 +67,10 @@ public class RobotContainer {
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro())); // drivetrain::zeroGyro not working
 
-    //Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
-    //Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
+    // Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain,
+    // new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
+    // Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new
+    // Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
     Controls.ZERO_ROBOT.onTrue(new ZeroRobotTag(drivetrain));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
