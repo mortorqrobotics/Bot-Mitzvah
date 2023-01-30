@@ -10,7 +10,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 
-public class ZeroRobot extends CommandBase {
+public class ZeroRobotTag extends CommandBase {
     private Drivetrain drivetrainSubsystem;
     // l
     private PIDController angleController;
@@ -22,7 +22,7 @@ public class ZeroRobot extends CommandBase {
      * @param drivetrainSubsystem
      * @param limelight
      */
-    public ZeroRobot(Drivetrain drivetrainSubsystem) {
+    public ZeroRobotTag(Drivetrain drivetrainSubsystem) {
         this.drivetrainSubsystem = drivetrainSubsystem;
         this.maxRotate = RobotMap.ALIGN_ANGLE_LIMIT * SwerveConstants.Swerve.maxAngularVelocity;
 

@@ -18,8 +18,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -41,7 +39,7 @@ public class RobotContainer {
     gyro = new Gyroscope();
     pvw = new PhotonVisionWrapper();
     
-    drivetrain = new Drivetrain(new Pose2d());
+    drivetrain = new Drivetrain(RobotMap.STARTING[RobotMap.POSE_MODE]);
     claw = new Claw();
     arm = new Arm();
     elevator = new Elevator();
@@ -62,7 +60,7 @@ public class RobotContainer {
 
     //Controls.ALIGN_LIGHT.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
     //Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
-    Controls.ZERO_ROBOT.onTrue(new ZeroRobot(drivetrain));
+    Controls.ZERO_ROBOT.onTrue(new ZeroRobotTag(drivetrain));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));

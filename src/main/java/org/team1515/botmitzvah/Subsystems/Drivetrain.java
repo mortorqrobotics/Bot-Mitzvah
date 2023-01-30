@@ -28,16 +28,21 @@ public class Drivetrain extends SubsystemBase {
     private SwerveDrivePoseEstimator poseEstimator;
     private final Field2d field2d = new Field2d();
 
+    private Rotation2d realZero;
+
     public Drivetrain(Pose2d initialPos) {
         zeroGyro();
 
-        poseEstimator = new SwerveDrivePoseEstimator(SwerveConstants.Swerve.swerveKinematics, Rotation2d.fromRadians(0), getModulePositions(), initialPos);
+        realZero = initialPos.getRotation();
+
         mSwerveMods = new SwerveModule[] {
                 new SwerveModule(0, SwerveConstants.Swerve.Mod0.constants),
                 new SwerveModule(1, SwerveConstants.Swerve.Mod1.constants),
                 new SwerveModule(2, SwerveConstants.Swerve.Mod2.constants),
                 new SwerveModule(3, SwerveConstants.Swerve.Mod3.constants)
         };
+
+        poseEstimator = new SwerveDrivePoseEstimator(SwerveConstants.Swerve.swerveKinematics, Rotation2d.fromRadians(0), getModulePositions(), initialPos);
 
         /*
          * By pausing init for a second before setting module offsets, we avoid a bug
@@ -94,6 +99,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void zeroGyro() {
+        realZero.minus(RobotContainer.gyro.getGyroscopeRotation());
         RobotContainer.gyro.zeroYaw();
     }
 
@@ -141,4 +147,10 @@ public class Drivetrain extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
         }
     }
+
+    public Rotation2d getRealZero() {
+        return realZero;
+    }
+
+
 }
