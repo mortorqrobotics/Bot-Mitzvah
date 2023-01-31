@@ -31,9 +31,9 @@ public class Drivetrain extends SubsystemBase {
     private Rotation2d realZero;
 
     public Drivetrain(Pose2d initialPos) {
-        zeroGyro();
-
         realZero = initialPos.getRotation();
+
+        zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
                 new SwerveModule(0, SwerveConstants.Swerve.Mod0.constants),
@@ -99,7 +99,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public void zeroGyro() {
-        realZero.minus(RobotContainer.gyro.getGyroscopeRotation());
+        realZero = realZero.minus(RobotContainer.gyro.getGyroscopeRotation());
         RobotContainer.gyro.zeroYaw();
     }
 
