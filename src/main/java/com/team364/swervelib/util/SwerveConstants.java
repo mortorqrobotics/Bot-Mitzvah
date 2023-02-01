@@ -91,7 +91,7 @@ public final class SwerveConstants {
                 /* Swerve Profiling Values */
                 /** Meters per Second */
                 public static final double maxSpeed = 6380.0 / 60.0
-                                * COTSFalconSwerveConstants.driveGearRatios.SDSMK4_L2 * chosenModule.wheelDiameter
+                                * COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2 * chosenModule.wheelDiameter
                                 * Math.PI * 0.1; // TODO: This must be tuned to specific robot
                 /** Radians per Second */
                 public static final double maxAngularVelocity = maxSpeed
