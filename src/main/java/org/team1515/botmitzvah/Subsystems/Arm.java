@@ -2,14 +2,14 @@ package org.team1515.botmitzvah.Subsystems;
 
 import org.team1515.botmitzvah.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
-    private TalonFX arm;
+    private CANSparkMax arm;
     private boolean isOut;
     private DigitalInput outerSwitch;
     private DigitalInput middleSwitch;
@@ -17,7 +17,9 @@ public class Arm extends SubsystemBase {
     public static final double speed = 0.5;
 
     public Arm() {
-        arm = new TalonFX(RobotMap.ARM_ID);
+        arm = new CANSparkMax(RobotMap.ARM_ID, MotorType.kBrushless);
+        arm.restoreFactoryDefaults();
+
         isOut = false;
         outerSwitch = new DigitalInput(RobotMap.H_OUTER_SWITCH_ID);
         innerSwitch = new DigitalInput(RobotMap.H_INNER_SWITCH_ID);
@@ -25,15 +27,15 @@ public class Arm extends SubsystemBase {
     }
 
     public void extend() {
-        arm.set(ControlMode.PercentOutput, speed);
+        arm.set(speed);
     }
 
     public void retract() {
-        arm.set(ControlMode.PercentOutput, -speed);
+        arm.set(-speed);
     }
 
     public void end() {
-        arm.set(ControlMode.PercentOutput, 0);
+        arm.set(0);
     }
 
     public boolean getOuter() {

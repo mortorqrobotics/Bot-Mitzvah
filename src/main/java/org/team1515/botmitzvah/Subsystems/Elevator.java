@@ -2,14 +2,14 @@ package org.team1515.botmitzvah.Subsystems;
 
 import org.team1515.botmitzvah.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase {
-    private TalonFX elevator;
+    private CANSparkMax elevator;
     private boolean isOut;
     private DigitalInput lowerSwitch;
     private DigitalInput middleSwitch;
@@ -17,7 +17,9 @@ public class Elevator extends SubsystemBase {
     public static final double speed = 0.5;
 
     public Elevator() {
-        elevator = new TalonFX(RobotMap.ELEVATOR_ID);
+        elevator = new CANSparkMax(RobotMap.ELEVATOR_ID, MotorType.kBrushless);
+        elevator.restoreFactoryDefaults();
+
         isOut = false;
         lowerSwitch = new DigitalInput(RobotMap.V_LOWER_SWITCH_ID);
         upperSwitch = new DigitalInput(RobotMap.V_UPPER_SWITCH_ID);
@@ -25,15 +27,15 @@ public class Elevator extends SubsystemBase {
     }
 
     public void extend() {
-        elevator.set(ControlMode.PercentOutput, speed);
+        elevator.set(speed);
     }
 
     public void retract() {
-        elevator.set(ControlMode.PercentOutput, -speed);
+        elevator.set(-speed);
     }
 
     public void end() {
-        elevator.set(ControlMode.PercentOutput, 0);
+        elevator.set(0);
     }
 
     public boolean getUpper() {
