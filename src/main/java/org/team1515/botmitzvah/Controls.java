@@ -1,7 +1,5 @@
 package org.team1515.botmitzvah;
 
-import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class Controls {
@@ -9,11 +7,9 @@ public class Controls {
 
     public static final Trigger GRAB = new Trigger(RobotContainer.secondController::getRightBumper);
     public static final Trigger RELEASE = new Trigger(RobotContainer.secondController::getLeftBumper);
-    public static final Trigger ALIGN = new Trigger(RobotContainer.mainController::getStartButton); // will limelight
-                                                                                                    // and apriltag
-                                                                                                    // overlap?
+
     public static final Trigger RESET_GYRO = new Trigger(RobotContainer.mainController::getBackButton);
-    public static final BooleanSupplier DRIVE_ROBOT_ORIENTED = () -> RobotContainer.mainController.getLeftBumper();
+    public static final Trigger DRIVE_ROBOT_ORIENTED = new Trigger(RobotContainer.mainController::getLeftBumper);
 
     public static final Trigger HIGH = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger MID = new Trigger(RobotContainer.secondController::getBButton);
@@ -24,8 +20,10 @@ public class Controls {
     public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRightStickUp);
     public static final Trigger MANUAL_BACKWARD = new Trigger(Controls::getRightStickDown);
 
-    //public static final Trigger ALIGN_TAG = new Trigger(RobotContainer.mainController::getStartButton);
-    //public static final Trigger ALIGN_LIGHT = new Trigger(RobotContainer.mainController::getStartButton);
+    // public static final Trigger ALIGN_TAG = new
+    // Trigger(RobotContainer.mainController::getStartButton);
+    // public static final Trigger ALIGN_LIGHT = new
+    // Trigger(RobotContainer.mainController::getStartButton);
     public static final Trigger ZERO_ROBOT = new Trigger(RobotContainer.mainController::getStartButton);
 
     public static boolean getRightTrigger() {

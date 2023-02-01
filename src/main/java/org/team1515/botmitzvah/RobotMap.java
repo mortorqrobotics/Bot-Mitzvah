@@ -1,14 +1,11 @@
 package org.team1515.botmitzvah;
 
-import java.util.HashMap;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.DriverStation;
 
 public class RobotMap {
 
@@ -49,17 +46,6 @@ public class RobotMap {
     public final static double HEIGHT_OF_WEBCAM = -1;// replace
     public final static double ANGLE_OF_WEBCAM = -1;// replace
     public final static double WEBCAM_OFFSET = -1;// replace
-    public final static double DISTANCE_OFFSET = -1;// replace
-
-    // balance PID
-    public static final double BALANCE_KP = -1;// replace
-    public static final double BALANCE_KI = -1;// replace
-    public static final double BALANCE_KD = -1;// replace
-
-    // align pos PID
-    public static final double ALIGN_POS_KP = -1;// replace
-    public static final double ALIGN_POS_KI = -1;// replace
-    public static final double ALIGN_POS_KD = -1;// replace
 
     // speed limits
     public static final double SWERVE_LIMIT = 0.5;// replace
@@ -68,9 +54,13 @@ public class RobotMap {
     public static final double ALIGN_ANGLE_LIMIT = 0.5;
 
     // pids
-    public static final double SWERVE_KP = 0;
-    public static final double SWERVE_KI = 0;
-    public static final double SWERVE_KD = 0;
+    public static final double BALANCE_KP = -1;// replace
+    public static final double BALANCE_KI = -1;// replace
+    public static final double BALANCE_KD = -1;// replace
+
+    public static final double ALIGN_POS_KP = -1;// replace
+    public static final double ALIGN_POS_KI = -1;// replace
+    public static final double ALIGN_POS_KD = -1;// replace
 
     public static final double ALIGN_ANGLE_KP = 0;
     public static final double ALIGN_ANGLE_KI = 0;

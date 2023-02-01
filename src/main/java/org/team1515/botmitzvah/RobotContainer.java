@@ -4,7 +4,6 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
@@ -28,18 +27,20 @@ public class RobotContainer {
   public static XboxController mainController;
   public static XboxController secondController;
 
+  private final SendableChooser<Integer> startingPose;
+
   public static Drivetrain drivetrain;
   public static Gyroscope gyro;
   public static PhotonVisionWrapper pvw;
+
   public static Claw claw;
   public static Elevator elevator;
   public static Arm arm;
-  private final SendableChooser<Integer> startingPose;
 
   public RobotContainer() {
     mainController = new XboxController(0);
     secondController = new XboxController(1);
-    
+
     startingPose = new SendableChooser<>();
     startingPose.setDefaultOption("Charging Station", 1);
     startingPose.addOption("Close", 0);
@@ -48,8 +49,6 @@ public class RobotContainer {
     gyro = new Gyroscope();
     pvw = new PhotonVisionWrapper();
 
-    System.out.print(DriverStation.getAlliance().name());
-
     claw = new Claw();
     arm = new Arm();
     elevator = new Elevator();
@@ -57,7 +56,7 @@ public class RobotContainer {
     configureBindings();
   }
 
-  public void startup(){
+  public void startup() {
     if (DriverStation.getAlliance() == Alliance.Red) {
       drivetrain = new Drivetrain(RobotMap.STARTING_RED[startingPose.getSelected()]);
     } else if (DriverStation.getAlliance() == Alliance.Blue) {
