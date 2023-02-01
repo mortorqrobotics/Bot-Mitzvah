@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotContainer {
@@ -32,28 +34,37 @@ public class RobotContainer {
   public static Claw claw;
   public static Elevator elevator;
   public static Arm arm;
+  private final SendableChooser<Integer> startingPose;
 
   public RobotContainer() {
     mainController = new XboxController(0);
     secondController = new XboxController(1);
+    
+    startingPose = new SendableChooser<>();
+    startingPose.setDefaultOption("Charging Station", 1);
+    startingPose.addOption("Close", 0);
+    startingPose.addOption("Far", 2);
 
     gyro = new Gyroscope();
     pvw = new PhotonVisionWrapper();
 
     System.out.print(DriverStation.getAlliance().name());
 
-    if (DriverStation.getAlliance().name().equals("kRed")) {
-      drivetrain = new Drivetrain(RobotMap.STARTING_RED[DriverStation.getLocation() - 1]);
-    } else if (DriverStation.getAlliance().name().equals("kBlue")) {
-      drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[DriverStation.getLocation() - 1]);
-    } else {
-      drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[0]);
-    }
     claw = new Claw();
     arm = new Arm();
     elevator = new Elevator();
 
     configureBindings();
+  }
+
+  public void startup(){
+    if (DriverStation.getAlliance() == Alliance.Red) {
+      drivetrain = new Drivetrain(RobotMap.STARTING_RED[startingPose.getSelected()]);
+    } else if (DriverStation.getAlliance() == Alliance.Blue) {
+      drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[startingPose.getSelected()]);
+    } else {
+      drivetrain = new Drivetrain(RobotMap.STARTING_BLUE[0]);
+    }
   }
 
   private void configureBindings() {

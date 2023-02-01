@@ -10,36 +10,38 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
-    private DoubleSolenoid piston;
+    private DoubleSolenoid pistonL;
+    private DoubleSolenoid pistonR;
     private boolean extended = false;
 
     public Claw() {
 
-        piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.CLAW_FORWARD_ID, RobotMap.CLAW_REVERSE_ID); // add
-                                                                                                                       // parameter
-                                                                                                                       // if
-                                                                                                                       // we
-                                                                                                                       // change
+        pistonL = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.LEFT_CLAW_FORWARD_ID, RobotMap.LEFT_CLAW_REVERSE_ID);
+        pistonR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.RIGHT_CLAW_FORWARD_ID, RobotMap.RIGHT_CLAW_REVERSE_ID);
         // PCM ID
-        piston.set(Value.kReverse); // check if this runs in robotInit
+        //pistonL.set(Value.kReverse); // check if this runs in robotInit
+        //pistonR.set(Value.kReverse);
     }
 
     public void extend() {
         if (!extended) {
-            piston.set(Value.kForward);
+            pistonL.set(Value.kForward);
+            pistonR.set(Value.kForward);
         }
         extended = true;
     }
 
     public void retract() {
-        if (!extended) {
-            piston.set(Value.kReverse);
+        if (extended) {
+            pistonL.set(Value.kReverse);
+            pistonR.set(Value.kReverse);
         }
         extended = false;
     }
 
     public void toggle() {
-        piston.toggle();
+        pistonL.toggle();
+        pistonR.toggle();
     }
 
     public boolean getExtended() {

@@ -21,8 +21,10 @@ public class RobotMap {
     // Subsystems
 
     // Claw
-    public final static int CLAW_FORWARD_ID = -1;// replace
-    public final static int CLAW_REVERSE_ID = -1;// replace
+    public final static int LEFT_CLAW_FORWARD_ID = -1;// replace
+    public final static int LEFT_CLAW_REVERSE_ID = -1;// replace
+    public final static int RIGHT_CLAW_FORWARD_ID = -1;// replace
+    public final static int RIGHT_CLAW_REVERSE_ID = -1;// replace
 
     // Arm
     public final static int ARM_ID = -1;// replace
