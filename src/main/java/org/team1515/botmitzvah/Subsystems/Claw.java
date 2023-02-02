@@ -49,5 +49,4 @@ public class Claw extends SubsystemBase {
     public boolean getExtended() {
         return extended;
     }
-
 }

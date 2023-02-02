@@ -34,5 +34,4 @@ public class AutoElevatorUp extends CommandBase {
     public boolean isFinished() {
         return elevator.getUpper();
     }
-
 }

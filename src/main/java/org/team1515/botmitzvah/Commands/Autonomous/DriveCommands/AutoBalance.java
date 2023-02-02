@@ -42,5 +42,4 @@ public class AutoBalance extends CommandBase {
     public boolean isFinished() {
         return controller.atSetpoint();
     }
-
 }

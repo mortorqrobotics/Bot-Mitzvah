@@ -44,5 +44,4 @@ public class AutoElevatorMid extends CommandBase {
     public boolean isFinished() {
         return elevator.getMiddle();
     }
-
 }
