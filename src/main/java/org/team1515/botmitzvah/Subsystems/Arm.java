@@ -98,4 +98,17 @@ public class Arm extends SubsystemBase {
     public boolean isAtSetPoint() {
         return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE) == 0;
     }
+
+    @Override
+    public void periodic() {
+        if(outerSwitch.get()){
+            encoder.setPosition(RobotMap.ARM_OUTER_POS);
+        }
+        if(middleSwitch.get()){
+            encoder.setPosition(RobotMap.ARM_MIDDLE_POS);
+        }
+        if(innerSwitch.get()){
+            encoder.setPosition(RobotMap.ARM_INNER_POS);
+        }
+    }
 }

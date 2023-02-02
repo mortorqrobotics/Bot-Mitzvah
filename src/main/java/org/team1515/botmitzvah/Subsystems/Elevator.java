@@ -99,4 +99,17 @@ public class Elevator extends SubsystemBase {
     public boolean isAtSetPoint() {
         return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ELEVATOR_TOLERANCE) == 0;
     }
+
+    @Override
+    public void periodic() {
+        if(upperSwitch.get()){
+            encoder.setPosition(RobotMap.ELEVATOR_UPPER_POS);
+        }
+        if(middleSwitch.get()){
+            encoder.setPosition(RobotMap.ELEVATOR_MIDDLE_POS);
+        }
+        if(lowerSwitch.get()){
+            encoder.setPosition(RobotMap.ELEVATOR_LOWER_POS);
+        }
+    }
 }
