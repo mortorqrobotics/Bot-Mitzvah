@@ -4,13 +4,11 @@ import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Utils.Utilities;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxLimitSwitch;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxLimitSwitch.Type;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,12 +16,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Elevator extends SubsystemBase {
     private CANSparkMax elevator;
     private RelativeEncoder encoder;
+
     private SparkMaxPIDController controller;
     private double setPoint;
+
     private boolean isOut;
     private DigitalInput upperSwitch;
     private DigitalInput middleSwitch;
     private DigitalInput lowerSwitch;
+
     public static final double speed = 0.5;
 
     public Elevator() {
@@ -39,13 +40,12 @@ public class Elevator extends SubsystemBase {
         controller.setFF(RobotMap.ELEVATOR_KFF);
 
         elevator.setIdleMode(IdleMode.kBrake);
-
         elevator.burnFlash();
 
         isOut = false;
         upperSwitch = new DigitalInput(RobotMap.V_UPPER_SWITCH_ID);
-        lowerSwitch = new DigitalInput(RobotMap.V_LOWER_SWITCH_ID);
         middleSwitch = new DigitalInput(RobotMap.V_MIDDLE_SWITCH_ID);
+        lowerSwitch = new DigitalInput(RobotMap.V_LOWER_SWITCH_ID);
     }
 
     public void extend() {
@@ -60,16 +60,16 @@ public class Elevator extends SubsystemBase {
         elevator.set(0);
     }
 
-    public boolean getLower() {
-        return lowerSwitch.get();
-    }
-
     public boolean getUpper() {
         return upperSwitch.get();
     }
 
     public boolean getMiddle() {
         return middleSwitch.get();
+    }
+
+    public boolean getLower() {
+        return lowerSwitch.get();
     }
 
     public boolean getIsOut() {
@@ -80,20 +80,23 @@ public class Elevator extends SubsystemBase {
         return isOut = out;
     }
 
-    public void goToUpper(){
+    public void goToUpper() {
         controller.setReference(RobotMap.ELEVATOR_UPPER_POS, ControlType.kPosition);
         setPoint = RobotMap.ELEVATOR_UPPER_POS;
     }
-    public void goToMiddle(){
+
+    public void goToMiddle() {
         controller.setReference(RobotMap.ELEVATOR_MIDDLE_POS, ControlType.kPosition);
         setPoint = RobotMap.ELEVATOR_MIDDLE_POS;
     }
-    public void goToLower(){
+
+    public void goToLower() {
         controller.setReference(RobotMap.ELEVATOR_LOWER_POS, ControlType.kPosition);
         setPoint = RobotMap.ELEVATOR_LOWER_POS;
 
     }
+
     public boolean isAtSetPoint() {
-        return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ELEVATOR_TOLERANCE)==0;
+        return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ELEVATOR_TOLERANCE) == 0;
     }
 }

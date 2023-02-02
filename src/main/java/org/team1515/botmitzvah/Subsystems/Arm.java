@@ -4,13 +4,11 @@ import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Utils.Utilities;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxLimitSwitch;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxLimitSwitch.Type;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,12 +16,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Arm extends SubsystemBase {
     private CANSparkMax arm;
     private RelativeEncoder encoder;
+
     private SparkMaxPIDController controller;
     private double setPoint;
+
     private boolean isOut;
     private DigitalInput outerSwitch;
     private DigitalInput middleSwitch;
     private DigitalInput innerSwitch;
+
     public static final double speed = 0.5;
 
     public Arm() {
@@ -39,13 +40,12 @@ public class Arm extends SubsystemBase {
         controller.setFF(RobotMap.ARM_KFF);
 
         arm.setIdleMode(IdleMode.kBrake);
-
         arm.burnFlash();
 
         isOut = false;
         outerSwitch = new DigitalInput(RobotMap.H_OUTER_SWITCH_ID);
-        innerSwitch = new DigitalInput(RobotMap.H_INNER_SWITCH_ID);
         middleSwitch = new DigitalInput(RobotMap.H_MIDDLE_SWITCH_ID);
+        innerSwitch = new DigitalInput(RobotMap.H_INNER_SWITCH_ID);
     }
 
     public void extend() {
@@ -64,12 +64,12 @@ public class Arm extends SubsystemBase {
         return outerSwitch.get();
     }
 
-    public boolean getInner() {
-        return innerSwitch.get();
-    }
-
     public boolean getMiddle() {
         return middleSwitch.get();
+    }
+
+    public boolean getInner() {
+        return innerSwitch.get();
     }
 
     public boolean getIsOut() {
@@ -80,20 +80,22 @@ public class Arm extends SubsystemBase {
         return isOut = out;
     }
 
-    public void goToOuter(){
+    public void goToOuter() {
         controller.setReference(RobotMap.ARM_OUTER_POS, ControlType.kPosition);
         setPoint = RobotMap.ARM_OUTER_POS;
     }
-    public void goToMiddle(){
+
+    public void goToMiddle() {
         controller.setReference(RobotMap.ARM_MIDDLE_POS, ControlType.kPosition);
         setPoint = RobotMap.ARM_MIDDLE_POS;
     }
-    public void goToInner(){
+
+    public void goToInner() {
         controller.setReference(RobotMap.ARM_INNER_POS, ControlType.kPosition);
         setPoint = RobotMap.ARM_INNER_POS;
-
     }
+
     public boolean isAtSetPoint() {
-        return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE)==0;
+        return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE) == 0;
     }
 }
