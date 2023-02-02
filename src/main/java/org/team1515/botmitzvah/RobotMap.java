@@ -53,6 +53,28 @@ public class RobotMap {
     public static final double ALIGN_POS_LIMIT = 0.5;// replace
     public static final double ALIGN_ANGLE_LIMIT = 0.5;
 
+     //Arm Constants
+     public static double ARM_KP;
+     public static double ARM_KI;
+     public static double ARM_KD;
+     public static double ARM_KFF;
+ 
+     public static double ARM_INNER_POS;
+     public static double ARM_MIDDLE_POS;
+     public static double ARM_OUTER_POS;
+     public static double ARM_TOLERANCE;
+     
+    //Elevator Constants
+     public static double ELEVATOR_KP;
+     public static double ELEVATOR_KI;
+     public static double ELEVATOR_KD;
+     public static double ELEVATOR_KFF;
+     
+     public static double ELEVATOR_UPPER_POS;
+     public static double ELEVATOR_MIDDLE_POS;
+     public static double ELEVATOR_LOWER_POS;
+     public static double ELEVATOR_TOLERANCE;
+
     // pids
     public static final double BALANCE_KP = -1;// replace
     public static final double BALANCE_KI = -1;// replace

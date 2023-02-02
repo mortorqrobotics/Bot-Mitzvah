@@ -32,7 +32,7 @@ public class PhotonVisionWrapper {
 
         // Create pose estimator
         photonPoseEstimator = new PhotonPoseEstimator(
-                aprilTagFieldLayout, PoseStrategy.CLOSEST_TO_REFERENCE_POSE, photonCamera, RobotMap.ROBOT_TO_CAM);
+                aprilTagFieldLayout, PoseStrategy.LOWEST_AMBIGUITY, photonCamera, RobotMap.ROBOT_TO_CAM);
     }
 
     /**
