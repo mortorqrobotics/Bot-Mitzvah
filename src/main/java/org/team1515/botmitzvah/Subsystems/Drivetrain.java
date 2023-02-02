@@ -42,7 +42,8 @@ public class Drivetrain extends SubsystemBase {
                 new SwerveModule(3, SwerveConstants.Swerve.Mod3.constants)
         };
 
-        poseEstimator = new SwerveDrivePoseEstimator(SwerveConstants.Swerve.swerveKinematics, Rotation2d.fromRadians(0), getModulePositions(), initialPos);
+        poseEstimator = new SwerveDrivePoseEstimator(SwerveConstants.Swerve.swerveKinematics, Rotation2d.fromRadians(0),
+                getModulePositions(), initialPos);
 
         /*
          * By pausing init for a second before setting module offsets, we avoid a bug
@@ -54,6 +55,14 @@ public class Drivetrain extends SubsystemBase {
 
         SmartDashboard.putData("Field", field2d);
     }
+
+    /**
+     * 
+     * @param translation   speed translation in m/s
+     * @param rotation      in r/s
+     * @param fieldRelative if robot is robot or field reletive
+     * @param isOpenLoop    does not use velocity pid?
+     */
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates = SwerveConstants.Swerve.swerveKinematics.toSwerveModuleStates(
@@ -98,15 +107,21 @@ public class Drivetrain extends SubsystemBase {
         return positions;
     }
 
+    /**
+     * resets robot yaw to zero
+     */
     public void zeroGyro() {
         realZero = realZero.minus(RobotContainer.gyro.getGyroscopeRotation());
         RobotContainer.gyro.zeroYaw();
     }
 
-    public Pose2d getPose(){
+    public Pose2d getPose() {
         return poseEstimator.getEstimatedPosition();
     }
 
+    /**
+     * @return Rotation2d yaw of the robot in radians
+     */
     public Rotation2d getYaw() {
         return (SwerveConstants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - RobotContainer.gyro.getYaw())
                 : Rotation2d.fromDegrees(RobotContainer.gyro.getYaw());
@@ -125,15 +140,15 @@ public class Drivetrain extends SubsystemBase {
         // Also apply vision measurements. We use 0.3 seconds in the past as an example
         // -- on
         // a real robot, this must be calculated based either on latency or timestamps.
-        Optional<EstimatedRobotPose> result =
-                RobotContainer.pvw.getEstimatedGlobalPose(poseEstimator.getEstimatedPosition());
+        Optional<EstimatedRobotPose> result = RobotContainer.pvw
+                .getEstimatedGlobalPose(poseEstimator.getEstimatedPosition());
 
         if (result.isPresent()) {
             EstimatedRobotPose camPose = result.get();
             poseEstimator.addVisionMeasurement(
                     camPose.estimatedPose.toPose2d(), camPose.timestampSeconds);
         }
-        
+
         field2d.setRobotPose(getPose());
     }
 
@@ -148,9 +163,12 @@ public class Drivetrain extends SubsystemBase {
         }
     }
 
+    /**
+     * @return Rotation2d offset from starting zero to currect zero
+     */
+
     public Rotation2d getRealZero() {
         return realZero;
     }
-
 
 }

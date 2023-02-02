@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
+/**
+ * autonomously moves robot arm to outer position using a limit switch
+ */
+
 public class AutoArmOut extends CommandBase {
     private final Arm arm;
 

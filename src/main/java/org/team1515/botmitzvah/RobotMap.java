@@ -62,9 +62,9 @@ public class RobotMap {
     public static final double ALIGN_POS_KI = -1;// replace
     public static final double ALIGN_POS_KD = -1;// replace
 
-    public static final double ALIGN_ANGLE_KP = 0;
-    public static final double ALIGN_ANGLE_KI = 0;
-    public static final double ALIGN_ANGLE_KD = 0;
+    public static final double ALIGN_ANGLE_KP = -1;// replace
+    public static final double ALIGN_ANGLE_KI = -1;// replace
+    public static final double ALIGN_ANGLE_KD = -1;// replace
 
     // photonVision
     public static final String CAMERA_NAME = "name";

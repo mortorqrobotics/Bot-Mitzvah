@@ -4,6 +4,10 @@ import org.team1515.botmitzvah.Subsystems.Elevator;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+/**
+ * autonomously moves robot elevator to upper position using a limit switch
+ */
+
 public class AutoElevatorUp extends CommandBase {
 
     private final Elevator elevator;

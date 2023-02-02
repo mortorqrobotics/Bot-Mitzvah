@@ -29,19 +29,24 @@ public class AprilTag {
     }
 
     /**
-     * Returns yaw in radians
+     * @return double yaw in radians
      */
     public double getYaw() {
         return Units.degreesToRadians(yaw);
     }
 
     /**
-     * Returns distance in meters
+     * @return double distance in meters
      */
     public double getDistance() {
         return distance;
     }
 
+    /**
+     * returns horizontal offset in meters
+     * 
+     * @return
+     */
     public double getHOffset() {
         return h_offset;
     }

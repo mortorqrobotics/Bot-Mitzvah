@@ -16,11 +16,13 @@ public class Claw extends SubsystemBase {
 
     public Claw() {
 
-        pistonL = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.LEFT_CLAW_FORWARD_ID, RobotMap.LEFT_CLAW_REVERSE_ID);
-        pistonR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.RIGHT_CLAW_FORWARD_ID, RobotMap.RIGHT_CLAW_REVERSE_ID);
+        pistonL = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.LEFT_CLAW_FORWARD_ID,
+                RobotMap.LEFT_CLAW_REVERSE_ID);
+        pistonR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.RIGHT_CLAW_FORWARD_ID,
+                RobotMap.RIGHT_CLAW_REVERSE_ID);
         // PCM ID
-        //pistonL.set(Value.kReverse); // check if this runs in robotInit
-        //pistonR.set(Value.kReverse);
+        // pistonL.set(Value.kReverse); // check if this runs in robotInit
+        // pistonR.set(Value.kReverse);
     }
 
     public void extend() {

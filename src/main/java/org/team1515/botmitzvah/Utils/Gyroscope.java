@@ -28,14 +28,23 @@ public class Gyroscope {
                                                                        // instead of the intake
     }
 
+    /**
+     * resets gyro yaw to zero
+     */
     public void zeroYaw() {
         navx.zeroYaw();
     }
 
+    /**
+     * @return float yaw of the robot in degrees
+     */
     public float getYaw() {
         return navx.getYaw();
     }
 
+    /**
+     * @return float pitch of the robot in radians
+     */
     public float getPitch() {
         return navx.getPitch();
     }

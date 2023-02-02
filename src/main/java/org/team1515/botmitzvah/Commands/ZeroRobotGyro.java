@@ -40,8 +40,10 @@ public class ZeroRobotGyro extends CommandBase {
 
     @Override
     public void execute() {
-        double error = MathUtil.angleModulus(RobotContainer.gyro.getGyroscopeRotation().getRadians()) - drivetrainSubsystem.getRealZero().getRadians();
-        double rotation = (MathUtil.clamp(angleController.calculate(error, 0.0)+(ff*Math.signum(-error)), -maxRotate, maxRotate));
+        double error = MathUtil.angleModulus(RobotContainer.gyro.getGyroscopeRotation().getRadians())
+                - drivetrainSubsystem.getRealZero().getRadians();
+        double rotation = (MathUtil.clamp(angleController.calculate(error, 0.0) + (ff * Math.signum(-error)),
+                -maxRotate, maxRotate));
         drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, true, true);
     }
 
