@@ -80,7 +80,7 @@ public class Elevator extends SubsystemBase {
         return isOut = out;
     }
 
-    public void goToOuter(){
+    public void goToUpper(){
         controller.setReference(RobotMap.ELEVATOR_UPPER_POS, ControlType.kPosition);
         setPoint = RobotMap.ELEVATOR_UPPER_POS;
     }
@@ -88,7 +88,7 @@ public class Elevator extends SubsystemBase {
         controller.setReference(RobotMap.ELEVATOR_MIDDLE_POS, ControlType.kPosition);
         setPoint = RobotMap.ELEVATOR_MIDDLE_POS;
     }
-    public void goToInner(){
+    public void goToLower(){
         controller.setReference(RobotMap.ELEVATOR_LOWER_POS, ControlType.kPosition);
         setPoint = RobotMap.ELEVATOR_LOWER_POS;
 

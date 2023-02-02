@@ -20,11 +20,7 @@ public class AutoArmMid extends CommandBase {
 
     @Override
     public void execute() {
-        if (arm.getIsOut()) {
-            arm.retract();
-        } else {
-            arm.extend();
-        }
+        arm.goToMiddle();
     }
 
     @Override

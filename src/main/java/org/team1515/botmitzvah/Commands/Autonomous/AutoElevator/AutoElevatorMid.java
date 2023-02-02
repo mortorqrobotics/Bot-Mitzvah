@@ -21,11 +21,7 @@ public class AutoElevatorMid extends CommandBase {
 
     @Override
     public void execute() {
-        if (elevator.getIsOut()) {
-            elevator.retract();
-        } else {
-            elevator.extend();
-        }
+        elevator.goToMiddle();
     }
 
     @Override

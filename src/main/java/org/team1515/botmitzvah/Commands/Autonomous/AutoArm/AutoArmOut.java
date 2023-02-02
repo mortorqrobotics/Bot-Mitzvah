@@ -18,7 +18,7 @@ public class AutoArmOut extends CommandBase {
 
     @Override
     public void execute() {
-        arm.extend();
+        arm.goToOuter();
     }
 
     @Override

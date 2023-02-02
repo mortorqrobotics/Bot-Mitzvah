@@ -24,12 +24,8 @@ public class AutoElevatorUp extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if (elevator.getUpper()) {
-            elevator.setIsOut(true);
-        }
-        elevator.end();
+        elevator.goToUpper();
     }
-
     @Override
     public boolean isFinished() {
         return elevator.getUpper();

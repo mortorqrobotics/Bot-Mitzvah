@@ -19,7 +19,7 @@ public class AutoElevatorDown extends CommandBase {
 
     @Override
     public void execute() {
-        elevator.retract();
+        elevator.goToLower();
     }
 
     @Override

@@ -18,7 +18,7 @@ public class AutoArmIn extends CommandBase {
 
     @Override
     public void execute() {
-        arm.retract();
+        arm.goToInner();
     }
 
     @Override
