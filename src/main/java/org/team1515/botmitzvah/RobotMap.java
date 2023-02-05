@@ -1,5 +1,7 @@
 package org.team1515.botmitzvah;
 
+import com.revrobotics.Rev2mDistanceSensor;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
@@ -105,4 +107,6 @@ public class RobotMap {
             new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(9), Rotation2d.fromRadians(0.0)),
             new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(15), Rotation2d.fromRadians(0.0))
     };
+
+    public static final double MAX_EDGE_BOUND = 0;
 }
