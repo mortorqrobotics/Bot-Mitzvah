@@ -99,6 +99,10 @@ public class Arm extends SubsystemBase {
         return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE) == 0;
     }
 
+    public void setZero() {
+        retract();
+    }
+
     @Override
     public void periodic() {
         if(outerSwitch.get()){

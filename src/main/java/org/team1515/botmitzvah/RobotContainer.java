@@ -115,4 +115,8 @@ public class RobotContainer {
 
     return value;
   }
+
+  public static void zeroArm() {
+    new ZeroArm(arm).schedule();
+  }
 }
