@@ -30,6 +30,7 @@ public class RobotContainer {
 
   public static Drivetrain drivetrain;
   public static Gyroscope gyro;
+  public static TwoMeterSensor ir;
   public static PhotonVisionWrapper pvw;
 
   public static Claw claw;
@@ -46,6 +47,7 @@ public class RobotContainer {
     startingPose.addOption("Far", 2);
 
     gyro = new Gyroscope();
+    ir = new TwoMeterSensor();
     pvw = new PhotonVisionWrapper();
 
     claw = new Claw();
@@ -117,6 +119,6 @@ public class RobotContainer {
   }
 
   public static void zeroArm() {
-    new ZeroArm(arm).schedule();
+    new AutoArmIn(arm).schedule();
   }
 }

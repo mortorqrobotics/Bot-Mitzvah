@@ -4,8 +4,6 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.Commands.ZeroArm;
-import org.team1515.botmitzvah.Subsystems.Arm;
 import org.team1515.botmitzvah.Utils.*;
 
 import com.team364.swervelib.util.CTREConfigs;
@@ -24,7 +22,6 @@ public class Robot extends TimedRobot {
 
   public static Limelight limelight;
   public static AprilTag apriltag;
-  public static Arm arm;
 
   @Override
   public void robotInit() {
@@ -33,15 +30,14 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
     limelight = new Limelight();
     apriltag = new AprilTag();
-    arm = new Arm();
     RobotContainer.zeroArm();
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    if(arm.getInner()){
-        arm.end();
+    if(RobotContainer.arm.getInner()){ // just incase command failsafe doesn't work
+        RobotContainer.arm.end();
     }
   }
 

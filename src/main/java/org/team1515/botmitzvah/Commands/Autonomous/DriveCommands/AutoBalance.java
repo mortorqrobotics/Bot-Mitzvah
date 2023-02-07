@@ -40,6 +40,6 @@ public class AutoBalance extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return controller.atSetpoint();
+        return controller.atSetpoint() || RobotContainer.ir.getEdgeBound();
     }
 }
