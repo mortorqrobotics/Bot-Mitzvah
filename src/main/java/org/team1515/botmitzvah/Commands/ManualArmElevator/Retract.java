@@ -19,6 +19,9 @@ public class Retract extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        if (arm.getInner()) {
+            arm.zeroEncoder();
+        }
         arm.end();
     }
 
