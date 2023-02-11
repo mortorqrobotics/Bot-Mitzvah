@@ -20,9 +20,10 @@ public class Elevator extends SubsystemBase {
     private SparkMaxPIDController controller;
     private double setPoint;
 
-    private DigitalInput retractSwitch;
+    private DigitalInput retractedSwitch;
+    private int ELEVATOR_RETRACT_SWITCH;
 
-    public static final double speed = 0.5;
+    public static double speed = 0.5;
 
     public Elevator() {
         elevator = new CANSparkMax(RobotMap.ELEVATOR_ID, MotorType.kBrushless);

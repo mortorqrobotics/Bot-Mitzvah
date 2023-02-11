@@ -36,9 +36,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    if(RobotContainer.arm.getInner()){ // just incase command failsafe doesn't work
-        RobotContainer.arm.end();
-    }
   }
 
   @Override

@@ -20,9 +20,9 @@ public class Arm extends SubsystemBase {
     private SparkMaxPIDController controller;
     private double setPoint;
 
-    private DigitalInput innerSwitch;
+    private DigitalInput retractedSwitch;
 
-    public static final double speed;
+    public static double speed;
 
     public Arm() {
         arm = new CANSparkMax(RobotMap.ARM_ID, MotorType.kBrushless);
@@ -39,7 +39,7 @@ public class Arm extends SubsystemBase {
         arm.setIdleMode(IdleMode.kBrake);
         arm.burnFlash();
 
-        retractedSwitch = new DigitalInput(RobotMap.ARM_RETRACT_SWITCH_ID);
+        retractedSwitch = new DigitalInput(RobotMap.ARM_RETRACT_SWITCH);
 
         speed = RobotMap.ARM_SPEED;
     }

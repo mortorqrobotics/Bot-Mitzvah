@@ -45,6 +45,7 @@ public class RobotMap {
 
      //Arm Constants
      public final static int ARM_ID = -1;// replace
+     public static int ARM_RETRACT_SWITCH;
      public final static int ARM_SPEED = -1;// replace
 
      public static double ARM_KP;
@@ -69,6 +70,7 @@ public class RobotMap {
      public static double ELEVATOR_UPPER_POS;
      public static double ELEVATOR_MIDDLE_POS;
      public static double ELEVATOR_LOWER_POS;
+     public static double ELEVATOR_RETRACTED_POS;
      public static double ELEVATOR_TOLERANCE;
 
     // swerve pids
