@@ -20,10 +20,7 @@ public class Elevator extends SubsystemBase {
     private SparkMaxPIDController controller;
     private double setPoint;
 
-    private boolean isOut;
-    private DigitalInput upperSwitch;
-    private DigitalInput middleSwitch;
-    private DigitalInput lowerSwitch;
+    private DigitalInput retractSwitch;
 
     public static final double speed = 0.5;
 
@@ -42,10 +39,9 @@ public class Elevator extends SubsystemBase {
         elevator.setIdleMode(IdleMode.kBrake);
         elevator.burnFlash();
 
-        isOut = false;
-        upperSwitch = new DigitalInput(RobotMap.V_UPPER_SWITCH_ID);
-        middleSwitch = new DigitalInput(RobotMap.V_MIDDLE_SWITCH_ID);
-        lowerSwitch = new DigitalInput(RobotMap.V_LOWER_SWITCH_ID);
+        retractedSwitch = new DigitalInput(ELEVATOR_RETRACT_SWITCH);
+
+        speed = RobotMap.ELEVATOR_SPEED;
     }
 
     public void extend() {
@@ -60,24 +56,8 @@ public class Elevator extends SubsystemBase {
         elevator.set(0);
     }
 
-    public boolean getUpper() {
-        return upperSwitch.get();
-    }
-
-    public boolean getMiddle() {
-        return middleSwitch.get();
-    }
-
-    public boolean getLower() {
-        return lowerSwitch.get();
-    }
-
-    public boolean getIsOut() {
-        return isOut;
-    }
-
-    public boolean setIsOut(boolean out) {
-        return isOut = out;
+    public boolean getRetracted() {
+        return retractedSwitch.get();
     }
 
     public void goToUpper() {
@@ -96,20 +76,16 @@ public class Elevator extends SubsystemBase {
 
     }
 
+    public void goToRetracted() {
+        controller.setReference(RobotMap.ELEVATOR_RETRACTED_POS, ControlType.kPosition);
+        setPoint = RobotMap.ELEVATOR_RETRACTED_POS;
+    }
+
     public boolean isAtSetPoint() {
         return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ELEVATOR_TOLERANCE) == 0;
     }
 
-    @Override
-    public void periodic() {
-        if(upperSwitch.get()){
-            encoder.setPosition(RobotMap.ELEVATOR_UPPER_POS);
-        }
-        if(middleSwitch.get()){
-            encoder.setPosition(RobotMap.ELEVATOR_MIDDLE_POS);
-        }
-        if(lowerSwitch.get()){
-            encoder.setPosition(RobotMap.ELEVATOR_LOWER_POS);
-        }
+    public void zeroEncoder() {
+        encoder.setPosition(0.0);
     }
 }

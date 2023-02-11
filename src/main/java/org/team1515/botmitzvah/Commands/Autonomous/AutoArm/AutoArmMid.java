@@ -25,18 +25,11 @@ public class AutoArmMid extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if (arm.getMiddle()) {
-            if (arm.getIsOut()) {
-                arm.setIsOut(false);
-            } else {
-                arm.setIsOut(true);
-            }
-        }
         arm.end();
     }
 
     @Override
     public boolean isFinished() {
-        return arm.getMiddle();
+        return arm.isAtSetPoint();
     }
 }

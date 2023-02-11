@@ -23,15 +23,11 @@ public class AutoArmIn extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if (arm.getInner()) {
-            arm.setIsOut(false);
-            arm.zeroEncoder();
-        }
         arm.end();
     }
 
     @Override
     public boolean isFinished() {
-        return arm.getInner();
+        return arm.isAtSetPoint();
     }
 }

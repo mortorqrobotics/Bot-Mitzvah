@@ -25,18 +25,6 @@ public class RobotMap {
     public final static int RIGHT_CLAW_FORWARD_ID = -1;// replace
     public final static int RIGHT_CLAW_REVERSE_ID = -1;// replace
 
-    // Arm
-    public final static int ARM_ID = -1;// replace
-    public static final int H_OUTER_SWITCH_ID = -1;// replace
-    public static final int H_MIDDLE_SWITCH_ID = -1;// replace
-    public static final int H_INNER_SWITCH_ID = -1;// replace
-
-    // Elevator
-    public final static int ELEVATOR_ID = -1;// replace
-    public static final int V_UPPER_SWITCH_ID = -1;// replace
-    public static final int V_LOWER_SWITCH_ID = -1;// replace
-    public static final int V_MIDDLE_SWITCH_ID = -1;// replace
-
     // Limelight
     public final static double HEIGHT_OF_TAPE = -1;// replace
     public final static double HEIGHT_OF_LIMELIGHT = -1;// replace
@@ -49,13 +37,16 @@ public class RobotMap {
     public final static double ANGLE_OF_WEBCAM = -1;// replace
     public final static double WEBCAM_OFFSET = -1;// replace
 
-    // speed limits
+    // speed limits for swerve
     public static final double SWERVE_LIMIT = 0.5;// replace
     public static final double BALANCE_LIMIT = 0.5;// replace
     public static final double ALIGN_POS_LIMIT = 0.5;// replace
     public static final double ALIGN_ANGLE_LIMIT = 0.5;
 
      //Arm Constants
+     public final static int ARM_ID = -1;// replace
+     public final static int ARM_SPEED = -1;// replace
+
      public static double ARM_KP;
      public static double ARM_KI;
      public static double ARM_KD;
@@ -67,6 +58,9 @@ public class RobotMap {
      public static double ARM_TOLERANCE;
      
     //Elevator Constants
+     public final static int ELEVATOR_ID = -1;// replace
+     public final static int ELEVATOR_SPEED = -1;// replace
+
      public static double ELEVATOR_KP;
      public static double ELEVATOR_KI;
      public static double ELEVATOR_KD;
@@ -77,7 +71,7 @@ public class RobotMap {
      public static double ELEVATOR_LOWER_POS;
      public static double ELEVATOR_TOLERANCE;
 
-    // pids
+    // swerve pids
     public static final double BALANCE_KP = -1;// replace
     public static final double BALANCE_KI = -1;// replace
     public static final double BALANCE_KD = -1;// replace

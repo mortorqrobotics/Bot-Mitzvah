@@ -20,12 +20,9 @@ public class Arm extends SubsystemBase {
     private SparkMaxPIDController controller;
     private double setPoint;
 
-    private boolean isOut;
-    private DigitalInput outerSwitch;
-    private DigitalInput middleSwitch;
     private DigitalInput innerSwitch;
 
-    public static final double speed = 0.5;
+    public static final double speed;
 
     public Arm() {
         arm = new CANSparkMax(RobotMap.ARM_ID, MotorType.kBrushless);
@@ -42,10 +39,9 @@ public class Arm extends SubsystemBase {
         arm.setIdleMode(IdleMode.kBrake);
         arm.burnFlash();
 
-        isOut = false;
-        outerSwitch = new DigitalInput(RobotMap.H_OUTER_SWITCH_ID);
-        middleSwitch = new DigitalInput(RobotMap.H_MIDDLE_SWITCH_ID);
-        innerSwitch = new DigitalInput(RobotMap.H_INNER_SWITCH_ID);
+        retractedSwitch = new DigitalInput(RobotMap.ARM_RETRACT_SWITCH_ID);
+
+        speed = RobotMap.ARM_SPEED;
     }
 
     public void extend() {
@@ -60,24 +56,8 @@ public class Arm extends SubsystemBase {
         arm.set(0);
     }
 
-    public boolean getOuter() {
-        return outerSwitch.get();
-    }
-
-    public boolean getMiddle() {
-        return middleSwitch.get();
-    }
-
-    public boolean getInner() {
-        return innerSwitch.get();
-    }
-
-    public boolean getIsOut() {
-        return isOut;
-    }
-
-    public boolean setIsOut(boolean out) {
-        return isOut = out;
+    public boolean getRetracted() {
+        return retractedSwitch.get();
     }
 
     public void goToOuter() {
@@ -101,18 +81,5 @@ public class Arm extends SubsystemBase {
 
     public void zeroEncoder() {
         encoder.setPosition(0.0);
-    }
-
-    @Override
-    public void periodic() {
-        if(outerSwitch.get()){
-            encoder.setPosition(RobotMap.ARM_OUTER_POS);
-        }
-        if(middleSwitch.get()){
-            encoder.setPosition(RobotMap.ARM_MIDDLE_POS);
-        }
-        if(innerSwitch.get()){
-            encoder.setPosition(RobotMap.ARM_INNER_POS);
-        }
     }
 }

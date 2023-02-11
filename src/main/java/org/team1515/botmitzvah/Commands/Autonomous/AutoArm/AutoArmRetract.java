@@ -5,20 +5,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.team1515.botmitzvah.Subsystems.Arm;
 
 /**
- * autonomously moves robot arm to outer position using a limit switch
+ * autonomously moves robot arm to middle position using a limit switch
+ * changes state of isOut variable when touching limit switch
+ * if arm is past the middle switch, retract, otherwise expand
  */
 
-public class AutoArmOut extends CommandBase {
+public class AutoArmRetract extends CommandBase {
     private final Arm arm;
 
-    public AutoArmOut(Arm arm) {
+    public AutoArmRetract(Arm arm) {
         this.arm = arm;
         addRequirements(arm);
     }
 
     @Override
     public void execute() {
-        arm.goToOuter();
+        arm.retract();
     }
 
     @Override
@@ -28,6 +30,6 @@ public class AutoArmOut extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return isAtSetPoint();
+        return arm.getRetracted();
     }
 }
