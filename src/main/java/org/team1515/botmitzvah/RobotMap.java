@@ -1,7 +1,5 @@
 package org.team1515.botmitzvah;
 
-import com.revrobotics.Rev2mDistanceSensor;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
