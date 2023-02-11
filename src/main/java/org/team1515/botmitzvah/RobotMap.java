@@ -108,5 +108,8 @@ public class RobotMap {
             new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(15), Rotation2d.fromRadians(0.0))
     };
 
+    // Lidar Sensor
     public static final double MAX_EDGE_BOUND = 0;
+
+    public static final double CHARGING_STATION_DISTANCE = (48 + 2*9.125)/12; // units in feet
 }
