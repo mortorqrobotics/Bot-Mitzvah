@@ -25,6 +25,7 @@ public class AutoArmIn extends CommandBase {
     public void end(boolean interrupted) {
         if (arm.getInner()) {
             arm.setIsOut(false);
+            arm.zeroEncoder();
         }
         arm.end();
     }
