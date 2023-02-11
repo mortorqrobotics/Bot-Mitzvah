@@ -54,6 +54,7 @@ public class RobotMap {
      public static double ARM_INNER_POS;
      public static double ARM_MIDDLE_POS;
      public static double ARM_OUTER_POS;
+     public static double ARM_MAX_POS;
      public static double ARM_TOLERANCE;
      
     //Elevator Constants

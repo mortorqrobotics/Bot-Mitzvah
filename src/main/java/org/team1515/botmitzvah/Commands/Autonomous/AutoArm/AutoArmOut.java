@@ -28,6 +28,6 @@ public class AutoArmOut extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return isAtSetPoint();
+        return arm.isAtSetPoint();
     }
 }

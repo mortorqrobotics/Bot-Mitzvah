@@ -1,4 +1,4 @@
-package org.team1515.botmitzvah.Commands.ManualArmElevator;
+package org.team1515.botmitzvah.Commands.ManualArm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -19,7 +19,7 @@ public class Retract extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if (arm.getInner()) {
+        if (arm.getRetracted()) {
             arm.zeroEncoder();
         }
         arm.end();
@@ -27,6 +27,6 @@ public class Retract extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return arm.getInner();
+        return arm.getRetracted();
     }
 }

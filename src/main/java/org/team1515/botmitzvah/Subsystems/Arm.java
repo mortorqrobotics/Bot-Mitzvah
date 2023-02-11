@@ -79,7 +79,18 @@ public class Arm extends SubsystemBase {
         return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE) == 0;
     }
 
+    /**
+     * @return boolean true if the arm is not over or under extended
+     */
+    public boolean isInBounds() {
+        return !getRetracted() || getPosition() > RobotMap.ARM_MAX_POS;
+    }
+
     public void zeroEncoder() {
         encoder.setPosition(0.0);
+    }
+
+    public double getPosition() {
+        return encoder.getPosition();
     }
 }

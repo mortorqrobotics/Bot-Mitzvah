@@ -1,4 +1,4 @@
-package org.team1515.botmitzvah.Commands.ManualArmElevator;
+package org.team1515.botmitzvah.Commands.ManualArm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -24,6 +24,6 @@ public class Extend extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return arm.getOuter();
+        return !arm.isInBounds();
     }
 }
