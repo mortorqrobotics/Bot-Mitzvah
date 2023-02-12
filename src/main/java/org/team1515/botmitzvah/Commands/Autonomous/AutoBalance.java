@@ -1,6 +1,6 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
-import org.team1515.botmitzvah.RobotMap;
+import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
@@ -23,7 +23,7 @@ public class AutoBalance extends CommandBase {
 
     public AutoBalance(Swerve drivetrain) {
         this.drivetrain = drivetrain;
-        this.maxSpeed = 0.2 * RobotMap.MAX_SPEED;
+        this.maxSpeed = 0.2 * SwerveConstants.Swerve.maxSpeed;
 
         controller = new PIDController(p,i,d); // retun PID
         controller.setTolerance(Units.degreesToRadians(1));
