@@ -1,23 +1,13 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
-import org.team1515.botmitzvah.RobotContainer;
-import org.team1515.botmitzvah.Robot;
-
-import org.team1515.botmitzvah.Commands.*;
-import org.team1515.botmitzvah.Commands.Autonomous.*;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
-
-import org.team1515.botmitzvah.Subsystems.*;
-
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-//j
+// import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutoCommandBalance extends SequentialCommandGroup {
+
+    private double chargingStation = (29 + 48) / 12;
 
     /**
      * Runs auto one command after another (finished when the isFinished method
@@ -25,9 +15,11 @@ public class AutoCommandBalance extends SequentialCommandGroup {
      * 
      * @param # add params
      */
-    public AutoCommandBalance(Drivetrain drivetrain) { // add params
+    public AutoCommandBalance(Swerve drivetrain) { // add params
         addCommands(
-        // add commands in order and wait when needed
-        );
+                new InstantCommand(() -> drivetrain.zeroGyro()),
+                new DriveDist(drivetrain, Units.feetToMeters(3+chargingStation+6), 1),
+                new DriveDist(drivetrain, Units.feetToMeters(4.5), -1),
+                new AutoBalance(drivetrain));
     }
 }
