@@ -34,7 +34,7 @@ public class RobotContainer {
   public static PhotonVisionWrapper pvw;
 
   public static Claw claw;
-  public static Elevator elevator;
+  public static ArmPivot armPivot;
   public static Arm arm;
 
   public RobotContainer() {
@@ -52,7 +52,7 @@ public class RobotContainer {
 
     claw = new Claw();
     arm = new Arm();
-    elevator = new Elevator();
+    armPivot = new ArmPivot();
 
     configureBindings();
   }

@@ -41,49 +41,59 @@ public class RobotMap {
     public static final double ALIGN_POS_LIMIT = 0.5;// replace
     public static final double ALIGN_ANGLE_LIMIT = 0.5;
 
-     //Arm Constants
-     public final static int ARM_ID = -1;// replace
-     public static int ARM_RETRACT_SWITCH;
-     public final static int ARM_SPEED = -1;// replace
+    //Arm Constants
+    public final static int ARM_ID = -1;// replace
+    public static int ARM_RETRACT_SWITCH;
+    public final static int ARM_SPEED = -1;// replace
 
-     public static double ARM_KP;
-     public static double ARM_KI;
-     public static double ARM_KD;
-     public static double ARM_KFF;
+    public static double ARM_KP;
+    public static double ARM_KI;
+    public static double ARM_KD;
+    public static double ARM_KFF;
  
-     public static double ARM_INNER_POS;
-     public static double ARM_MIDDLE_POS;
-     public static double ARM_OUTER_POS;
-     public static double ARM_MAX_POS;
-     public static double ARM_TOLERANCE;
+    public static double ARM_INNER_POS;
+    public static double ARM_MIDDLE_POS;
+    public static double ARM_OUTER_POS;
+    public static double ARM_MAX_POS;
+    public static double ARM_TOLERANCE;
      
-    //Elevator Constants
-     public final static int ELEVATOR_ID = -1;// replace
-     public final static int ELEVATOR_SPEED = -1;// replace
+    // ArmPivot Constants
+    public static final int ARM_PIVOT_ID = -1; // replace
+    public static final int ARM_PIVOT_CANCODER_ID = -1;
 
-     public static double ELEVATOR_KP;
-     public static double ELEVATOR_KI;
-     public static double ELEVATOR_KD;
-     public static double ELEVATOR_KFF;
-     
-     public static double ELEVATOR_UPPER_POS;
-     public static double ELEVATOR_MIDDLE_POS;
-     public static double ELEVATOR_LOWER_POS;
-     public static double ELEVATOR_RETRACTED_POS;
-     public static double ELEVATOR_TOLERANCE;
+    public static final double ARM_PIVOT_KP = -1; // replace
+    public static final double ARM_PIVOT_KI = -1; // replace
+    public static final double ARM_PIVOT_KD = -1; // replace
+
+    public static final double ARM_PIVOT_KS = -1; // replace
+    public static final double ARM_PIVOT_KG = -1; // replace
+    public static final double ARM_PIVOT_KV = -1; // replace
+    public static final double ARM_PIVOT_KA = -1; // replace
+
+    /** degrees */
+    public static final double ARM_PIVOT_OFFSET = 0; // MEASURE (ZERO SHOULD BE REFERENCE FROM HORIZONTAL)
+    public static final double ARM_PIVOT_GEAR_RATIO = -1; // replace
+
+    // all angles in degrees
+    public static final double ARM_PIVOT_HIGH_POS = -1; // replace
+    public static final double ARM_PIVOT_MID_POS = -1; // replace
+    public static final double ARM_PIVOT_LOW_POS = -1; // replace
+    public static final double ARM_PIVOT_MIN_POS = -1; // replace
+
+    public static final double ARM_PIVOT_SPEED = 0.7;
 
     // swerve pids
-    public static final double BALANCE_KP = -1;// replace
-    public static final double BALANCE_KI = -1;// replace
-    public static final double BALANCE_KD = -1;// replace
+    public static final double BALANCE_KP = -1; // replace
+    public static final double BALANCE_KI = -1; // replace
+    public static final double BALANCE_KD = -1; // replace
 
-    public static final double ALIGN_POS_KP = -1;// replace
-    public static final double ALIGN_POS_KI = -1;// replace
-    public static final double ALIGN_POS_KD = -1;// replace
+    public static final double ALIGN_POS_KP = -1; // replace
+    public static final double ALIGN_POS_KI = -1; // replace
+    public static final double ALIGN_POS_KD = -1; // replace
 
-    public static final double ALIGN_ANGLE_KP = -1;// replace
-    public static final double ALIGN_ANGLE_KI = -1;// replace
-    public static final double ALIGN_ANGLE_KD = -1;// replace
+    public static final double ALIGN_ANGLE_KP = -1; // replace
+    public static final double ALIGN_ANGLE_KI = -1; // replace
+    public static final double ALIGN_ANGLE_KD = -1; // replace
 
     // photonVision
     public static final String CAMERA_NAME = "name";
