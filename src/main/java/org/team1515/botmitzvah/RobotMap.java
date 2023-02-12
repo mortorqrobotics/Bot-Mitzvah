@@ -75,10 +75,11 @@ public class RobotMap {
     public static final double ARM_PIVOT_GEAR_RATIO = -1; // replace
 
     // all angles in degrees
-    public static final double ARM_PIVOT_HIGH_POS = -1; // replace
-    public static final double ARM_PIVOT_MID_POS = -1; // replace
-    public static final double ARM_PIVOT_LOW_POS = -1; // replace
-    public static final double ARM_PIVOT_MIN_POS = -1; // replace
+    public static final double ARM_PIVOT_HIGH_DEGREES = -1; // replace
+    public static final double ARM_PIVOT_MID_DEGREES = -1; // replace
+    public static final double ARM_PIVOT_LOW_DEGREES = -1; // replace
+    public static final double ARM_PIVOT_MIN_DEGREES = -1; // replace
+    public static final double ARM_PIVOT_MAX_DEGREES = -1;
 
     public static final double ARM_PIVOT_SPEED = 0.7;
 

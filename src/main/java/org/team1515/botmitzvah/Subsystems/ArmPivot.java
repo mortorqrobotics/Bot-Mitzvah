@@ -95,4 +95,11 @@ public class ArmPivot {
     public void rotateCounterClockwise() {
         pivotMotor.set(-speed);
     }
+
+    /**
+     * @return boolean true if not over or under rotated
+     */
+    public boolean isInBounds() {
+        return getAngle() > RobotMap.ARM_PIVOT_MIN_DEGREES && getAngle() < RobotMap.ARM_PIVOT_MAX_DEGREES;
+    }
 }
