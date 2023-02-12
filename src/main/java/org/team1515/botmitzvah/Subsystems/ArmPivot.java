@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxPIDController.ArbFFUnits;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
@@ -69,6 +70,7 @@ public class ArmPivot {
      * @param angle in degrees
      */
     public void setPivotAngle(double angle) {
+        angle = MathUtil.clamp(angle, RobotMap.ARM_PIVOT_MIN_DEGREES, RobotMap.ARM_PIVOT_MAX_DEGREES);
         double position = Utilities.degreesToRev(angle, RobotMap.ARM_PIVOT_GEAR_RATIO);
         controller.setReference(position, ControlType.kVelocity, 0, feedforward.calculate(Units.degreesToRadians(angle), 0), ArbFFUnits.kVoltage); // TODO: Consider SMART MOTION
     }
