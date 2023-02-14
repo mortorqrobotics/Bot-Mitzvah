@@ -27,6 +27,6 @@ public class Retract extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return arm.getRetracted();
+        return !arm.isInBounds();
     }
 }

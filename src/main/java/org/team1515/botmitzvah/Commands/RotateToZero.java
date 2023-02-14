@@ -1,5 +1,6 @@
 package org.team1515.botmitzvah.Commands;
 
+import org.team1515.botmitzvah.RobotContainer;
 import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
 
@@ -10,11 +11,13 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 
-public class ZeroRobotTag extends CommandBase {
+public class RotateToZero extends CommandBase {
     private Drivetrain drivetrainSubsystem;
     // l
     private PIDController angleController;
     private double maxRotate;
+
+    private double ff = 3.23; // retune
 
     /**
      * Align robot with the target using the limelight
@@ -22,7 +25,7 @@ public class ZeroRobotTag extends CommandBase {
      * @param drivetrainSubsystem
      * @param limelight
      */
-    public ZeroRobotTag(Drivetrain drivetrainSubsystem) {
+    public RotateToZero(Drivetrain drivetrainSubsystem) {
         this.drivetrainSubsystem = drivetrainSubsystem;
         this.maxRotate = RobotMap.ALIGN_ANGLE_LIMIT * SwerveConstants.Swerve.maxAngularVelocity;
 
@@ -37,10 +40,10 @@ public class ZeroRobotTag extends CommandBase {
 
     @Override
     public void execute() {
-        double error = drivetrainSubsystem.getPose().getRotation().getRadians();
-        if (error == 0) // Stop auto align if camera has no target in view
-            this.end(true);
-        double rotation = MathUtil.clamp(angleController.calculate(error, 0.0), -maxRotate, maxRotate);
+        double error = MathUtil.angleModulus(RobotContainer.gyro.getGyroscopeRotation().getRadians())
+                - drivetrainSubsystem.getRealZero().getRadians();
+        double rotation = (MathUtil.clamp(angleController.calculate(error, 0.0) + (ff * Math.signum(-error)),
+                -maxRotate, maxRotate));
         drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), rotation, true, true);
     }
 

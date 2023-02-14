@@ -82,7 +82,7 @@ public class RobotContainer {
     // new Rotation2d(0.0, 0.0)), new AlignLight(drivetrain)));
     // Controls.ALIGN_TAG.onTrue(Commands.sequence(new RotateToAngle(drivetrain, new
     // Rotation2d(0.0, 0.0)), new AlignTag(drivetrain)));
-    Controls.ZERO_ROBOT.onTrue(new ZeroRobotTag(drivetrain));
+    Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
 
     Controls.GRAB.onTrue(new ClawClose(claw));
     Controls.RELEASE.onTrue(new ClawOpen(claw));
@@ -92,12 +92,11 @@ public class RobotContainer {
     // Controls.MID.onTrue(Commands.parallel(new AutoArmMid(arm), new AutoElevatorDown(elevator)));
     // Controls.LOW.onTrue(Commands.parallel(new AutoArmIn(arm), new AutoElevatorDown(elevator)));
 
-    // manual arm and elevator
+    // manual arm and pivot
     // Controls.MANUAL_UP.whileTrue(new Elevate(elevator));
     // Controls.MANUAL_DOWN.whileTrue(new Lower(elevator));
     Controls.MANUAL_FORWARD.whileTrue(new Extend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new Retract(arm));
-
   }
 
   public Command getAutonomousCommand() {

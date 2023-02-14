@@ -1,5 +1,6 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
+import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Subsystems.*;
@@ -20,8 +21,8 @@ public class AutoCommandBalance extends SequentialCommandGroup {
     public AutoCommandBalance(Drivetrain drivetrain) { // add params
         addCommands(
                 new InstantCommand(() -> drivetrain.zeroGyro()),
-                new DriveDist(drivetrain, Units.feetToMeters(12.5), 1),
-                new DriveDist(drivetrain, Units.feetToMeters(2.5), -1),
+                new DriveDist(drivetrain, Units.feetToMeters(3 + RobotMap.CHARGING_STATION_DISTANCE + 6), 1),
+                new DriveDist(drivetrain, Units.feetToMeters(4.5), -1),
                 new AutoBalance(drivetrain));
     }
 }

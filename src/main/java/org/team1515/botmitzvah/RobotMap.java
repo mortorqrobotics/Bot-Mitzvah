@@ -119,5 +119,5 @@ public class RobotMap {
     // Lidar Sensor
     public static final double MAX_EDGE_BOUND = 0;
 
-    public static final double CHARGING_STATION_DISTANCE = (48 + 2*9.125)/12; // units in feet
+    public static final double CHARGING_STATION_DISTANCE = (48 + 2 * 9.125) / 12; // units in feet
 }
