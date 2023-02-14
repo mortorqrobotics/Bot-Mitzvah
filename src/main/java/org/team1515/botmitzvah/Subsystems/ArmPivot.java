@@ -97,7 +97,7 @@ public class ArmPivot extends SubsystemBase {
      */
     public void pivotPeriodic() {
         TrapezoidProfile.State state = motionProfile.calculate(timer.get());
-        controller.setReference(setPoint, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
+        controller.setReference(state.position, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
     } 
 
     public double getPositionRev() {
