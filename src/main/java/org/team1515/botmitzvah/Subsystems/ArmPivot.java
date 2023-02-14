@@ -19,7 +19,9 @@ import com.revrobotics.SparkMaxPIDController.ArbFFUnits;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ArmPivot {
     private CANSparkMax pivotMotor;
@@ -30,6 +32,10 @@ public class ArmPivot {
 
     private double setPoint;
     private double speed = RobotMap.ARM_PIVOT_SPEED;
+    private TrapezoidProfile motionProfile;
+    private TrapezoidProfile.Constraints constraits;
+
+    private Timer timer;
 
     public ArmPivot() {
         pivotMotor = new CANSparkMax(RobotMap.ARM_PIVOT_ID, MotorType.kBrushless);
@@ -53,6 +59,12 @@ public class ArmPivot {
 
         feedforward = new ArmFeedforward(RobotMap.ARM_PIVOT_KS, RobotMap.ARM_PIVOT_KG, RobotMap.ARM_PIVOT_KV);
 
+        TrapezoidProfile.Constraints constraits = new TrapezoidProfile.Constraints(RobotMap.ARM_PIVOT_MAX_VELOCITY, RobotMap.ARM_PIVOT_MAX_ACCELERATION);
+        TrapezoidProfile.State initalGoal = new TrapezoidProfile.State(0, 0);
+        motionProfile = new TrapezoidProfile(constraits, initalGoal);
+
+        timer = new Timer();
+
         resetToAbsolute();
     }
 
@@ -72,11 +84,19 @@ public class ArmPivot {
     public void setPivotAngle(double angle) {
         angle = MathUtil.clamp(angle, RobotMap.ARM_PIVOT_MIN_DEGREES, RobotMap.ARM_PIVOT_MAX_DEGREES);
         double position = Utilities.degreesToRev(angle, RobotMap.ARM_PIVOT_GEAR_RATIO);
-        controller.setReference(position, ControlType.kVelocity, 0, feedforward.calculate(Units.degreesToRadians(angle), 0), ArbFFUnits.kVoltage); // TODO: Consider SMART MOTION
+        setPoint = position;
+        setGoalState(Units.degreesToRadians(angle));
+        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
+        controller.setReference(position, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
     }
 
     public double getPositionRev() {
         return encoder.getPosition();
+    }
+
+    public void setGoalState(double goal) {
+        timer.restart();
+        motionProfile = new TrapezoidProfile(constraits, new TrapezoidProfile.State(goal, 0));
     }
 
     /**
