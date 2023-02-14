@@ -82,6 +82,8 @@ public class RobotMap {
     public static final double ARM_PIVOT_MAX_DEGREES = -1;
 
     public static final double ARM_PIVOT_SPEED = 0.7;
+    public static final double ARM_PIVOT_MAX_VELOCITY = -1; // replace (in radians per second)
+    public static final double ARM_PIVOT_MAX_ACCELERATION = -1; // replace (in radians per second per second) 
 
     // swerve pids
     public static final double BALANCE_KP = -1; // replace
