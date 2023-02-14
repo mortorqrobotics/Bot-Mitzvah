@@ -83,7 +83,7 @@ public class Arm extends SubsystemBase {
      * @return boolean true if the arm is not over or under extended
      */
     public boolean isInBounds() {
-        return !getRetracted() || getPosition() > RobotMap.ARM_MAX_POS;
+        return !getRetracted() && (getPosition() > RobotMap.ARM_MAX_POS);
     }
 
     public void zeroEncoder() {
