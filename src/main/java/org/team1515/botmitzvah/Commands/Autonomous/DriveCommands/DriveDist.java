@@ -1,6 +1,7 @@
-package org.team1515.botmitzvah.Commands;
+package org.team1515.botmitzvah.Commands.Autonomous.DriveCommands;
 
 import org.team1515.botmitzvah.RobotContainer;
+import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
 import org.team1515.botmitzvah.Utils.Utilities;
 
@@ -21,21 +22,22 @@ public class DriveDist extends CommandBase {
     private double maxSpeed;
     private Rotation2d startGyroAngle;
 
-    public DriveDist(Drivetrain drivetrainSubsystem, double targetDist, double speed) {
+    public DriveDist(Drivetrain drivetrainSubsystem, double targetDist) {
         this.drivetrainSubsystem = drivetrainSubsystem;
         this.targetDist = targetDist;
+        this.maxSpeed = RobotMap.SWERVE_LIMIT * SwerveConstants.Swerve.maxSpeed;
+
         this.direction = 1;
-        this.maxSpeed = speed * SwerveConstants.Swerve.maxSpeed;
 
         SmartDashboard.putNumber("target dist", targetDist);
         addRequirements(drivetrainSubsystem);
     }
 
-    public DriveDist(Drivetrain drivetrainSubsystem, double targetDist, double direction, double speed) {
+    public DriveDist(Drivetrain drivetrainSubsystem, double targetDist, double direction) {
         this.drivetrainSubsystem = drivetrainSubsystem;
         this.targetDist = targetDist;
         this.direction = direction;
-        this.maxSpeed = speed * SwerveConstants.Swerve.maxSpeed;
+        this.maxSpeed = RobotMap.SWERVE_LIMIT * SwerveConstants.Swerve.maxSpeed;
 
         SmartDashboard.putNumber("target dist", targetDist);
         addRequirements(drivetrainSubsystem);

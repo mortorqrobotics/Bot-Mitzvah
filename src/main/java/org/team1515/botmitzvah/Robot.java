@@ -14,11 +14,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-
   public static CTREConfigs config;
 
-  public RobotContainer robotContainer;
+  private static RobotContainer robotContainer;
+
+  private static Command m_autonomousCommand;
 
   public static Limelight limelight;
   public static AprilTag apriltag;
@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
     limelight = new Limelight();
     apriltag = new AprilTag();
+    RobotContainer.zeroArm();
   }
 
   @Override
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    robotContainer.startup();
     m_autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {

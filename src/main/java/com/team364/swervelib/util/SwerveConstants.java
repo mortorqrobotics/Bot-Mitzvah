@@ -1,16 +1,12 @@
 package com.team364.swervelib.util;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.team364.swervelib.util.COTSFalconSwerveConstants;
-import com.team364.swervelib.util.SwerveModuleConstants;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-
-import org.team1515.botmitzvah.RobotMap;
 
 public final class SwerveConstants {
         public static final double stickDeadband = 0.1;
@@ -95,7 +91,7 @@ public final class SwerveConstants {
                 /* Swerve Profiling Values */
                 /** Meters per Second */
                 public static final double maxSpeed = 6380.0 / 60.0
-                                * COTSFalconSwerveConstants.driveGearRatios.SDSMK4_L2 * chosenModule.wheelDiameter
+                                * COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2 * chosenModule.wheelDiameter
                                 * Math.PI * 0.1; // TODO: This must be tuned to specific robot
                 /** Radians per Second */
                 public static final double maxAngularVelocity = maxSpeed

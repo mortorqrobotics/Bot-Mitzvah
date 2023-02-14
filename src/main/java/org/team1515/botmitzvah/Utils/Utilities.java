@@ -18,4 +18,22 @@ public class Utilities {
             return 0.0;
         }
     }
+
+    /**
+     * @param counts REV Position (in rotations)
+     * @param gearRatio Gear Ratio between NEO and Mechanism
+     * @return Degrees of Rotation of Mechanism
+     */
+    public static double revToDegrees(double rotations, double gearRatio) {
+        return rotations * (360.0 / (gearRatio));
+    }
+
+    /**
+     * @param degrees Degrees of rotation of Mechanism
+     * @param gearRatio Gear Ratio between NEO and Mechanism
+     * @return REV Position (in rotations)
+     */
+    public static double degreesToRev(double degrees, double gearRatio) {
+        return degrees / (360.0 / (gearRatio));
+    }
 }

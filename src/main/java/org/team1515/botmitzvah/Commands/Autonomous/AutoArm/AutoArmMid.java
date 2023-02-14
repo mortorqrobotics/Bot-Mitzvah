@@ -4,6 +4,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
+/**
+ * autonomously moves robot arm to middle position using a limit switch
+ * changes state of isOut variable when touching limit switch
+ * if arm is past the middle switch, retract, otherwise expand
+ */
+
 public class AutoArmMid extends CommandBase {
     private final Arm arm;
 
@@ -14,27 +20,16 @@ public class AutoArmMid extends CommandBase {
 
     @Override
     public void execute() {
-        if (arm.getIsOut()) {
-            arm.retract();
-        } else {
-            arm.extend();
-        }
+        arm.goToMiddle();
     }
 
     @Override
     public void end(boolean interrupted) {
-        if (arm.getMiddle()) {
-            if (arm.getIsOut()) {
-                arm.setIsOut(false);
-            } else {
-                arm.setIsOut(true);
-            }
-        }
         arm.end();
     }
 
     @Override
     public boolean isFinished() {
-        return arm.getMiddle();
+        return arm.isAtSetPoint();
     }
 }

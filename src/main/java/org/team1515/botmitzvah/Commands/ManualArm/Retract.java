@@ -1,29 +1,32 @@
-package org.team1515.botmitzvah.Commands;
+package org.team1515.botmitzvah.Commands.ManualArm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
-public class Extend extends CommandBase {
+public class Retract extends CommandBase {
     private final Arm arm;
 
-    public Extend(Arm arm) {
+    public Retract(Arm arm) {
         this.arm = arm;
         addRequirements(arm);
     }
 
     @Override
     public void execute() {
-        arm.extend();
+        arm.retract();
     }
 
     @Override
     public void end(boolean interrupted) {
+        if (arm.getRetracted()) {
+            arm.zeroEncoder();
+        }
         arm.end();
     }
 
     @Override
     public boolean isFinished() {
-        return arm.getOuter();
+        return !arm.isInBounds();
     }
 }
