@@ -17,12 +17,12 @@ public class AutoPivotSet extends CommandBase {
 
     @Override
     public void initialize() {
-        this.pivot.setTrapezoidGoal(this.targetAngle);
+        this.pivot.setAngle(this.targetAngle);
     }
 
     @Override
     public void execute() {
-        pivot.setAngle(targetAngle);
+        pivot.pivotPeriodic();
     }
 
     @Override

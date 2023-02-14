@@ -79,31 +79,29 @@ public class ArmPivot extends SubsystemBase {
     }
 
     /**
-     * Sets pivot to specified angle with pid
-     * setTrapezoidGoal must be called before calling this method.
+     * Sets the angle setpoint of the pivot
      * @param angle in degrees
      */
     public void setAngle(double angle) {
         angle = MathUtil.clamp(angle, RobotMap.ARM_PIVOT_MIN_DEG, RobotMap.ARM_PIVOT_MAX_DEG);
         double position = Utilities.degreesToRev(angle, RobotMap.ARM_PIVOT_GEAR_RATIO);
         setPoint = position;
-        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
-        controller.setReference(setPoint, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
-    }
-
-    public double getPositionRev() {
-        return encoder.getPosition();
+        TrapezoidProfile.State goalState = new TrapezoidProfile.State(Units.degreesToRadians(angle), 0);
+        TrapezoidProfile.State initalState = new TrapezoidProfile.State(Units.degreesToRadians(getAngle()), 0);
+        motionProfile = new TrapezoidProfile(constraits, goalState, initalState);
+        timer.restart();
     }
 
     /**
-     * Sets trapezoid motion profile goal. 
-     * @param goal target goal in degrees
+     * Call this method periodically to drive the pivot toward the setpoint
      */
-    public void setTrapezoidGoal(double goal) {
-        timer.restart();
-        TrapezoidProfile.State goalState = new TrapezoidProfile.State(Units.degreesToRadians(goal), 0);
-        TrapezoidProfile.State initalState = new TrapezoidProfile.State(Units.degreesToRadians(getAngle()), 0);
-        motionProfile = new TrapezoidProfile(constraits, goalState, initalState);
+    public void pivotPeriodic() {
+        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
+        controller.setReference(setPoint, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
+    } 
+
+    public double getPositionRev() {
+        return encoder.getPosition();
     }
 
     /**
