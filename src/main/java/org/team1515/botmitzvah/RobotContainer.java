@@ -8,9 +8,8 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoArm.*;
-// import org.team1515.botmitzvah.Commands.Autonomous.AutoElevator.*;
-import org.team1515.botmitzvah.Commands.ManualArm.*;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoArmAndPivot.*;
+import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -88,15 +87,15 @@ public class RobotContainer {
     Controls.RELEASE.onTrue(new ClawOpen(claw));
 
     // automized arm and elevator
-    // Controls.HIGH.onTrue(Commands.parallel(new AutoArmOut(arm), new AutoElevatorUp(elevator)));
-    // Controls.MID.onTrue(Commands.parallel(new AutoArmMid(arm), new AutoElevatorDown(elevator)));
-    // Controls.LOW.onTrue(Commands.parallel(new AutoArmIn(arm), new AutoElevatorDown(elevator)));
+    Controls.HIGH.onTrue(Commands.sequence(new AutoPivotSet(armPivot, RobotMap.ARM_PIVOT_BOTTOM_DEG), new AutoArmSet(arm, RobotMap.ARM_BOTTOM_POS)));
+    Controls.MID.onTrue(Commands.sequence(new AutoPivotSet(armPivot, RobotMap.ARM_PIVOT_MIDDLE_DEG), new AutoArmSet(arm, RobotMap.ARM_MIDDLE_POS)));
+    Controls.LOW.onTrue(Commands.sequence(new AutoPivotSet(armPivot, RobotMap.ARM_PIVOT_TOP_DEG), new AutoArmSet(arm, RobotMap.ARM_TOP_POS)));
 
     // manual arm and pivot
-    // Controls.MANUAL_UP.whileTrue(new Elevate(elevator));
-    // Controls.MANUAL_DOWN.whileTrue(new Lower(elevator));
-    Controls.MANUAL_FORWARD.whileTrue(new Extend(arm));
-    Controls.MANUAL_BACKWARD.whileTrue(new Retract(arm));
+    Controls.MANUAL_UP.whileTrue(new PivotRaise(armPivot));
+    Controls.MANUAL_DOWN.whileTrue(new PivotLower(armPivot));
+    Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
+    Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
   }
 
   public Command getAutonomousCommand() {

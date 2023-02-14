@@ -1,27 +1,24 @@
-package org.team1515.botmitzvah.Commands.ManualArm;
+package org.team1515.botmitzvah.Commands.ManualArmAndPivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
-public class Retract extends CommandBase {
+public class ArmExtend extends CommandBase {
     private final Arm arm;
 
-    public Retract(Arm arm) {
+    public ArmExtend(Arm arm) {
         this.arm = arm;
         addRequirements(arm);
     }
 
     @Override
     public void execute() {
-        arm.retract();
+        arm.extend();
     }
 
     @Override
     public void end(boolean interrupted) {
-        if (arm.getRetracted()) {
-            arm.zeroEncoder();
-        }
         arm.end();
     }
 

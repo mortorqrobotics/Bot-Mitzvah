@@ -22,8 +22,9 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ArmPivot {
+public class ArmPivot extends SubsystemBase {
     private CANSparkMax pivotMotor;
     private RelativeEncoder encoder;
     private CANCoder canCoder;
@@ -81,20 +82,18 @@ public class ArmPivot {
      * Sets pivot to specified angle with pid
      * @param angle in degrees
      */
-    public void setPivotAngle(double angle) {
-        angle = MathUtil.clamp(angle, RobotMap.ARM_PIVOT_MIN_DEGREES, RobotMap.ARM_PIVOT_MAX_DEGREES);
+    public void setAngle(double angle) {
+        angle = MathUtil.clamp(angle, RobotMap.ARM_PIVOT_MIN_DEG, RobotMap.ARM_PIVOT_MAX_DEG);
         double position = Utilities.degreesToRev(angle, RobotMap.ARM_PIVOT_GEAR_RATIO);
         setPoint = position;
-        setGoalState(Units.degreesToRadians(angle));
-        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
-        controller.setReference(position, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
+        setTrapezoidState(Units.degreesToRadians(angle));
     }
 
     public double getPositionRev() {
         return encoder.getPosition();
     }
 
-    public void setGoalState(double goal) {
+    private void setTrapezoidState(double goal) {
         timer.restart();
         motionProfile = new TrapezoidProfile(constraits, new TrapezoidProfile.State(goal, 0));
     }
@@ -110,18 +109,29 @@ public class ArmPivot {
         return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE) == 0;
     }
 
-    public void rotateClockwise() {
+    public void raise() {
         pivotMotor.set(speed);
     }
 
-    public void rotateCounterClockwise() {
+    public void lower() {
         pivotMotor.set(-speed);
+    }
+
+    public void end() {
+        pivotMotor.set(0);
     }
 
     /**
      * @return boolean true if not over or under rotated
      */
     public boolean isInBounds() {
-        return getAngle() > RobotMap.ARM_PIVOT_MIN_DEGREES && getAngle() < RobotMap.ARM_PIVOT_MAX_DEGREES;
+        return getAngle() > RobotMap.ARM_PIVOT_MIN_DEG && getAngle() < RobotMap.ARM_PIVOT_MAX_DEG;
+    }
+
+    @Override
+    public void periodic() {
+        if(isAtSetPoint()) return;
+        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
+        controller.setReference(setPoint, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
     }
 }

@@ -51,9 +51,9 @@ public class RobotMap {
     public static double ARM_KD;
     public static double ARM_KFF;
  
-    public static double ARM_INNER_POS;
+    public static double ARM_BOTTOM_POS;
     public static double ARM_MIDDLE_POS;
-    public static double ARM_OUTER_POS;
+    public static double ARM_TOP_POS;
     public static double ARM_MAX_POS;
     public static double ARM_TOLERANCE;
      
@@ -75,11 +75,11 @@ public class RobotMap {
     public static final double ARM_PIVOT_GEAR_RATIO = -1; // replace
 
     // all angles in degrees
-    public static final double ARM_PIVOT_HIGH_DEGREES = -1; // replace
-    public static final double ARM_PIVOT_MID_DEGREES = -1; // replace
-    public static final double ARM_PIVOT_LOW_DEGREES = -1; // replace
-    public static final double ARM_PIVOT_MIN_DEGREES = -1; // replace
-    public static final double ARM_PIVOT_MAX_DEGREES = -1;
+    public static final double ARM_PIVOT_TOP_DEG = -1; // replace
+    public static final double ARM_PIVOT_MIDDLE_DEG = -1; // replace
+    public static final double ARM_PIVOT_BOTTOM_DEG = -1; // replace
+    public static final double ARM_PIVOT_MIN_DEG = -1; // replace
+    public static final double ARM_PIVOT_MAX_DEG = -1;
 
     public static final double ARM_PIVOT_SPEED = 0.7;
     public static final double ARM_PIVOT_MAX_VELOCITY = -1; // replace (in radians per second)

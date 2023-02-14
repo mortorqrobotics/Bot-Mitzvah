@@ -59,20 +59,10 @@ public class Arm extends SubsystemBase {
     public boolean getRetracted() {
         return retractedSwitch.get();
     }
-
-    public void goToOuter() {
-        controller.setReference(RobotMap.ARM_OUTER_POS, ControlType.kPosition);
-        setPoint = RobotMap.ARM_OUTER_POS;
-    }
-
-    public void goToMiddle() {
-        controller.setReference(RobotMap.ARM_MIDDLE_POS, ControlType.kPosition);
-        setPoint = RobotMap.ARM_MIDDLE_POS;
-    }
-
-    public void goToInner() {
-        controller.setReference(RobotMap.ARM_INNER_POS, ControlType.kPosition);
-        setPoint = RobotMap.ARM_INNER_POS;
+    
+    public void setExtension(double position) {
+        controller.setReference(position, ControlType.kPosition);
+        setPoint = position;
     }
 
     public boolean isAtSetPoint() {

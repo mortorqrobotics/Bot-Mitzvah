@@ -1,24 +1,22 @@
-package org.team1515.botmitzvah.Commands.Autonomous.AutoArm;
+package org.team1515.botmitzvah.Commands.Autonomous.AutoArmAndPivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Arm;
 
-/**
- * autonomously moves robot arm to outer position using a limit switch
- */
-
-public class AutoArmOut extends CommandBase {
+public class AutoArmSet extends CommandBase {
     private final Arm arm;
+    private final double targetPosition;
 
-    public AutoArmOut(Arm arm) {
+    public AutoArmSet(Arm arm, double targetPosition) {
         this.arm = arm;
+        this.targetPosition = targetPosition;
         addRequirements(arm);
     }
 
     @Override
     public void execute() {
-        arm.goToOuter();
+        arm.setExtension(targetPosition);
     }
 
     @Override
