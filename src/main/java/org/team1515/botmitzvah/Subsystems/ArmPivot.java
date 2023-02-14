@@ -80,22 +80,30 @@ public class ArmPivot extends SubsystemBase {
 
     /**
      * Sets pivot to specified angle with pid
+     * setTrapezoidGoal must be called before calling this method.
      * @param angle in degrees
      */
     public void setAngle(double angle) {
         angle = MathUtil.clamp(angle, RobotMap.ARM_PIVOT_MIN_DEG, RobotMap.ARM_PIVOT_MAX_DEG);
         double position = Utilities.degreesToRev(angle, RobotMap.ARM_PIVOT_GEAR_RATIO);
         setPoint = position;
-        setTrapezoidState(Units.degreesToRadians(angle));
+        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
+        controller.setReference(setPoint, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
     }
 
     public double getPositionRev() {
         return encoder.getPosition();
     }
 
-    private void setTrapezoidState(double goal) {
+    /**
+     * Sets trapezoid motion profile goal. 
+     * @param goal target goal in degrees
+     */
+    public void setTrapezoidGoal(double goal) {
         timer.restart();
-        motionProfile = new TrapezoidProfile(constraits, new TrapezoidProfile.State(goal, 0));
+        TrapezoidProfile.State goalState = new TrapezoidProfile.State(Units.degreesToRadians(goal), 0);
+        TrapezoidProfile.State initalState = new TrapezoidProfile.State(Units.degreesToRadians(getAngle()), 0);
+        motionProfile = new TrapezoidProfile(constraits, goalState, initalState);
     }
 
     /**
@@ -126,12 +134,5 @@ public class ArmPivot extends SubsystemBase {
      */
     public boolean isInBounds() {
         return getAngle() > RobotMap.ARM_PIVOT_MIN_DEG && getAngle() < RobotMap.ARM_PIVOT_MAX_DEG;
-    }
-
-    @Override
-    public void periodic() {
-        if(isAtSetPoint()) return;
-        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
-        controller.setReference(setPoint, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
     }
 }
