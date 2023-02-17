@@ -1,6 +1,7 @@
 package org.team1515.botmitzvah.Commands.Autonomous.DriveCommands;
 
 import org.team1515.botmitzvah.RobotContainer;
+import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
 
 import com.team364.swervelib.util.SwerveConstants;
@@ -18,16 +19,13 @@ public class AutoBalance extends CommandBase {
     private double maxSpeed;
     private LinearFilter filter = LinearFilter.movingAverage(5);
 
-    private double p = 3;
-    private double i = 1.6;
-    private double d = 0.55;
     private int count = 0;
 
     public AutoBalance(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
         this.maxSpeed = 0.2 * SwerveConstants.Swerve.maxSpeed;
 
-        controller = new PIDController(p, i, d); // retune PID
+        controller = new PIDController(RobotMap.BALANCE_KP, RobotMap.BALANCE_KI, RobotMap.BALANCE_KD); // retune PID
         controller.setTolerance(Units.degreesToRadians(1));
         controller.enableContinuousInput(-Math.PI, Math.PI);
         controller.setSetpoint(0);

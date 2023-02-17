@@ -17,7 +17,7 @@ public class RotateToZero extends CommandBase {
     private PIDController angleController;
     private double maxRotate;
 
-    private double ff = 3.23; // retune
+    private double ff = 0.0; // retune
 
     /**
      * Align robot with the target using the limelight

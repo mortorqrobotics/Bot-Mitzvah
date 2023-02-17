@@ -86,9 +86,9 @@ public class RobotMap {
     public static final double ARM_PIVOT_MAX_ACCELERATION = -1; // replace (in radians per second per second) 
 
     // swerve pids
-    public static final double BALANCE_KP = -1; // replace
-    public static final double BALANCE_KI = -1; // replace
-    public static final double BALANCE_KD = -1; // replace
+    public static final double BALANCE_KP = 3; // replace
+    public static final double BALANCE_KI = 1.6; // replace
+    public static final double BALANCE_KD = 0.55; // replace
 
     public static final double ALIGN_POS_KP = -1; // replace
     public static final double ALIGN_POS_KI = -1; // replace
