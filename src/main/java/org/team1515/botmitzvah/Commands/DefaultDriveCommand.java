@@ -7,7 +7,7 @@ import org.team1515.botmitzvah.Subsystems.Drivetrain;
 
 import com.team364.swervelib.util.SwerveConstants;
 
-import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -17,6 +17,10 @@ public class DefaultDriveCommand extends CommandBase {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
+
+    private SlewRateLimiter filterX = new SlewRateLimiter(0.5, -0.5, 0);
+    private SlewRateLimiter filterY = new SlewRateLimiter(0.5, -0.5, 0);
+    private SlewRateLimiter filterRot = new SlewRateLimiter(0.5, -0.5, 0);
 
     public DefaultDriveCommand(Drivetrain drivetrain, DoubleSupplier translationSup, DoubleSupplier strafeSup,
             DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
@@ -32,12 +36,12 @@ public class DefaultDriveCommand extends CommandBase {
     @Override
     public void execute() {
         /* Get Values, Deadband */
-        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), SwerveConstants.stickDeadband);
-        double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), SwerveConstants.stickDeadband);
-        double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), SwerveConstants.stickDeadband);
-
+        double translationVal = filterY.calculate(translationSup.getAsDouble());
+        double strafeVal = filterX.calculate(strafeSup.getAsDouble());
+        double rotationVal = filterRot.calculate(rotationSup.getAsDouble());
         /* Drive */
         drivetrain.drive(
+
                 new Translation2d(translationVal, strafeVal).times(SwerveConstants.Swerve.maxSpeed),
                 rotationVal * SwerveConstants.Swerve.maxAngularVelocity,
                 !robotCentricSup.getAsBoolean(),
