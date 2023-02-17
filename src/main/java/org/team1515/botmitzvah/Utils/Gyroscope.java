@@ -10,6 +10,7 @@ public class Gyroscope {
     private double offset = 0;
 
     public float rollOffset = 0;
+    private float pitchOffset = 0;
 
     public Gyroscope() {
         navx = new AHRS(SPI.Port.kMXP, (byte) 200);
@@ -48,7 +49,7 @@ public class Gyroscope {
      * @return float pitch of the robot in degrees
      */
     public float getPitch() {
-        return navx.getPitch();
+        return navx.getPitch() - pitchOffset;
     }
 
 
@@ -64,5 +65,9 @@ public class Gyroscope {
      */
     public void zeroRoll() {
         rollOffset = navx.getRoll();
+    }
+
+    public void zeroPitch(){
+        pitchOffset = navx.getPitch();
     }
 }

@@ -35,7 +35,7 @@ public class AutoBalance extends CommandBase {
 
     @Override
     public void execute() {
-        double error = Math.toRadians(filter.calculate(RobotContainer.gyro.getRoll()));
+        double error = Math.toRadians(filter.calculate(RobotContainer.gyro.getPitch()));
         double speed = MathUtil.clamp(controller.calculate(-error, 0.0), -maxSpeed, maxSpeed);
         drivetrain.drive(new Translation2d(speed, 0.0), 0.0, false, true);
 
