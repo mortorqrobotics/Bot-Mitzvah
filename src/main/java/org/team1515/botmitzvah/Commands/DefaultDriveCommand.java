@@ -20,7 +20,7 @@ public class DefaultDriveCommand extends CommandBase {
 
     private SlewRateLimiter filterX = new SlewRateLimiter(0.5, -0.5, 0);
     private SlewRateLimiter filterY = new SlewRateLimiter(0.5, -0.5, 0);
-    private SlewRateLimiter filterRot = new SlewRateLimiter(0.5, -0.5, 0);
+    private SlewRateLimiter filterTheta = new SlewRateLimiter(0.5, -0.5, 0);
 
     public DefaultDriveCommand(Drivetrain drivetrain, DoubleSupplier translationSup, DoubleSupplier strafeSup,
             DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
@@ -38,7 +38,7 @@ public class DefaultDriveCommand extends CommandBase {
         /* Get Values, Deadband */
         double translationVal = filterY.calculate(translationSup.getAsDouble());
         double strafeVal = filterX.calculate(strafeSup.getAsDouble());
-        double rotationVal = filterRot.calculate(rotationSup.getAsDouble());
+        double rotationVal = filterTheta.calculate(rotationSup.getAsDouble());
         /* Drive */
         drivetrain.drive(
 
