@@ -45,7 +45,7 @@ public class Gyroscope {
     }
 
     /**
-     * @return float pitch of the robot in radians
+     * @return float pitch of the robot in degrees
      */
     public float getPitch() {
         return navx.getPitch();
@@ -53,7 +53,7 @@ public class Gyroscope {
 
 
     /**
-     * @return float roll of the robot in radians
+     * @return float roll of the robot in degrees
      */
     public float getRoll() {
         return navx.getRoll() - rollOffset;
