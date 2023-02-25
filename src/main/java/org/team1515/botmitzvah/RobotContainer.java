@@ -97,7 +97,7 @@ public class RobotContainer {
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
   }
-
+  
   public Command getAutonomousCommand() {
     return Commands.print("No auto command");
     // return new AutoCommandScore(drivetrain, arm, elevator, claw);
