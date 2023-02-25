@@ -10,40 +10,33 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
-    private DoubleSolenoid pistonL;
-    private DoubleSolenoid pistonR;
+    private DoubleSolenoid piston;
     private boolean extended = false;
 
     public Claw() {
 
-        pistonL = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.LEFT_CLAW_FORWARD_ID,
+        piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.LEFT_CLAW_FORWARD_ID,
                 RobotMap.LEFT_CLAW_REVERSE_ID);
-        pistonR = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.RIGHT_CLAW_FORWARD_ID,
-                RobotMap.RIGHT_CLAW_REVERSE_ID);
         // PCM ID
-        // pistonL.set(Value.kReverse); // check if this runs in robotInit
-        // pistonR.set(Value.kReverse);
+        // piston.set(Value.kReverse); // check if this runs in robotInit
     }
 
     public void extend() {
         if (!extended) {
-            pistonL.set(Value.kForward);
-            pistonR.set(Value.kForward);
+            piston.set(Value.kForward);
         }
         extended = true;
     }
 
     public void retract() {
         if (extended) {
-            pistonL.set(Value.kReverse);
-            pistonR.set(Value.kReverse);
+            piston.set(Value.kReverse);
         }
         extended = false;
     }
 
     public void toggle() {
-        pistonL.toggle();
-        pistonR.toggle();
+        piston.toggle();
     }
 
     public boolean getExtended() {
