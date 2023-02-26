@@ -39,8 +39,6 @@ public class AutoBalance extends CommandBase {
         double speed = MathUtil.clamp(controller.calculate(-error, 0.0), -maxSpeed, maxSpeed);
         drivetrain.drive(new Translation2d(speed, 0.0), 0.0, false, true);
 
-        System.out.println(speed);
-        
         if (controller.atSetpoint()){
             count++;
         }

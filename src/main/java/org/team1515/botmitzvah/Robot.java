@@ -4,6 +4,10 @@
 
 package org.team1515.botmitzvah;
 
+import org.team1515.botmitzvah.Commands.ClawClose;
+import org.team1515.botmitzvah.Commands.Autonomous.StartupCommand;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoArmAndPivot.AutoArmSet;
+import org.team1515.botmitzvah.Subsystems.Arm.Extension;
 import org.team1515.botmitzvah.Utils.*;
 
 import com.team364.swervelib.util.CTREConfigs;
@@ -20,17 +24,12 @@ public class Robot extends TimedRobot {
 
   private static Command m_autonomousCommand;
 
-  public static Limelight limelight;
-  public static AprilTag apriltag;
 
   @Override
   public void robotInit() {
     config = new CTREConfigs();
 
     robotContainer = new RobotContainer();
-    limelight = new Limelight();
-    apriltag = new AprilTag();
-    RobotContainer.zeroArm();
   }
 
   @Override
@@ -52,7 +51,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    robotContainer.startup();
+    // new StartupCommand(RobotContainer.arm, RobotContainer.armPivot).schedule();
+    new ClawClose(RobotContainer.claw).schedule();
     m_autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {

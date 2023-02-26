@@ -18,10 +18,8 @@ public class RobotMap {
     // Subsystems
 
     // Claw
-    public final static int LEFT_CLAW_FORWARD_ID = -1;// replace
-    public final static int LEFT_CLAW_REVERSE_ID = -1;// replace
-    public final static int RIGHT_CLAW_FORWARD_ID = -1;// replace
-    public final static int RIGHT_CLAW_REVERSE_ID = -1;// replace
+    public final static int CLAW_FORWARD_ID = -1;// replace
+    public final static int CLAW_REVERSE_ID = -1;// replace
 
     // Limelight
     public final static double HEIGHT_OF_TAPE = -1;// replace
@@ -43,19 +41,13 @@ public class RobotMap {
 
     //Arm Constants
     public final static int ARM_ID = -1;// replace
-    public static int ARM_RETRACT_SWITCH;
-    public final static int ARM_SPEED = -1;// replace
+    public final static double ARM_SPEED = 0.5;// replace
 
-    public static double ARM_KP;
-    public static double ARM_KI;
-    public static double ARM_KD;
-    public static double ARM_KFF;
- 
-    public static double ARM_BOTTOM_POS;
-    public static double ARM_MIDDLE_POS;
-    public static double ARM_TOP_POS;
-    public static double ARM_MAX_POS;
-    public static double ARM_TOLERANCE;
+    public static final double ARM_RETRACTED_POS = -1; // replace
+    public static final double ARM_EXTENDED_POS = -1; // replace
+    public static final double ARM_MAX_POS = -1; // replace
+    public static final double ARM_MIN_POS = -1; // replace
+    public static final double ARM_TOLERANCE = -1; // replace
      
     // ArmPivot Constants
     public static final int ARM_PIVOT_ID = -1; // replace
@@ -65,10 +57,6 @@ public class RobotMap {
     public static final double ARM_PIVOT_KI = -1; // replace
     public static final double ARM_PIVOT_KD = -1; // replace
 
-    public static final double ARM_PIVOT_KS = -1; // replace
-    public static final double ARM_PIVOT_KG = -1; // replace
-    public static final double ARM_PIVOT_KV = -1; // replace
-    public static final double ARM_PIVOT_KA = -1; // replace
 
     /** degrees */
     public static final double ARM_PIVOT_OFFSET = 0; // MEASURE (ZERO SHOULD BE REFERENCE FROM HORIZONTAL)
@@ -78,12 +66,19 @@ public class RobotMap {
     public static final double ARM_PIVOT_TOP_DEG = -1; // replace
     public static final double ARM_PIVOT_MIDDLE_DEG = -1; // replace
     public static final double ARM_PIVOT_BOTTOM_DEG = -1; // replace
+    public static final double ARM_PIVOT_STATION_DEG = -1; // replace
     public static final double ARM_PIVOT_MIN_DEG = -1; // replace
     public static final double ARM_PIVOT_MAX_DEG = -1;
 
     public static final double ARM_PIVOT_SPEED = 0.7;
     public static final double ARM_PIVOT_MAX_VELOCITY = -1; // replace (in radians per second)
-    public static final double ARM_PIVOT_MAX_ACCELERATION = -1; // replace (in radians per second per second) 
+    public static final double ARM_PIVOT_MAX_ACCELERATION = -1; // replace (in radians per second per second)
+    
+    public static final double ARM_PIVOT_STATION_OUT_VOLTS = -1;
+    public static final double ARM_PIVOT_BOTTOM_OUT_VOLTS = -1;
+    public static final double ARM_PIVOT_MIDDLE_OUT_VOLTS = -1;
+    public static final double ARM_PIVOT_TOP_OUT_VOLTS = -1;
+    public static final double ARM_PIVOT_BOTTOM_IN_VOLTS = -1;
 
     // swerve pids
     public static final double BALANCE_KP = 3; // replace
@@ -97,24 +92,6 @@ public class RobotMap {
     public static final double ALIGN_ANGLE_KP = -1; // replace
     public static final double ALIGN_ANGLE_KI = -1; // replace
     public static final double ALIGN_ANGLE_KD = -1; // replace
-
-    // photonVision
-    public static final String CAMERA_NAME = "name";
-    public static final Transform3d ROBOT_TO_CAM = new Transform3d(new Translation3d(0.5, 0.0, 0.5),
-            new Rotation3d(0, 0, 0));
-    // TODO replace transform values
-
-    // starting values for pose estimator
-    public static final Pose2d[] STARTING_RED = {
-            new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(3), Rotation2d.fromRadians(0.0)),
-            new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(9), Rotation2d.fromRadians(0.0)),
-            new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(15), Rotation2d.fromRadians(0.0))
-    };
-    public static final Pose2d[] STARTING_BLUE = {
-            new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(3), Rotation2d.fromRadians(0.0)),
-            new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(9), Rotation2d.fromRadians(0.0)),
-            new Pose2d(Units.feetToMeters(4.5), Units.feetToMeters(15), Rotation2d.fromRadians(0.0))
-    };
 
     // Lidar Sensor
     public static final double MAX_EDGE_BOUND = 0;

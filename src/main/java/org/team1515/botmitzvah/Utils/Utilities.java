@@ -36,4 +36,11 @@ public class Utilities {
     public static double degreesToRev(double degrees, double gearRatio) {
         return degrees / (360.0 / (gearRatio));
     }
+
+    /*
+     * Returns true if error is within epsilon
+     */
+    public static boolean epsilonEquals(double a, double b, double epsilon) {
+        return (a - epsilon <= b) && (a + epsilon >= b);
+    }
 }

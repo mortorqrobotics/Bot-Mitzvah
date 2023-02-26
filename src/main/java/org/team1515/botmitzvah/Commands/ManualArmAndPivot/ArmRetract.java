@@ -19,14 +19,6 @@ public class ArmRetract extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if (arm.getRetracted()) {
-            arm.zeroEncoder();
-        }
         arm.end();
-    }
-
-    @Override
-    public boolean isFinished() {
-        return !arm.isInBounds();
     }
 }
