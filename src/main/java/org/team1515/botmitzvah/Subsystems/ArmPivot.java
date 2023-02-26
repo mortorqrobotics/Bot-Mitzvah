@@ -1,6 +1,8 @@
 package org.team1515.botmitzvah.Subsystems;
 
+import org.team1515.botmitzvah.RobotContainer;
 import org.team1515.botmitzvah.RobotMap;
+import org.team1515.botmitzvah.Utils.ArmPivotMap;
 import org.team1515.botmitzvah.Utils.Utilities;
 
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
@@ -17,11 +19,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxPIDController.ArbFFUnits;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmPivot extends SubsystemBase {
@@ -29,14 +27,10 @@ public class ArmPivot extends SubsystemBase {
     private RelativeEncoder encoder;
     private CANCoder canCoder;
     private SparkMaxPIDController controller;
-    private ArmFeedforward feedforward;
+    private ArmPivotMap pivotMap;
 
     private double setPoint;
-    private double speed = RobotMap.ARM_PIVOT_SPEED;
-    private TrapezoidProfile motionProfile;
-    private TrapezoidProfile.Constraints constraits;
-
-    private Timer timer;
+    public boolean usePid = false;
 
     public ArmPivot() {
         pivotMotor = new CANSparkMax(RobotMap.ARM_PIVOT_ID, MotorType.kBrushless);
@@ -45,7 +39,7 @@ public class ArmPivot extends SubsystemBase {
 
         canCoder = new CANCoder(RobotMap.ARM_PIVOT_CANCODER_ID);
         CANCoderConfiguration pivotCanCoderConfig = new CANCoderConfiguration();
-        pivotCanCoderConfig.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
+        pivotCanCoderConfig.absoluteSensorRange = AbsoluteSensorRange.Signed_PlusMinus180;
         pivotCanCoderConfig.sensorDirection = false; // double check this
         pivotCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
         pivotCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
@@ -58,15 +52,10 @@ public class ArmPivot extends SubsystemBase {
         pivotMotor.setIdleMode(IdleMode.kBrake);
         pivotMotor.burnFlash();
 
-        feedforward = new ArmFeedforward(RobotMap.ARM_PIVOT_KS, RobotMap.ARM_PIVOT_KG, RobotMap.ARM_PIVOT_KV);
-
-        TrapezoidProfile.Constraints constraits = new TrapezoidProfile.Constraints(RobotMap.ARM_PIVOT_MAX_VELOCITY, RobotMap.ARM_PIVOT_MAX_ACCELERATION);
-        TrapezoidProfile.State initalGoal = new TrapezoidProfile.State(0, 0);
-        motionProfile = new TrapezoidProfile(constraits, initalGoal);
-
-        timer = new Timer();
+        pivotMap = new ArmPivotMap();
 
         resetToAbsolute();
+        setAngle(getAngle());
     }
 
     public Rotation2d getCancoderAngle() {
@@ -74,7 +63,7 @@ public class ArmPivot extends SubsystemBase {
     }
 
     public void resetToAbsolute() {
-        double absolutePosition = Utilities.degreesToRev(getCancoderAngle().getDegrees() - RobotMap.ARM_PIVOT_OFFSET, RobotMap.ARM_PIVOT_GEAR_RATIO);
+        double absolutePosition = Utilities.degreesToRev(getAngle(), RobotMap.ARM_PIVOT_GEAR_RATIO);
         encoder.setPosition(absolutePosition);
     }
 
@@ -86,41 +75,29 @@ public class ArmPivot extends SubsystemBase {
         angle = MathUtil.clamp(angle, RobotMap.ARM_PIVOT_MIN_DEG, RobotMap.ARM_PIVOT_MAX_DEG);
         double position = Utilities.degreesToRev(angle, RobotMap.ARM_PIVOT_GEAR_RATIO);
         setPoint = position;
-        TrapezoidProfile.State goalState = new TrapezoidProfile.State(Units.degreesToRadians(angle), 0);
-        TrapezoidProfile.State initalState = new TrapezoidProfile.State(Units.degreesToRadians(getAngle()), 0);
-        motionProfile = new TrapezoidProfile(constraits, goalState, initalState);
-        timer.restart();
     }
-
-    /**
-     * Call this method periodically to drive the pivot toward the setpoint
-     */
-    public void pivotPeriodic() {
-        TrapezoidProfile.State state = motionProfile.calculate(timer.get());
-        controller.setReference(state.position, ControlType.kVelocity, 0, feedforward.calculate(state.position, state.velocity), ArbFFUnits.kVoltage);
-    } 
 
     public double getPositionRev() {
         return encoder.getPosition();
     }
 
     /**
-     * @return double angle of the arm in degrees based on internal encoder
+     * @return double angle of the arm in degrees based on cancoder angle   
      */
     public double getAngle() {
-        return Utilities.revToDegrees(getPositionRev(), RobotMap.ARM_PIVOT_GEAR_RATIO);
+        return getCancoderAngle().getDegrees() - RobotMap.ARM_PIVOT_OFFSET;
     }
 
     public boolean isAtSetPoint() {
-        return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE) == 0;
+        return Utilities.epsilonEquals(setPoint, encoder.getPosition(), RobotMap.ARM_TOLERANCE);
     }
 
     public void raise() {
-        pivotMotor.set(speed);
+        setPoint += 0.1;
     }
 
     public void lower() {
-        pivotMotor.set(-speed);
+        setPoint -= 0.1;
     }
 
     public void end() {
@@ -132,5 +109,20 @@ public class ArmPivot extends SubsystemBase {
      */
     public boolean isInBounds() {
         return getAngle() > RobotMap.ARM_PIVOT_MIN_DEG && getAngle() < RobotMap.ARM_PIVOT_MAX_DEG;
+    }
+
+    /**
+     * Calculates feedforward based on the current pivot angle and arm extension
+     * @returns arbitrary feedforward in volts
+     */
+    public double calculateFeedForward() {
+        return pivotMap.get(getAngle(), RobotContainer.arm.extension);
+    }
+
+    @Override
+    public void periodic() {
+        if(usePid) {
+            controller.setReference(setPoint, ControlType.kPosition, 0, calculateFeedForward(), ArbFFUnits.kVoltage);
+        }
     }
 }

@@ -4,80 +4,83 @@ import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Utils.Utilities;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.RelativeEncoder;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
     private CANSparkMax arm;
     private RelativeEncoder encoder;
 
-    private SparkMaxPIDController controller;
-    private double setPoint;
-
-    private DigitalInput retractedSwitch;
+    public Extension extension;
 
     public static double speed;
+
+    public static enum Extension {
+        Extended(RobotMap.ARM_EXTENDED_POS),
+        Retracted(RobotMap.ARM_RETRACTED_POS);
+
+        public double position;
+
+        private Extension(double position) {
+            this.position = position;
+        }
+    }
 
     public Arm() {
         arm = new CANSparkMax(RobotMap.ARM_ID, MotorType.kBrushless);
         arm.restoreFactoryDefaults();
+        arm.setInverted(false);
 
         encoder = arm.getEncoder();
 
-        controller = arm.getPIDController();
-        controller.setP(RobotMap.ARM_KP);
-        controller.setI(RobotMap.ARM_KI);
-        controller.setD(RobotMap.ARM_KD);
-        controller.setFF(RobotMap.ARM_KFF);
-
         arm.setIdleMode(IdleMode.kBrake);
         arm.burnFlash();
-
-        retractedSwitch = new DigitalInput(RobotMap.ARM_RETRACT_SWITCH);
 
         speed = RobotMap.ARM_SPEED;
     }
 
     public void extend() {
-        arm.set(speed);
+        double percentSpeed = !isOverExtended() ? speed : 0;
+        arm.set(percentSpeed);
     }
 
     public void retract() {
-        arm.set(-speed);
+        double percentSpeed = !isUnderExtended() ? -speed : 0;
+        arm.set(percentSpeed);
+    }
+
+    /*
+     * Return true if position is greater than set point position
+     */
+    public boolean isPastSetpoint() {
+        return getPosition() > extension.position;
     }
 
     public void end() {
         arm.set(0);
     }
-
-    public boolean getRetracted() {
-        return retractedSwitch.get();
-    }
     
-    public void setExtension(double position) {
-        controller.setReference(position, ControlType.kPosition);
-        setPoint = position;
+    public void setExtension(Extension extension) {
+        this.extension = extension;
     }
 
     public boolean isAtSetPoint() {
-        return Utilities.deadband(setPoint - encoder.getPosition(), RobotMap.ARM_TOLERANCE) == 0;
+        return Utilities.epsilonEquals(extension.position, getPosition(), RobotMap.ARM_TOLERANCE);
     }
 
-    /**
-     * @return boolean true if the arm is not over or under extended
-     */
-    public boolean isInBounds() {
-        return !getRetracted() && (getPosition() > RobotMap.ARM_MAX_POS);
+    public boolean isOverExtended() {
+        return getPosition() > RobotMap.ARM_MAX_POS;
     }
 
-    public void zeroEncoder() {
-        encoder.setPosition(0.0);
+    public boolean isUnderExtended() {
+        return getPosition() < RobotMap.ARM_MIN_POS;
+    }
+
+    public void setEncoder(double position) { // use at start of match
+        encoder.setPosition(position);
     }
 
     public double getPosition() {

@@ -17,12 +17,8 @@ public class AutoPivotSet extends CommandBase {
 
     @Override
     public void initialize() {
+        this.pivot.resetToAbsolute();
         this.pivot.setAngle(this.targetAngle);
-    }
-
-    @Override
-    public void execute() {
-        pivot.pivotPeriodic();
     }
 
     @Override
