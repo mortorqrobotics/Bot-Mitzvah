@@ -1,7 +1,6 @@
 package org.team1515.botmitzvah.Commands.Autonomous.DriveCommands;
 
 import org.team1515.botmitzvah.RobotContainer;
-import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
 
 import com.team364.swervelib.util.SwerveConstants;
@@ -19,13 +18,16 @@ public class AutoBalance extends CommandBase {
     private double maxSpeed;
     private LinearFilter filter = LinearFilter.movingAverage(5);
 
+    private double p = 3;
+    private double i = 1.6;
+    private double d = 0.55;
     private int count = 0;
 
     public AutoBalance(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
         this.maxSpeed = 0.2 * SwerveConstants.Swerve.maxSpeed;
 
-        controller = new PIDController(RobotMap.BALANCE_KP, RobotMap.BALANCE_KI, RobotMap.BALANCE_KD); // retune PID
+        controller = new PIDController(p,i,d); // retun PID
         controller.setTolerance(Units.degreesToRadians(1));
         controller.enableContinuousInput(-Math.PI, Math.PI);
         controller.setSetpoint(0);
@@ -35,10 +37,12 @@ public class AutoBalance extends CommandBase {
 
     @Override
     public void execute() {
-        double error = Math.toRadians(filter.calculate(RobotContainer.gyro.getPitch()));
+        double error = Math.toRadians(filter.calculate(RobotContainer.gyro.getRoll()));
         double speed = MathUtil.clamp(controller.calculate(-error, 0.0), -maxSpeed, maxSpeed);
         drivetrain.drive(new Translation2d(speed, 0.0), 0.0, false, true);
 
+        System.out.println(speed);
+        
         if (controller.atSetpoint()){
             count++;
         }
@@ -54,6 +58,6 @@ public class AutoBalance extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (controller.atSetpoint() && count > 40) || RobotContainer.ir.getEdgeBound();
+        return controller.atSetpoint() && count > 40;
     }
 }

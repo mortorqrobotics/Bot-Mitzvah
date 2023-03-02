@@ -41,7 +41,6 @@ public class DefaultDriveCommand extends CommandBase {
         double rotationVal = filterTheta.calculate(rotationSup.getAsDouble());
         /* Drive */
         drivetrain.drive(
-
                 new Translation2d(translationVal, strafeVal).times(SwerveConstants.Swerve.maxSpeed),
                 rotationVal * SwerveConstants.Swerve.maxAngularVelocity,
                 !robotCentricSup.getAsBoolean(),

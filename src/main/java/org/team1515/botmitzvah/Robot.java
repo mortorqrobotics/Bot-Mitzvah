@@ -5,9 +5,6 @@
 package org.team1515.botmitzvah;
 
 import org.team1515.botmitzvah.Commands.ClawClose;
-import org.team1515.botmitzvah.Commands.Autonomous.StartupCommand;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoArmAndPivot.AutoArmSet;
-import org.team1515.botmitzvah.Subsystems.Arm.Extension;
 import org.team1515.botmitzvah.Utils.*;
 
 import com.team364.swervelib.util.CTREConfigs;
