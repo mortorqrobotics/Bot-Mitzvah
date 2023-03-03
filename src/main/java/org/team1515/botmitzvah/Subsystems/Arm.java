@@ -29,7 +29,7 @@ public class Arm extends SubsystemBase {
     }
 
     public void retract() {
-        arm.set(speed);
+        arm.set(-speed);
     }
 
     public void end() {

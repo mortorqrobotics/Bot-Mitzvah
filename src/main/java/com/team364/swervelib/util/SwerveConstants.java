@@ -90,12 +90,9 @@ public final class SwerveConstants {
 
                 /* Swerve Profiling Values */
                 /** Meters per Second */
-                public static final double maxSpeed = 6380.0 / 60.0
-                                * COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L2 * chosenModule.wheelDiameter
-                                * Math.PI * 0.1; // TODO: This must be tuned to specific robot
+                public static final double maxSpeed = 4.5; // TODO: This must be tuned to specific robot
                 /** Radians per Second */
-                public static final double maxAngularVelocity = maxSpeed
-                                / Math.hypot(trackWidth / 2.0, wheelBase / 2.0); // TODO: This must be tuned to specific
+                public static final double maxAngularVelocity = 10; // TODO: This must be tuned to specific
 
                 /* Neutral Modes */
                 public static final NeutralMode angleNeutralMode = NeutralMode.Coast;

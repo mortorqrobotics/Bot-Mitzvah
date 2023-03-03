@@ -11,10 +11,10 @@ public class Controls {
     public static final Trigger RESET_GYRO = new Trigger(RobotContainer.mainController::getBackButton);
     public static final Trigger DRIVE_ROBOT_ORIENTED = new Trigger(RobotContainer.mainController::getLeftBumper);
 
-    public static final Trigger MANUAL_UP = new Trigger(RobotContainer.secondController::getAButton);
-    public static final Trigger MANUAL_DOWN = new Trigger(RobotContainer.secondController::getBButton);
-    public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRightStickUp);
-    public static final Trigger MANUAL_BACKWARD = new Trigger(Controls::getRightStickDown);
+    public static final Trigger MANUAL_UP = new Trigger(RobotContainer.secondController::getYButton);
+    public static final Trigger MANUAL_DOWN = new Trigger(RobotContainer.secondController::getAButton);
+    public static final Trigger MANUAL_FORWARD = new Trigger(RobotContainer.secondController::getXButton);
+    public static final Trigger MANUAL_BACKWARD = new Trigger(RobotContainer.secondController::getBButton);
 
     // public static final Trigger ALIGN_TAG = new
     // Trigger(RobotContainer.mainController::getStartButton);

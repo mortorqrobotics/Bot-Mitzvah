@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // new StartupCommand(RobotContainer.arm, RobotContainer.armPivot).schedule();
-    new ClawClose(RobotContainer.claw).schedule();
+    // new ClawClose(RobotContainer.claw).schedule();
     m_autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {
