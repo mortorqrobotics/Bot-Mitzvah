@@ -31,14 +31,13 @@ public class ArmPivot extends SubsystemBase {
         pivotMotor = new CANSparkMax(RobotMap.ARM_PIVOT_ID, MotorType.kBrushless);
         pivotMotor.setInverted(true);
 
-        encoder = new CANCoder(RobotMap.ARM_PIVOT_CANCODER_ID); //replace
+        encoder = new CANCoder(RobotMap.ARM_PIVOT_CANCODER_ID); // replace
         CANCoderConfiguration pivotCanCoderConfig = new CANCoderConfiguration();
         pivotCanCoderConfig.absoluteSensorRange = AbsoluteSensorRange.Signed_PlusMinus180;
         pivotCanCoderConfig.sensorDirection = false; // double check this
         pivotCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
         pivotCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
         encoder.configAllSettings(pivotCanCoderConfig);
-
 
         pivotMotor.setIdleMode(IdleMode.kBrake);
         pivotMotor.burnFlash();
@@ -56,8 +55,12 @@ public class ArmPivot extends SubsystemBase {
         pivotMotor.set(-speed * RobotContainer.secondController.getLeftTriggerAxis());
     }
 
-    public boolean isInBounds() {
-        return true;
+    public boolean getOverLimit() {
+        return false;
+    }
+
+    public boolean getUnderLimit() {
+        return false;
     }
 
     public void end() {

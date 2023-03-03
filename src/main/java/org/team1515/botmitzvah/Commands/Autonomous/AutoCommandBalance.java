@@ -21,7 +21,6 @@ public class AutoCommandBalance extends SequentialCommandGroup {
     public AutoCommandBalance(Drivetrain drivetrain) { // add params
         addCommands(
                 new DriveDist(drivetrain, Units.feetToMeters(3 + RobotMap.CHARGING_STATION_DISTANCE + 6), 1),
-                new DriveDist(drivetrain, Units.feetToMeters(4.5), -1),
-                new AutoBalance(drivetrain));
+                new DriveDist(drivetrain, Units.feetToMeters(4.5), -1));
     }
 }

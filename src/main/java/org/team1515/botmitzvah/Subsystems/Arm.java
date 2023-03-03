@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Arm extends SubsystemBase {
     private CANSparkMax arm;
 
-    public static double speed;
+    public static double speed = 0.25;
 
     public Arm() {
         arm = new CANSparkMax(RobotMap.ARM_ID, MotorType.kBrushless);
@@ -30,6 +30,14 @@ public class Arm extends SubsystemBase {
 
     public void retract() {
         arm.set(-speed);
+    }
+
+    public boolean getOverExtended() {
+        return arm.getEncoder().getPosition() > RobotMap.ARM_UPPER_LIMIT;
+    }
+
+    public boolean getUnderExtended() {
+        return arm.getEncoder().getPosition() < RobotMap.ARM_LOWER_LIMIT;
     }
 
     public void end() {

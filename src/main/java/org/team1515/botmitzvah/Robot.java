@@ -21,7 +21,6 @@ public class Robot extends TimedRobot {
 
   private static Command m_autonomousCommand;
 
-
   @Override
   public void robotInit() {
     config = new CTREConfigs();

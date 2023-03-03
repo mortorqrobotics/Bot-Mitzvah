@@ -9,7 +9,7 @@ public class PivotRaise extends CommandBase {
 
   public PivotRaise(ArmPivot pivot) {
     this.pivot = pivot;
-    
+
     addRequirements(pivot);
   }
 
@@ -25,6 +25,6 @@ public class PivotRaise extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return !pivot.isInBounds();
+    return pivot.getOverLimit();
   }
 }
