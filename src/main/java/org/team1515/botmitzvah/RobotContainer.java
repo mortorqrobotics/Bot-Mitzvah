@@ -64,12 +64,12 @@ public class RobotContainer {
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
 
-    Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
+    //Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No auto command");
-    // return new AutoCommandScore(drivetrain, claw);
+    //return Commands.print("No auto command");
+    return new AutoCommandScore(drivetrain, claw);
   }
 
   public static double getRobotSpeed() {

@@ -48,11 +48,11 @@ public class ArmPivot extends SubsystemBase {
     }
 
     public void raise() {
-        pivotMotor.set(speed * RobotContainer.secondController.getLeftTriggerAxis());
+        pivotMotor.set(speed * MathUtil.clamp((Math.pow(RobotContainer.secondController.getLeftTriggerAxis(), 2)+0.1), 0, 1));
     }
 
     public void lower() {
-        pivotMotor.set(-speed * RobotContainer.secondController.getLeftTriggerAxis());
+        pivotMotor.set(-speed * MathUtil.clamp((Math.pow(RobotContainer.secondController.getLeftTriggerAxis(), 2)+0.1), 0, 1));
     }
 
     public boolean getOverLimit() {

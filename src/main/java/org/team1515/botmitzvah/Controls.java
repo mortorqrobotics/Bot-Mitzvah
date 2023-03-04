@@ -21,7 +21,7 @@ public class Controls {
     // public static final Trigger ALIGN_LIGHT = new
     // Trigger(RobotContainer.mainController::getStartButton);
     public static final Trigger ZERO_ROBOT = new Trigger(RobotContainer.mainController::getStartButton);
-    public static final Trigger DRIVE = new Trigger(RobotContainer.mainController::getXButton);
+    //public static final Trigger DRIVE = new Trigger(RobotContainer.mainController::getXButton);
 
     public static boolean getRightTriggerMain() {
         return RobotContainer.mainController.getRightTriggerAxis() >= 0.250;
