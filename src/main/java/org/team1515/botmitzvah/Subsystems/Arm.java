@@ -33,11 +33,13 @@ public class Arm extends SubsystemBase {
     }
 
     public boolean getOverExtended() {
-        return arm.getEncoder().getPosition() > RobotMap.ARM_UPPER_LIMIT;
+        return false;
+        //return arm.getEncoder().getPosition() > RobotMap.ARM_UPPER_LIMIT;
     }
 
     public boolean getUnderExtended() {
-        return arm.getEncoder().getPosition() < RobotMap.ARM_LOWER_LIMIT;
+        return false;
+        //return arm.getEncoder().getPosition() < RobotMap.ARM_LOWER_LIMIT;
     }
 
     public void end() {

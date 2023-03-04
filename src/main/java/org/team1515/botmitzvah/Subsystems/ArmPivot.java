@@ -57,10 +57,12 @@ public class ArmPivot extends SubsystemBase {
 
     public boolean getOverLimit() {
         return false;
+        //return encoder.getPosition() > RobotMap.ARM_PIVOT_UPPER_LIMIT;
     }
 
     public boolean getUnderLimit() {
         return false;
+        //return encoder.getPosition() < RobotMap.ARM_PIVOT_LOWER_LIMIT;
     }
 
     public void end() {

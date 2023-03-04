@@ -6,7 +6,7 @@ public class Controls {
     // change botton maps later
 
     public static final Trigger GRAB = new Trigger(RobotContainer.secondController::getRightBumper);
-    public static final Trigger RELEASE = new Trigger(RobotContainer.secondController::getLeftBumper);
+    public static final Trigger RELEASE = new Trigger(Controls::getRightTriggerSecond);
 
     public static final Trigger RESET_GYRO = new Trigger(RobotContainer.mainController::getBackButton);
     public static final Trigger DRIVE_ROBOT_ORIENTED = new Trigger(RobotContainer.mainController::getLeftBumper);
@@ -21,9 +21,14 @@ public class Controls {
     // public static final Trigger ALIGN_LIGHT = new
     // Trigger(RobotContainer.mainController::getStartButton);
     public static final Trigger ZERO_ROBOT = new Trigger(RobotContainer.mainController::getStartButton);
+    public static final Trigger DRIVE = new Trigger(RobotContainer.mainController::getXButton);
 
-    public static boolean getRightTrigger() {
+    public static boolean getRightTriggerMain() {
         return RobotContainer.mainController.getRightTriggerAxis() >= 0.250;
+    }
+
+    public static boolean getRightTriggerSecond() {
+        return RobotContainer.secondController.getRightTriggerAxis() >= 0.250;
     }
 
     public static boolean getLeftTrigger() {

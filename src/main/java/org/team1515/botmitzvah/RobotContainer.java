@@ -8,6 +8,7 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
+import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
 
@@ -48,7 +49,7 @@ public class RobotContainer {
         new DefaultDriveCommand(drivetrain,
             () -> -modifyAxis(-mainController.getLeftY() * getRobotSpeed()),
             () -> -modifyAxis(-mainController.getLeftX() * getRobotSpeed()),
-            () -> -modifyAxis(mainController.getRightX() * getRobotSpeed()),
+            () -> modifyAxis(mainController.getRightX() * getRobotSpeed()),
             () -> Controls.DRIVE_ROBOT_ORIENTED.getAsBoolean()));
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro()));
@@ -62,11 +63,13 @@ public class RobotContainer {
     Controls.MANUAL_DOWN.whileTrue(new PivotLower(armPivot));
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
+
+    Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }
 
   public Command getAutonomousCommand() {
     return Commands.print("No auto command");
-    // return new AutoCommandScore(drivetrain, arm, elevator, claw);
+    // return new AutoCommandScore(drivetrain, claw);
   }
 
   public static double getRobotSpeed() {
