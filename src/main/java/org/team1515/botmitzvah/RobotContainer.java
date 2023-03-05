@@ -8,6 +8,7 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
+import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
@@ -63,6 +64,8 @@ public class RobotContainer {
     Controls.MANUAL_DOWN.whileTrue(new PivotLower(armPivot));
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
+
+    Controls.B.whileTrue(new AutoBalance(drivetrain));
 
     //Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }

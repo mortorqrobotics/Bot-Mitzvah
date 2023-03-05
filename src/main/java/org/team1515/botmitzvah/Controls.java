@@ -16,6 +16,8 @@ public class Controls {
     public static final Trigger MANUAL_FORWARD = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger MANUAL_BACKWARD = new Trigger(RobotContainer.secondController::getBButton);
 
+    public static final Trigger B = new Trigger(RobotContainer.mainController::getYButton);
+
     // public static final Trigger ALIGN_TAG = new
     // Trigger(RobotContainer.mainController::getStartButton);
     // public static final Trigger ALIGN_LIGHT = new

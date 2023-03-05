@@ -25,7 +25,7 @@ public class DriveDist extends CommandBase {
     public DriveDist(Drivetrain drivetrainSubsystem, double targetDist) {
         this.drivetrainSubsystem = drivetrainSubsystem;
         this.targetDist = targetDist;
-        this.maxSpeed = (RobotMap.SWERVE_LIMIT/2) * SwerveConstants.Swerve.maxSpeed;
+        this.maxSpeed = (RobotMap.SWERVE_LIMIT/1.5) * SwerveConstants.Swerve.maxSpeed;
 
         this.direction = 1;
 
@@ -37,11 +37,21 @@ public class DriveDist extends CommandBase {
         this.drivetrainSubsystem = drivetrainSubsystem;
         this.targetDist = targetDist;
         this.direction = direction;
-        this.maxSpeed = (RobotMap.SWERVE_LIMIT/2) * SwerveConstants.Swerve.maxSpeed;
+        this.maxSpeed = (RobotMap.SWERVE_LIMIT/1.5) * SwerveConstants.Swerve.maxSpeed;
 
         SmartDashboard.putNumber("target dist", targetDist);
         addRequirements(drivetrainSubsystem);
     }
+    public DriveDist(Drivetrain drivetrainSubsystem, double targetDist, double direction, double limit) {
+        this.drivetrainSubsystem = drivetrainSubsystem;
+        this.targetDist = targetDist;
+        this.direction = direction;
+        this.maxSpeed = (limit) * SwerveConstants.Swerve.maxSpeed;
+
+        SmartDashboard.putNumber("target dist", targetDist);
+        addRequirements(drivetrainSubsystem);
+    }
+
 
     @Override
     public void initialize() {
