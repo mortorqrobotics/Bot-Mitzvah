@@ -51,6 +51,7 @@ public class DriveDist extends CommandBase {
         SmartDashboard.putNumber("target dist", targetDist);
         addRequirements(drivetrainSubsystem);
     }
+    
 
 
     @Override

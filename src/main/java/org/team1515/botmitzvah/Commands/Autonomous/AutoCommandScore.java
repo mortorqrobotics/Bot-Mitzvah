@@ -24,9 +24,9 @@ public class AutoCommandScore extends SequentialCommandGroup {
     public AutoCommandScore(Drivetrain drivetrain, Claw claw) { // add params
         addCommands(
                 new ClawClose(claw),
-                new DriveDist(drivetrain, Units.inchesToMeters(180), 1),
+                new DriveDist(drivetrain, Units.inchesToMeters(174), 1),
                 new WaitCommand(0.5),
-                new DriveDist(drivetrain, Units.inchesToMeters(52), -1),
+                new DriveDist(drivetrain, Units.inchesToMeters(87), -1, 0.5),
                 new WaitCommand(0.0459),
                 new InstantCommand(() -> drivetrain.drive(new Translation2d(0.0,0.0), 1, false, true))
             );

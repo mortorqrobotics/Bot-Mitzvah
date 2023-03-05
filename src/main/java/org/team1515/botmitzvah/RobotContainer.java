@@ -65,7 +65,7 @@ public class RobotContainer {
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
 
-    Controls.B.whileTrue(new AutoBalance(drivetrain));
+    // Controls.B.whileTrue(new AutoBalance(drivetrain));
 
     //Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }
