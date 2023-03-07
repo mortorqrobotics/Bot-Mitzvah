@@ -68,7 +68,6 @@ public class RobotMap {
 
         public static final double ARM_UPPER_LIMIT = 0;
 
-		public static final double ARM_PIVOT_UPPER_LIMIT = 0;
-
-        public static final double ARM_PIVOT_LOWER_LIMIT = 0;
+		public static final double ARM_PIVOT_UPPER_LIMIT = 50;
+        public static final double ARM_PIVOT_LOWER_LIMIT = -30;
 }

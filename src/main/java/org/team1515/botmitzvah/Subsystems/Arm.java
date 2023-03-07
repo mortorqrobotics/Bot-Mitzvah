@@ -13,6 +13,13 @@ public class Arm extends SubsystemBase {
 
     public static double speed = 0.25;
 
+    public enum Extension {
+        Extended,
+        Retracted
+    }
+
+    public Extension extension;
+
     public Arm() {
         arm = new CANSparkMax(RobotMap.ARM_ID, MotorType.kBrushless);
         arm.restoreFactoryDefaults();
