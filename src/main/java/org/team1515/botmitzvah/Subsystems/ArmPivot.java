@@ -93,14 +93,14 @@ public class ArmPivot extends SubsystemBase {
      * @returns arbitrary feedforward in volts
      */
     public double calculateFeedForward() {
-        return pivotMap.get(getAngle(), RobotContainer.arm.extension);
+        return pivotMap.calculate(getAngle(), RobotContainer.arm.extension);
     }
 
     @Override
     public void periodic() {
         if(usePid) {
             if(!isInBounds()) return;
-            pivotMotor.setVoltage(controller.calculate(getAngle()));
+            pivotMotor.setVoltage(controller.calculate(getAngle()) + calculateFeedForward());
         }
     }
 }

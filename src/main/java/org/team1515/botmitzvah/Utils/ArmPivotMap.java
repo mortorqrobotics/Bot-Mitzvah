@@ -33,10 +33,11 @@ public class ArmPivotMap {
     }
 
     /**
+     * @param angle angle of the arm in degrees (0 is parallel to the ground)
      * @param extension extension state
      * @return interpolated value at an extension
      */
-    public double get(double angle, Extension extension) {
+    public double calculate(double angle, Extension extension) {
         if(extension == Extension.Extended) {
             return outExtensionMap.get(angle);
         }
