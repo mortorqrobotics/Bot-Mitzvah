@@ -45,6 +45,7 @@ public class ArmPivot extends SubsystemBase {
         pivotCanCoderConfig.sensorDirection = false; // double check this
         pivotCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
         pivotCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
+        pivotCanCoderConfig.magnetOffsetDegrees = -RobotMap.ARM_PIVOT_OFFSET;
         canCoder.configAllSettings(pivotCanCoderConfig);
 
         pivotMotor.setIdleMode(IdleMode.kBrake);
@@ -53,15 +54,11 @@ public class ArmPivot extends SubsystemBase {
         pivotMap = new ArmPivotMap();
     }
 
-    public Rotation2d getCancoderAngle() {
-        return Rotation2d.fromDegrees(canCoder.getAbsolutePosition());
-    }
-
     /**
      * @return double angle of the arm in degrees based on cancoder angle   
      */
     public double getAngle() {
-        return getCancoderAngle().getDegrees() - RobotMap.ARM_PIVOT_OFFSET;
+        return canCoder.getAbsolutePosition();
     }
 
     /**
@@ -81,26 +78,31 @@ public class ArmPivot extends SubsystemBase {
         setAngle(getAngle() - 0.05);
     }
 
-    /**
-     * @return boolean true if not over or under rotated
-     */
-    public boolean isInBounds() {
-        return getAngle() > RobotMap.ARM_PIVOT_LOWER_LIMIT && getAngle() < RobotMap.ARM_PIVOT_UPPER_LIMIT;
+    public boolean isOverRotated() {
+        return getAngle() > RobotMap.ARM_PIVOT_UPPER_LIMIT;
+    }
+
+    public boolean isUnderRotated() {
+        return getAngle() < RobotMap.ARM_PIVOT_LOWER_LIMIT;
     }
 
     /**
      * Calculates feedforward based on the current pivot angle and arm extension
      * @returns arbitrary feedforward in volts
      */
-    public double calculateFeedForward() {
-        return pivotMap.calculate(getAngle(), RobotContainer.arm.extension);
+    public double calculateFeedForward(double targetVelocity) {
+        return pivotMap.calculate(getAngle(), targetVelocity, RobotContainer.arm.extension);
     }
 
     @Override
     public void periodic() {
         if(usePid) {
-            if(!isInBounds()) return;
-            pivotMotor.setVoltage(controller.calculate(getAngle()) + calculateFeedForward());
+            if(!isOverRotated()) return;
+            double volts = controller.calculate(getAngle()) + calculateFeedForward(controller.getSetpoint().velocity); // double check this logic
+            if(isUnderRotated()) {
+                volts = Math.max(volts, 0);
+            }
+            pivotMotor.setVoltage(volts);
         }
     }
 }
