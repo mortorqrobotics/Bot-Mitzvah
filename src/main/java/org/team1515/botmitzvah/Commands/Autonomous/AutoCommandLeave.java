@@ -1,5 +1,6 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
+
 import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Commands.ClawClose;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
@@ -11,18 +12,11 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class AutoCommandBalance extends SequentialCommandGroup {
-
-    /**
-     * Runs auto one command after another (finished when the isFinished method
-     * returns true)
-     * 
-     * @param # add params
-     */
-    public AutoCommandBalance(Drivetrain drivetrain, Claw claw) { // add params
+public class AutoCommandLeave extends SequentialCommandGroup{
+    public AutoCommandLeave(Drivetrain drivetrain, Claw claw) { // add params
         addCommands(
-            new ClawClose(claw),
-            new DriveDist(drivetrain, Units.feetToMeters(3 + RobotMap.CHARGING_STATION_DISTANCE + 6), 1),
-            new DriveDist(drivetrain, Units.feetToMeters(4.5), -1));
+                new ClawClose(claw),
+                new DriveDist(drivetrain, Units.inchesToMeters(170), 1),
+                new DriveDist(drivetrain, Units.feetToMeters(4.5), -1));
     }
 }

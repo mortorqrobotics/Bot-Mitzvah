@@ -9,7 +9,7 @@ import org.team1515.botmitzvah.Subsystems.*;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-// import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutoCommandScore extends SequentialCommandGroup {
 
