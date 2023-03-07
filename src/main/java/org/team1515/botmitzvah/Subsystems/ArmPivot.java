@@ -48,6 +48,8 @@ public class ArmPivot extends SubsystemBase {
         pivotCanCoderConfig.magnetOffsetDegrees = -RobotMap.ARM_PIVOT_OFFSET;
         canCoder.configAllSettings(pivotCanCoderConfig);
 
+        controller.reset(getAngle());
+
         pivotMotor.setIdleMode(IdleMode.kBrake);
         pivotMotor.burnFlash();
 
