@@ -70,9 +70,17 @@ public class RobotContainer {
     //Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }
 
-  public Command getAutonomousCommand() {
-    //return Commands.print("No auto command");
-    return new AutoCommandScore(drivetrain, claw);
+  public Command getAutonomousCommand(int command) {
+    switch(command){
+        case 1:
+            return new AutoCommandLeave(drivetrain, claw);
+        case 2:
+            return new AutoCommandBalance(drivetrain, claw);  
+        case 3:
+            return new AutoCommandScore(drivetrain, claw);
+        default:
+            return Commands.print("No auto command");
+    }
   }
 
   public static double getRobotSpeed() {
