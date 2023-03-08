@@ -1,12 +1,5 @@
 package org.team1515.botmitzvah;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.math.util.Units;
-
 public class RobotMap {
 
         // Conversion factors
@@ -33,13 +26,21 @@ public class RobotMap {
 
         public static final double ARM_RETRACTED_POS = -1; // replace
         public static final double ARM_EXTENDED_POS = -1; // replace
-        public static final double ARM_MAX_POS = -1; // replace
-        public static final double ARM_MIN_POS = -1; // replace
+        public static final double ARM_UPPER_LIMIT = -1;
+        public static final double ARM_LOWER_LIMIT = -1;
         public static final double ARM_TOLERANCE = -1; // replace
 
         // ArmPivot Constants
         public static final int ARM_PIVOT_ID = 14; // replace
         public static final int ARM_PIVOT_CANCODER_ID = 13;
+
+        public static final double ARM_PIVOT_UPPER_LIMIT = 50;
+        public static final double ARM_PIVOT_EXTENDED_LOWER_LIMIT = -30;
+        public static final double ARM_PIVOT_RETRACTED_LOWER_LIMIT = -70;
+        public static final double ARM_PIVOT_TOP_DEG = -1; // replace
+        public static final double ARM_PIVOT_MID_DEG = -1; // replace
+        public static final double ARM_PIVOT_BOTTOM_DEG = -1; // replace
+        public static final double ARM_PIVOT_STOWED_DEG = -1; // replace
 
         /** degrees */
         public static final double ARM_PIVOT_OFFSET = 0; // MEASURE (ZERO SHOULD BE REFERENCE FROM HORIZONTAL)
@@ -62,12 +63,5 @@ public class RobotMap {
         public static final double ALIGN_ANGLE_KI = 0; // replace
         public static final double ALIGN_ANGLE_KD = 1; // replace
 
-        public static final double CHARGING_STATION_DISTANCE = (48 + 2 * 9.125) / 12; // units in feet
-
-        public static final double ARM_LOWER_LIMIT = 0;
-
-        public static final double ARM_UPPER_LIMIT = 0;
-
-		public static final double ARM_PIVOT_UPPER_LIMIT = 50;
-        public static final double ARM_PIVOT_LOWER_LIMIT = -30;
+        //public static final double CHARGING_STATION_DISTANCE = (48 + 2 * 9.125) / 12; // units in feet
 }

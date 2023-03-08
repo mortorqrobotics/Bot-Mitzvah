@@ -16,6 +16,11 @@ public class Controls {
     public static final Trigger MANUAL_FORWARD = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger MANUAL_BACKWARD = new Trigger(RobotContainer.secondController::getBButton);
 
+    public static final Trigger AUTO_PIVOT_LOW = new Trigger(RobotContainer.secondController::getAButton);
+    public static final Trigger AUTO_PIVOT_MID = new Trigger(RobotContainer.secondController::getAButton);
+    public static final Trigger AUTO_PIVOT_HIGH = new Trigger(RobotContainer.secondController::getAButton);
+
+
     // public static final Trigger ALIGN_TAG = new
     // Trigger(RobotContainer.mainController::getStartButton);
     // public static final Trigger ALIGN_LIGHT = new

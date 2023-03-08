@@ -1,6 +1,5 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
-import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Subsystems.*;
 
@@ -8,7 +7,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class AutoCommandBalance extends SequentialCommandGroup {
+public class AutoCommandLeave extends SequentialCommandGroup {
 
     /**
      * Runs auto one command after another (finished when the isFinished method
@@ -16,11 +15,9 @@ public class AutoCommandBalance extends SequentialCommandGroup {
      * 
      * @param # add params
      */
-    public AutoCommandBalance(Drivetrain drivetrain) { // add params
+    public AutoCommandLeave(Drivetrain drivetrain) { // add params
         addCommands(
-                new DriveDist(drivetrain, Units.inchesToMeters(170), 1),
-                new DriveDist(drivetrain, Units.feetToMeters(4.5), -1),
-                new AutoBalance(drivetrain)
+                new DriveDist(drivetrain, Units.inchesToMeters(170), 1)
         );
     }
 }

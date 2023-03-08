@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotContainer {
   public static XboxController mainController;
@@ -30,6 +32,8 @@ public class RobotContainer {
   public static ArmPivot armPivot;
   public static Arm arm;
 
+  private static SendableChooser<Command> autonomousChooser = new SendableChooser<>();
+
   public RobotContainer() {
     mainController = new XboxController(0);
     secondController = new XboxController(1);
@@ -40,6 +44,12 @@ public class RobotContainer {
     claw = new Claw();
     arm = new Arm();
     armPivot = new ArmPivot();
+
+    autonomousChooser.setDefaultOption("None", Commands.print("No auto command"));
+    autonomousChooser.addOption("Leave", new AutoCommandLeave(drivetrain));
+    autonomousChooser.setDefaultOption("Balance", new AutoCommandBalance(drivetrain));
+    autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, claw, armPivot, arm));
+    SmartDashboard.putData("Auto Choices", autonomousChooser);
 
     configureBindings();
   }
@@ -56,20 +66,23 @@ public class RobotContainer {
 
     Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
 
-    Controls.GRAB.onTrue(new ClawClose(claw));
-    Controls.RELEASE.onTrue(new ClawOpen(claw));
+    Controls.GRAB.onTrue(new InstantCommand(() -> claw.extend()));
+    Controls.RELEASE.onTrue(new InstantCommand(() -> claw.retract()));
 
     Controls.MANUAL_UP.whileTrue(new PivotRaise(armPivot));
     Controls.MANUAL_DOWN.whileTrue(new PivotLower(armPivot));
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
 
+    Controls.AUTO_PIVOT_LOW.onTrue(new InstantCommand(() -> armPivot.setAngle(0)));
+    Controls.AUTO_PIVOT_MID.onTrue(new InstantCommand(() -> armPivot.setAngle(0)));
+    Controls.AUTO_PIVOT_HIGH.onTrue(new InstantCommand(() -> armPivot.setAngle(0)));
+
     Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }
 
   public Command getAutonomousCommand() {
-    return Commands.print("No auto command");
-    // return new AutoCommandScore(drivetrain, claw);
+    return autonomousChooser.getSelected();
   }
 
   public static double getRobotSpeed() {

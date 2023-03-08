@@ -4,15 +4,10 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.Commands.ClawClose;
-import org.team1515.botmitzvah.Utils.*;
-
 import com.team364.swervelib.util.CTREConfigs;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -27,6 +22,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     config = new CTREConfigs();
 
+    //start two camera feeds in shuffleboard (counts up from 0, port is implied)
     CameraServer.startAutomaticCapture();
     CameraServer.startAutomaticCapture();
     robotContainer = new RobotContainer();

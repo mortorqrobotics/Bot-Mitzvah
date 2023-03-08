@@ -21,9 +21,4 @@ public class ArmExtend extends CommandBase {
     public void end(boolean interrupted) {
         arm.end();
     }
-
-    @Override
-    public boolean isFinished() {
-        return arm.getOverExtended();
-    }
 }

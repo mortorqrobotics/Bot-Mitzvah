@@ -23,13 +23,14 @@ public class ArmPivotMap {
 
          /* angle, voltage */
          /* out extension */
-        outExtensionMap.put(0d, 0d);
-        outExtensionMap.put(0d, 0d);
-        outExtensionMap.put(0d, 0d);
-        outExtensionMap.put(0d, 0d);
+        outExtensionMap.put(RobotMap.ARM_PIVOT_TOP_DEG, 0d);
+        outExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
+        outExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
 
         /* in extension */
-        inExtensionMap.put(0d, 0d);
+        inExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
+        inExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
+        inExtensionMap.put(RobotMap.ARM_PIVOT_STOWED_DEG, 0d);
     }
 
     /**
@@ -38,6 +39,9 @@ public class ArmPivotMap {
      * @return interpolated value at an extension
      */
     public double calculate(double angle, double velocity, Extension extension) {
+        if(velocity < -0.05) {
+            return 0;
+        }
         if(extension == Extension.Extended) {
             return outExtensionMap.get(angle) * Math.signum(velocity);
         }
