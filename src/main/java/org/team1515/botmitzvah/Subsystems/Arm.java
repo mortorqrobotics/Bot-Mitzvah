@@ -21,6 +21,7 @@ public class Arm extends SubsystemBase {
         Retracted(RobotMap.ARM_RETRACTED_POS);
 
         public double position;
+        public boolean isHolding;
 
         private Extension(double position) {
             this.position = position;

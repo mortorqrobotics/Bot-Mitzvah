@@ -8,6 +8,8 @@ public class Controls {
     public static final Trigger GRAB = new Trigger(RobotContainer.secondController::getRightBumper);
     public static final Trigger RELEASE = new Trigger(Controls::getRightTriggerSecond);
 
+    public static final Trigger SWITCH_HOLDING_STATE = new Trigger(Controls::getLeftTriggerSecond);
+
     public static final Trigger RESET_GYRO = new Trigger(RobotContainer.mainController::getBackButton);
     public static final Trigger DRIVE_ROBOT_ORIENTED = new Trigger(RobotContainer.mainController::getLeftBumper);
 
@@ -38,6 +40,10 @@ public class Controls {
 
     public static boolean getLeftTrigger() {
         return RobotContainer.mainController.getLeftTriggerAxis() >= 0.250;
+    }
+
+    public static boolean getLeftTriggerSecond() {
+        return RobotContainer.secondController.getLeftTriggerAxis() >= 0.250;
     }
 
     public static boolean secondRightStickTrigger() {

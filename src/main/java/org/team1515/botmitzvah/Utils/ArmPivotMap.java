@@ -7,12 +7,16 @@ import edu.wpi.first.util.InterpolatingTreeMap;
 
 public class ArmPivotMap {
     // angle of pivot, volts
-    private InterpolatingTreeMap<Double, Double> outExtensionMap;
-    private InterpolatingTreeMap<Double, Double> inExtensionMap; 
+    private InterpolatingTreeMap<Double, Double> outHoldingExtensionMap;
+    private InterpolatingTreeMap<Double, Double> inHoldingExtensionMap;
+    private InterpolatingTreeMap<Double, Double> outEmptyExtensionMap;
+    private InterpolatingTreeMap<Double, Double> inEmptyExtensionMap;  
 
     public ArmPivotMap() {
-        outExtensionMap = new InterpolatingTreeMap<>();
-        inExtensionMap = new InterpolatingTreeMap<>();
+        outHoldingExtensionMap = new InterpolatingTreeMap<>();
+        inHoldingExtensionMap = new InterpolatingTreeMap<>();
+        outEmptyExtensionMap = new InterpolatingTreeMap<>();
+        inEmptyExtensionMap = new InterpolatingTreeMap<>();
 
         /*
          * Station (1 extension)
@@ -22,15 +26,21 @@ public class ArmPivotMap {
          */
 
          /* angle, voltage */
-         /* out extension */
-        outExtensionMap.put(RobotMap.ARM_PIVOT_TOP_DEG, 0d);
-        outExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
-        outExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
+        outHoldingExtensionMap.put(RobotMap.ARM_PIVOT_TOP_DEG, 0d);
+        outHoldingExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
+        outHoldingExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
 
-        /* in extension */
-        inExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
-        inExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
-        inExtensionMap.put(RobotMap.ARM_PIVOT_STOWED_DEG, 0d);
+        inHoldingExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
+        inHoldingExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
+        inHoldingExtensionMap.put(RobotMap.ARM_PIVOT_STOWED_DEG, 0d);
+
+        outEmptyExtensionMap.put(RobotMap.ARM_PIVOT_TOP_DEG, 0d);
+        outEmptyExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
+        outEmptyExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
+
+        inEmptyExtensionMap.put(RobotMap.ARM_PIVOT_MID_DEG, 0d);
+        inEmptyExtensionMap.put(RobotMap.ARM_PIVOT_BOTTOM_DEG, 0d);
+        inEmptyExtensionMap.put(RobotMap.ARM_PIVOT_STOWED_DEG, 0d);
     }
 
     /**
@@ -38,15 +48,15 @@ public class ArmPivotMap {
      * @param extension extension state
      * @return interpolated value at an extension
      */
-    public double calculate(double angle, double velocity, Extension extension) {
+    public double calculate(double angle, double velocity, Extension extension, boolean isHolding) {
         if(velocity < -0.05) {
             return 0;
         }
         if(extension == Extension.Extended) {
-            return outExtensionMap.get(angle) * Math.signum(velocity);
+            return isHolding ? outHoldingExtensionMap.get(angle) * Math.signum(velocity) : outEmptyExtensionMap.get(angle) * Math.signum(velocity);
         }
         else if(extension == Extension.Retracted){
-            return inExtensionMap.get(angle) * Math.signum(velocity);
+            return isHolding ? inHoldingExtensionMap.get(angle) * Math.signum(velocity) : inEmptyExtensionMap.get(angle) * Math.signum(velocity);
         }
         else {
             return 0;

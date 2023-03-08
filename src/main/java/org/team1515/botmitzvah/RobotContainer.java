@@ -64,6 +64,8 @@ public class RobotContainer {
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro()));
 
+    Controls.SWITCH_HOLDING_STATE.onTrue(new InstantCommand(() -> armPivot.setHolding(!armPivot.getHolding())));
+
     Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
 
     Controls.GRAB.whileTrue(new ClawIn(claw));
