@@ -1,45 +1,33 @@
 package org.team1515.botmitzvah.Subsystems;
 
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-
 import org.team1515.botmitzvah.RobotMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
-    private DoubleSolenoid piston;
-    private boolean extended = false;
+    private CANSparkMax lClaw;
+    private CANSparkMax rClaw;
 
     public Claw() {
-
-        piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, RobotMap.CLAW_FORWARD_ID,
-                RobotMap.CLAW_REVERSE_ID);
-        // PCM ID
-        // piston.set(Value.kReverse); // check if this runs in robotInit
+        lClaw = new CANSparkMax(RobotMap.L_CLAW_ID, MotorType.kBrushless);
+        rClaw = new CANSparkMax(RobotMap.R_CLAW_ID, MotorType.kBrushless);
     }
 
-    public void extend() {
-        if (!extended) {
-            piston.set(Value.kForward);
-        }
-        extended = true;
+    public void intake() {
+        lClaw.set(RobotMap.CLAW_SPEED);
+        rClaw.set(RobotMap.CLAW_SPEED);
     }
 
-    public void retract() {
-        if (extended) {
-            piston.set(Value.kReverse);
-        }
-        extended = false;
+    public void outtake() {
+        lClaw.set(-RobotMap.CLAW_SPEED);
+        rClaw.set(-RobotMap.CLAW_SPEED);
     }
 
-    public void toggle() {
-        piston.toggle();
-    }
-
-    public boolean getExtended() {
-        return extended;
+    public void end() {
+        lClaw.set(0);
+        rClaw.set(0);
     }
 }

@@ -1,12 +1,15 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
-
+import org.team1515.botmitzvah.RobotMap;
+import org.team1515.botmitzvah.Commands.ClawOut;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoArmAndPivot.AutoArmSet;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Subsystems.*;
 import org.team1515.botmitzvah.Subsystems.Arm.Extension;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // import edu.wpi.first.wpilibj2.command.WaitCommand;
 
@@ -20,12 +23,13 @@ public class AutoCommandScore extends SequentialCommandGroup {
      */
     public AutoCommandScore(Drivetrain drivetrain, Claw claw, ArmPivot pivot, Arm arm) { // add params
         addCommands(
-                new InstantCommand(() -> claw.extend()),
                 new AutoArmSet(arm, Extension.Retracted),
-                new InstantCommand(() -> pivot.setAngle(0)),
+                new InstantCommand(() -> pivot.setAngle(RobotMap.ARM_PIVOT_TOP_DEG)),
                 new AutoArmSet(arm, Extension.Extended),
-                new InstantCommand(() -> claw.retract()),
-                new DriveDist(drivetrain, Units.inchesToMeters(140), 1)
+                new ClawOut(claw),
+                new ParallelCommandGroup(
+                    Commands.sequence(new AutoArmSet(arm, Extension.Retracted), new InstantCommand(() -> pivot.setAngle(RobotMap.ARM_PIVOT_STOWED_DEG))), 
+                    new DriveDist(drivetrain, Units.inchesToMeters(140), 1))
         );
     }
 }

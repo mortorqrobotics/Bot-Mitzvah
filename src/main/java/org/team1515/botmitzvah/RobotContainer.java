@@ -66,8 +66,8 @@ public class RobotContainer {
 
     Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
 
-    Controls.GRAB.onTrue(new InstantCommand(() -> claw.extend()));
-    Controls.RELEASE.onTrue(new InstantCommand(() -> claw.retract()));
+    Controls.GRAB.whileTrue(new ClawIn(claw));
+    Controls.RELEASE.whileTrue(new ClawOut(claw));
 
     Controls.MANUAL_UP.whileTrue(new PivotRaise(armPivot));
     Controls.MANUAL_DOWN.whileTrue(new PivotLower(armPivot));
