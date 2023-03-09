@@ -1,7 +1,7 @@
-package org.team1515.botmitzvah.Commands.Autonomous;
+package org.team1515.botmitzvah.Commands.Autonomous.AutoCommands;
 
-import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
-import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoBalance;
+import org.team1515.botmitzvah.Commands.Autonomous.DriveDist;
 import org.team1515.botmitzvah.Subsystems.*;
 
 import edu.wpi.first.math.util.Units;

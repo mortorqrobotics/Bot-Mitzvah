@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ArmPivot extends SubsystemBase {
     private CANSparkMax pivotMotor;
     private CANCoder canCoder;
-    private boolean isHolding;
     private ArmPivotMap pivotMap;
 
     private final TrapezoidProfile.Constraints m_constraints = new TrapezoidProfile.Constraints(1.75, 0.75);
@@ -50,7 +49,6 @@ public class ArmPivot extends SubsystemBase {
         pivotMotor.burnFlash();
 
         pivotMap = new ArmPivotMap();
-        isHolding = false;
     }
 
     /**
@@ -58,14 +56,6 @@ public class ArmPivot extends SubsystemBase {
      */
     public double getAngle() {
         return canCoder.getAbsolutePosition();
-    }
-
-    public void setHolding(boolean state){
-        isHolding = state;
-    }
-
-    public boolean getHolding(){
-        return isHolding;
     }
 
     /**
@@ -100,7 +90,7 @@ public class ArmPivot extends SubsystemBase {
      * @returns arbitrary feedforward in volts
      */
     public double calculateFeedForward(double targetVelocity) {
-        return pivotMap.calculate(getAngle(), targetVelocity, RobotContainer.arm.extension, isHolding);
+        return pivotMap.calculate(getAngle(), targetVelocity, RobotContainer.arm.extension);
     }
 
     @Override

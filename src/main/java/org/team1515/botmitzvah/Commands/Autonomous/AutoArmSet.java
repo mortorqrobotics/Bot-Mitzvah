@@ -1,4 +1,4 @@
-package org.team1515.botmitzvah.Commands.Autonomous.AutoArmAndPivot;
+package org.team1515.botmitzvah.Commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

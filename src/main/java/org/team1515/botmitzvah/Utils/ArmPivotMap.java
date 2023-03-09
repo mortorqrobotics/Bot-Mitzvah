@@ -48,15 +48,15 @@ public class ArmPivotMap {
      * @param extension extension state
      * @return interpolated value at an extension
      */
-    public double calculate(double angle, double velocity, Extension extension, boolean isHolding) {
+    public double calculate(double angle, double velocity, Extension extension) {
         if(velocity < -0.05) {
             return 0;
         }
         if(extension == Extension.Extended) {
-            return isHolding ? outHoldingExtensionMap.get(angle) * Math.signum(velocity) : outEmptyExtensionMap.get(angle) * Math.signum(velocity);
+            return outEmptyExtensionMap.get(angle) * Math.signum(velocity);
         }
         else if(extension == Extension.Retracted){
-            return isHolding ? inHoldingExtensionMap.get(angle) * Math.signum(velocity) : inEmptyExtensionMap.get(angle) * Math.signum(velocity);
+            return inEmptyExtensionMap.get(angle) * Math.signum(velocity);
         }
         else {
             return 0;

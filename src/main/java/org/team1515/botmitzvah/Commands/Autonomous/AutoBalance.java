@@ -1,4 +1,4 @@
-package org.team1515.botmitzvah.Commands.Autonomous.DriveCommands;
+package org.team1515.botmitzvah.Commands.Autonomous;
 
 import org.team1515.botmitzvah.RobotContainer;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
