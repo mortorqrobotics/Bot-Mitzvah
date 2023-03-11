@@ -9,12 +9,12 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
 
 public class RotateToZeroProfiled extends ProfiledPIDCommand {
-    private static double p = 2;
+    private static double p = 3;
     private static double i = 0;
     private static double d = 0;
     private static double ff = 1.0;
-    private static double maxRotVel = 0.26;
-    private static double maxRotAcc = 0.016;
+    private static double maxRotVel = 6;
+    private static double maxRotAcc = 3;
 
     public RotateToZeroProfiled(Drivetrain drivetrainSubsystem) {
         super(
@@ -36,7 +36,7 @@ public class RotateToZeroProfiled extends ProfiledPIDCommand {
 
         getController().enableContinuousInput(-Math.PI, Math.PI);
         getController()
-                .setTolerance(3.5, 0.8);
+                .setTolerance(0.5, 0.3);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class RobotMap {
         public static final double ARM_PIVOT_STOWED_DEG = -1; // replace
 
         /** degrees */
-        public static final double ARM_PIVOT_OFFSET = 0; // MEASURE (ZERO SHOULD BE REFERENCE FROM HORIZONTAL)
+        public static final double ARM_PIVOT_OFFSET = 241; // MEASURE (ZERO SHOULD BE REFERENCE FROM HORIZONTAL)
         public static final double ARM_PIVOT_GEAR_RATIO = 90; // replace
 
         public static final double ARM_PIVOT_SPEED = 0.25;

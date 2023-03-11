@@ -8,6 +8,7 @@ import com.team364.swervelib.util.CTREConfigs;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -24,13 +25,15 @@ public class Robot extends TimedRobot {
 
     //start two camera feeds in shuffleboard (counts up from 0, port is implied)
     CameraServer.startAutomaticCapture();
-    CameraServer.startAutomaticCapture();
+    // CameraServer.startAutomaticCapture();
     robotContainer = new RobotContainer();
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("roll", RobotContainer.gyro.getRoll());
+    SmartDashboard.putNumber("yaw", RobotContainer.gyro.getYaw());
   }
 
   @Override

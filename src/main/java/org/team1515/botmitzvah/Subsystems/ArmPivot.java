@@ -18,6 +18,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.State;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmPivot extends SubsystemBase {
@@ -26,12 +27,12 @@ public class ArmPivot extends SubsystemBase {
     private ArmPivotMap pivotMap;
 
     private final TrapezoidProfile.Constraints m_constraints = new TrapezoidProfile.Constraints(1.75, 0.75);
-    public ProfiledPIDController controller = new ProfiledPIDController(0, 0, 0, m_constraints);
+    public ProfiledPIDController controller = new ProfiledPIDController(0.08, 0.00  , 0, m_constraints);
 
     public boolean usePid = false;
     public double armSpeed = 0.05; // degrees per 20 ms
 
-    public ArmPivot() {
+    public ArmPivot() { 
         pivotMotor = new CANSparkMax(RobotMap.ARM_PIVOT_ID, MotorType.kBrushless);
 
         canCoder = new CANCoder(RobotMap.ARM_PIVOT_CANCODER_ID);
@@ -43,7 +44,8 @@ public class ArmPivot extends SubsystemBase {
         pivotCanCoderConfig.magnetOffsetDegrees = -RobotMap.ARM_PIVOT_OFFSET;
         canCoder.configAllSettings(pivotCanCoderConfig);
 
-        controller.reset(getAngle());
+        // controller.reset(getAngle());
+        controller.setGoal(getAngle());
 
         pivotMotor.setIdleMode(IdleMode.kBrake);
         pivotMotor.burnFlash();
@@ -69,11 +71,13 @@ public class ArmPivot extends SubsystemBase {
     }
 
     public void raise() {
-        setAngle(getAngle() + 0.05);
+        // setAngle(getAngle() + 0.05);
+        pivotMotor.set(-0.1);
     }
 
     public void lower() {
-        setAngle(getAngle() - 0.05);
+        // setAngle(getAngle() - 0.05);
+        pivotMotor.set(-0.1);
     }
 
     public boolean isOverRotated() {
@@ -95,9 +99,14 @@ public class ArmPivot extends SubsystemBase {
 
     @Override
     public void periodic() {
+        SmartDashboard.putBoolean("use pid", usePid);
+        SmartDashboard.putNumber("arm angle", getAngle());
         if(usePid) {
-            if(!isOverRotated()) return;
-            double volts = controller.calculate(getAngle()) + calculateFeedForward(controller.getSetpoint().velocity); // double check this logic
+            if(isOverRotated()) return;
+            double volts = controller.calculate(getAngle()); /* + calculateFeedForward(controller.getSetpoint().velocity); */ // double check this logic
+            SmartDashboard.putNumber("Volt reading", volts);
+            SmartDashboard.putNumber("Goal angle", controller.getGoal().position);
+            volts = MathUtil.clamp(volts, -3, 3);
             if(isUnderRotated()) {
                 volts = Math.max(volts, 0);
             }

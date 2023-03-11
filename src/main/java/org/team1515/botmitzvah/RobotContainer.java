@@ -30,7 +30,7 @@ public class RobotContainer {
   public static Drivetrain drivetrain;
   public static Gyroscope gyro;
 
-  public static Claw claw;
+  //public static Claw claw;
   public static ArmPivot armPivot;
   public static Arm arm;
 
@@ -43,14 +43,14 @@ public class RobotContainer {
     gyro = new Gyroscope();
 
     drivetrain = new Drivetrain(new Pose2d());
-    claw = new Claw();
+    //claw = new Claw();
     arm = new Arm();
     armPivot = new ArmPivot();
 
     autonomousChooser.setDefaultOption("None", Commands.print("No auto command"));
     autonomousChooser.addOption("Leave", new AutoCommandLeave(drivetrain));
-    autonomousChooser.setDefaultOption("Balance", new AutoCommandBalance(drivetrain));
-    autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, claw, armPivot, arm));
+    autonomousChooser.addOption("Balance", new AutoCommandBalance(drivetrain));
+    //autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, claw, armPivot, arm));
     SmartDashboard.putData("Auto Choices", autonomousChooser);
 
     configureBindings();
@@ -70,19 +70,21 @@ public class RobotContainer {
 
     Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
 
-    Controls.GRAB.whileTrue(new ClawIn(claw));
-    Controls.RELEASE.whileTrue(new ClawOut(claw));
+    //Controls.GRAB.whileTrue(new ClawIn(claw));
+    //Controls.RELEASE.whileTrue(new ClawOut(claw));
 
     Controls.MANUAL_UP.whileTrue(new PivotRaise(armPivot));
     Controls.MANUAL_DOWN.whileTrue(new PivotLower(armPivot));
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
 
-    Controls.AUTO_PIVOT_LOW.onTrue(new InstantCommand(() -> armPivot.setAngle(0)));
+    Controls.AUTO_PIVOT_LOW.onTrue(new InstantCommand(() -> armPivot.setAngle(-10)));
     Controls.AUTO_PIVOT_MID.onTrue(new InstantCommand(() -> armPivot.setAngle(0)));
     Controls.AUTO_PIVOT_HIGH.onTrue(new InstantCommand(() -> armPivot.setAngle(0)));
+    Controls.USE_PID.onTrue(new InstantCommand(() -> armPivot.usePid = true));
 
-    Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
+    Controls.RESET_ROLL.onTrue(new InstantCommand(() -> gyro.zeroRoll()));
+    Controls.DRIVE.onTrue(new RotateToZeroProfiled(drivetrain));
   }
 
   public Command getAutonomousCommand() {
