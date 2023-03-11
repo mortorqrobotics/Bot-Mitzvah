@@ -65,7 +65,6 @@ public class DriveDistProfiled extends CommandBase {
 
     /**
      * Gets the distance traveled by reading drive motor encoder
-     * (milliseconds)
      */
     public void distanceTraveled() {
         distTraveled = Math.abs(drivetrainSubsystem.getModulePositions()[0].distanceMeters - initalDist);
