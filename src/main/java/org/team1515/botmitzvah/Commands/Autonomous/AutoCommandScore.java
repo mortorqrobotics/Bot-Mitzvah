@@ -1,7 +1,7 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
 import org.team1515.botmitzvah.RobotMap;
-import org.team1515.botmitzvah.Commands.ClawClose;
+import org.team1515.botmitzvah.Commands.ClawOut;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Subsystems.*;
@@ -21,7 +21,6 @@ public class AutoCommandScore extends SequentialCommandGroup {
      */
     public AutoCommandScore(Drivetrain drivetrain, Claw claw) { // add params
         addCommands(
-                new ClawClose(claw),
                 new DriveDist(drivetrain, Units.inchesToMeters(170), 1),
                 new DriveDist(drivetrain, Units.feetToMeters(4.5), -1));
     }

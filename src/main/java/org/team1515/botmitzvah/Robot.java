@@ -4,7 +4,7 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.Commands.ClawClose;
+import org.team1515.botmitzvah.Commands.ClawOut;
 import org.team1515.botmitzvah.Utils.*;
 
 import com.team364.swervelib.util.CTREConfigs;

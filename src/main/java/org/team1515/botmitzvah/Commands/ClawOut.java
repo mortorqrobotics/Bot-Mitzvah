@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.team1515.botmitzvah.Subsystems.Claw;
 
-public class ClawClose extends CommandBase {
+public class ClawOut extends CommandBase {
     private final Claw claw;
 
-    public ClawClose(Claw claw) {
+    public ClawOut(Claw claw) {
         this.claw = claw;
         addRequirements(claw);
     }
 
     @Override
     public void execute() {
-        claw.extend();
+        claw.outtake();
     }
 
     @Override

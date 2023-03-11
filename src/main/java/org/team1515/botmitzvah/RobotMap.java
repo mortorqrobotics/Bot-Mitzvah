@@ -18,8 +18,9 @@ public class RobotMap {
         // Subsystems
 
         // Claw
-        public final static int CLAW_FORWARD_ID = 4;// replace
-        public final static int CLAW_REVERSE_ID = 5;// replace
+        public final static int L_CLAW_ID = -1;// replace
+        public final static int R_CLAW_ID = -1;// replace
+        public static final double CLAW_SPEED = 0.4;
 
         // speed limits for swerve
         public static final double SWERVE_LIMIT = 0.5;// replace
