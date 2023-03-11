@@ -10,10 +10,7 @@ import org.team1515.botmitzvah.Utils.*;
 import com.team364.swervelib.util.CTREConfigs;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -24,8 +21,6 @@ public class Robot extends TimedRobot {
 
   private static Command m_autonomousCommand;
 
-  private static SendableChooser<Integer> m_autonomousChooser = new SendableChooser<>();
-
   @Override
   public void robotInit() {
     config = new CTREConfigs();
@@ -33,12 +28,6 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
     CameraServer.startAutomaticCapture();
     robotContainer = new RobotContainer();
-
-    m_autonomousChooser.setDefaultOption("None", 0);
-    m_autonomousChooser.setDefaultOption("Balance", 1);
-    m_autonomousChooser.addOption("Leave", 2);
-    m_autonomousChooser.addOption("Score", 3);
-    SmartDashboard.putData("Auto Choices", m_autonomousChooser);
   }
 
   @Override
@@ -62,7 +51,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     // new StartupCommand(RobotContainer.arm, RobotContainer.armPivot).schedule();
     // new ClawClose(RobotContainer.claw).schedule();
-    m_autonomousCommand = robotContainer.getAutonomousCommand(m_autonomousChooser.getSelected());
+    m_autonomousCommand = robotContainer.getAutonomousCommand();
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

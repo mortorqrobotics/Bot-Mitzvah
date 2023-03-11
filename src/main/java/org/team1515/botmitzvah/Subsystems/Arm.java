@@ -3,6 +3,7 @@ package org.team1515.botmitzvah.Subsystems;
 import org.team1515.botmitzvah.RobotMap;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
     private CANSparkMax arm;
+    private RelativeEncoder encoder;
 
     public static double speed = 0.25;
 
@@ -20,6 +22,9 @@ public class Arm extends SubsystemBase {
 
         arm.setIdleMode(IdleMode.kBrake);
         arm.burnFlash();
+
+        encoder = arm.getEncoder();
+        encoder.setInverted(false);
 
         speed = RobotMap.ARM_SPEED;
     }
@@ -32,6 +37,10 @@ public class Arm extends SubsystemBase {
         arm.set(-speed);
     }
 
+    public void setSpeed(double speed) {
+        arm.set(speed);
+    }
+
     public boolean getOverExtended() {
         return false;
         //return arm.getEncoder().getPosition() > RobotMap.ARM_UPPER_LIMIT;
@@ -40,6 +49,14 @@ public class Arm extends SubsystemBase {
     public boolean getUnderExtended() {
         return false;
         //return arm.getEncoder().getPosition() < RobotMap.ARM_LOWER_LIMIT;
+    }
+
+    public double getArmPosition() {
+        return encoder.getPosition();
+    }
+
+    public void resetArmPosition(double position) {
+        encoder.setPosition(position);
     }
 
     public void end() {

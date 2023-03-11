@@ -14,6 +14,9 @@ public class Claw extends SubsystemBase {
     public Claw() {
         lClaw = new CANSparkMax(RobotMap.L_CLAW_ID, MotorType.kBrushless);
         rClaw = new CANSparkMax(RobotMap.R_CLAW_ID, MotorType.kBrushless);
+
+        lClaw.setInverted(false);
+        rClaw.setInverted(false);
     }
 
     public void intake() {

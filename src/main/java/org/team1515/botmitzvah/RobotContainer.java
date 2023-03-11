@@ -8,6 +8,9 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandBalance;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandLeave;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandScore;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
@@ -19,6 +22,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotContainer {
   public static XboxController mainController;
@@ -31,6 +36,8 @@ public class RobotContainer {
   public static ArmPivot armPivot;
   public static Arm arm;
 
+  private static SendableChooser<Command> autonomousChooser = new SendableChooser<>();
+
   public RobotContainer() {
     mainController = new XboxController(0);
     secondController = new XboxController(1);
@@ -41,6 +48,12 @@ public class RobotContainer {
     claw = new Claw();
     arm = new Arm();
     armPivot = new ArmPivot();
+
+    autonomousChooser.setDefaultOption("None", Commands.print("No auto command"));
+    autonomousChooser.addOption("Leave", new AutoCommandLeave(drivetrain));
+    autonomousChooser.addOption("Balance", new AutoCommandBalance(drivetrain));
+    //autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, claw, armPivot, arm));
+    SmartDashboard.putData("Auto Choices", autonomousChooser);
 
     configureBindings();
   }
@@ -70,17 +83,8 @@ public class RobotContainer {
     //Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }
 
-  public Command getAutonomousCommand(int command) {
-    switch(command){
-        case 1:
-            return new AutoCommandLeave(drivetrain, claw);
-        case 2:
-            return new AutoCommandBalance(drivetrain, claw);  
-        case 3:
-            return new AutoCommandScore(drivetrain, claw);
-        default:
-            return Commands.print("No auto command");
-    }
+  public Command getAutonomousCommand() {
+    return autonomousChooser.getSelected();
   }
 
   public static double getRobotSpeed() {

@@ -1,4 +1,4 @@
-package org.team1515.botmitzvah.Commands.Autonomous;
+package org.team1515.botmitzvah.Commands.Autonomous.AutoCommands;
 
 
 import org.team1515.botmitzvah.RobotMap;
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class AutoCommandLeave extends SequentialCommandGroup{
-    public AutoCommandLeave(Drivetrain drivetrain, Claw claw) { // add params
+    public AutoCommandLeave(Drivetrain drivetrain) { // add params
         addCommands(
                 new DriveDist(drivetrain, Units.inchesToMeters(170), 1),
                 new DriveDist(drivetrain, Units.feetToMeters(4.5), -1));

@@ -37,24 +37,31 @@ public class ArmPivot extends SubsystemBase {
         pivotCanCoderConfig.sensorDirection = false; // double check this
         pivotCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
         pivotCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
+        pivotCanCoderConfig.magnetOffsetDegrees = -RobotMap.ARM_PIVOT_OFFSET;
         encoder.configAllSettings(pivotCanCoderConfig);
 
         pivotMotor.setIdleMode(IdleMode.kBrake);
         pivotMotor.burnFlash();
     }
 
-    public Rotation2d getCancoderAngle() {
-        return Rotation2d.fromDegrees(encoder.getAbsolutePosition());
+    /**
+     * @return double angle of the cancoder in degrees
+     */
+    public double getCancoderAngle() {
+        return encoder.getAbsolutePosition();
     }
 
     public void raise() {
-        pivotMotor.set(speed * MathUtil.clamp((Math.pow(RobotContainer.secondController.getLeftTriggerAxis(), 2)+0.1), 0, 1));
+        pivotMotor.set(speed);
+    }
+
+    public void setSpeed(double speed) {
+        pivotMotor.set(speed);
     }
 
     public void lower() {
-        pivotMotor.set(-speed * MathUtil.clamp((Math.pow(RobotContainer.secondController.getLeftTriggerAxis(), 2)+0.1), 0, 1));
+        pivotMotor.set(-speed);
     }
-
     public boolean getOverLimit() {
         return false;
         //return encoder.getPosition() > RobotMap.ARM_PIVOT_UPPER_LIMIT;
