@@ -19,7 +19,7 @@ public class AutoPivotSet extends CommandBase {
 
     @Override
     public void execute() {
-        if(pivot.getCancoderAngle() > angle) {
+        if(pivot.getCancoderAngle() < angle) {
             pivot.setSpeed(pivotSpeed);
         }
         else {
