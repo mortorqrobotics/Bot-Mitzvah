@@ -64,7 +64,7 @@ public class DriveDistProfiled extends CommandBase {
     }
 
     /**
-     * Gets the distance traveled by multiplying rate (drive velocity) and time
+     * Gets the distance traveled by reading drive motor encoder
      * (milliseconds)
      */
     public void distanceTraveled() {
