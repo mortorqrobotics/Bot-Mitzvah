@@ -12,15 +12,16 @@ public class Controls {
 
     public static final Trigger RESET_GYRO = new Trigger(RobotContainer.mainController::getBackButton);
     public static final Trigger DRIVE_ROBOT_ORIENTED = new Trigger(RobotContainer.mainController::getLeftBumper);
+    public static final Trigger USE_PID = new Trigger(RobotContainer.secondController::getStartButton);
 
     public static final Trigger MANUAL_UP = new Trigger(RobotContainer.secondController::getYButton);
     public static final Trigger MANUAL_DOWN = new Trigger(RobotContainer.secondController::getAButton);
     public static final Trigger MANUAL_FORWARD = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger MANUAL_BACKWARD = new Trigger(RobotContainer.secondController::getBButton);
 
-    public static final Trigger AUTO_PIVOT_LOW = new Trigger(RobotContainer.secondController::getAButton);
-    public static final Trigger AUTO_PIVOT_MID = new Trigger(RobotContainer.secondController::getAButton);
-    public static final Trigger AUTO_PIVOT_HIGH = new Trigger(RobotContainer.secondController::getAButton);
+    public static final Trigger AUTO_PIVOT_LOW = new Trigger(RobotContainer.secondController::getBackButton);
+    public static final Trigger AUTO_PIVOT_MID = new Trigger(() -> false);
+    public static final Trigger AUTO_PIVOT_HIGH = new Trigger(() -> false);
 
 
     // public static final Trigger ALIGN_TAG = new
@@ -29,6 +30,7 @@ public class Controls {
     // Trigger(RobotContainer.mainController::getStartButton);
     public static final Trigger ZERO_ROBOT = new Trigger(RobotContainer.mainController::getStartButton);
     public static final Trigger DRIVE = new Trigger(RobotContainer.mainController::getXButton);
+    public static final Trigger RESET_ROLL = new Trigger(RobotContainer.mainController::getYButton);
 
     public static boolean getRightTriggerMain() {
         return RobotContainer.mainController.getRightTriggerAxis() >= 0.250;

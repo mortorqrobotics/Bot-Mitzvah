@@ -12,17 +12,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class AutoBalanceSus extends CommandBase {
     private Drivetrain drivetrain;
     private double maxSpeed;
+    private double direction;
 
-    public AutoBalanceSus(Drivetrain drivetrain) {
+    public AutoBalanceSus(Drivetrain drivetrain, double direction) {
         this.drivetrain = drivetrain;
-        this.maxSpeed = 0.2 * SwerveConstants.Swerve.maxSpeed;
+        this.maxSpeed = 0.09 * SwerveConstants.Swerve.maxSpeed;
+        this.direction = direction;
 
         addRequirements(drivetrain);
     }
 
     @Override
     public void execute() {
-        drivetrain.drive(new Translation2d(maxSpeed, 0.0), 0.0, false, true);
+        drivetrain.drive(new Translation2d(maxSpeed * direction, 0.0), 0.0, false, true);
     }
 
     @Override
@@ -33,6 +35,6 @@ public class AutoBalanceSus extends CommandBase {
     @Override
     public boolean isFinished() {
         double error = RobotContainer.gyro.getRoll();
-        return Utilities.epsilonEquals(error, 0, 1);
+        return Utilities.epsilonEquals(error, 0, 3);
     }
 }
