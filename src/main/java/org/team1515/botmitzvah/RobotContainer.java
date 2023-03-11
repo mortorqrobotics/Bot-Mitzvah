@@ -8,6 +8,7 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
+import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
@@ -64,12 +65,22 @@ public class RobotContainer {
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
 
-    Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
+    // Controls.B.whileTrue(new AutoBalance(drivetrain));
+
+    //Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
   }
 
-  public Command getAutonomousCommand() {
-    return Commands.print("No auto command");
-    // return new AutoCommandScore(drivetrain, claw);
+  public Command getAutonomousCommand(int command) {
+    switch(command){
+        case 1:
+            return new AutoCommandLeave(drivetrain, claw);
+        case 2:
+            return new AutoCommandBalance(drivetrain, claw);  
+        case 3:
+            return new AutoCommandScore(drivetrain, claw);
+        default:
+            return Commands.print("No auto command");
+    }
   }
 
   public static double getRobotSpeed() {
