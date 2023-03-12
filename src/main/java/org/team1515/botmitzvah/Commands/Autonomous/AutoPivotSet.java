@@ -9,7 +9,8 @@ import org.team1515.botmitzvah.Utils.Utilities;
 public class AutoPivotSet extends CommandBase {
     private final ArmPivot pivot;
     private final double angle;
-    private final double pivotSpeed = 0.1;
+    private final double upSpeed = 0.1;
+    private final double downSpeed = -0.1;
 
     public AutoPivotSet(ArmPivot pivot, double angle) {
         this.pivot = pivot;
@@ -20,10 +21,10 @@ public class AutoPivotSet extends CommandBase {
     @Override
     public void execute() {
         if(pivot.getCancoderAngle() < angle) {
-            pivot.setSpeed(pivotSpeed);
+            pivot.setSpeed(upSpeed);
         }
         else {
-            pivot.setSpeed(-pivotSpeed);
+            pivot.setSpeed(downSpeed);
         }
     }
 

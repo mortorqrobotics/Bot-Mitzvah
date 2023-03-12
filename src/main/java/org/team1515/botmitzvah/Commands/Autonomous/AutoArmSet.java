@@ -18,11 +18,11 @@ public class AutoArmSet extends CommandBase {
 
     @Override
     public void execute() {
-        if(arm.getArmPosition() > position) {
-            arm.setSpeed(-armSpeed);
+        if(arm.getArmPosition() < position) {
+            arm.setSpeed(armSpeed);
         }
         else {
-            arm.setSpeed(armSpeed);
+            arm.setSpeed(-armSpeed);
         }
     }
 
