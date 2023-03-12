@@ -8,9 +8,7 @@ import org.team1515.botmitzvah.Utils.*;
 
 import org.team1515.botmitzvah.Commands.*;
 import org.team1515.botmitzvah.Commands.Autonomous.*;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandBalance;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandLeave;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandScore;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.*;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
 

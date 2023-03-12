@@ -1,15 +1,11 @@
 package org.team1515.botmitzvah.Commands.Autonomous;
 
-import org.team1515.botmitzvah.RobotContainer;
-import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Subsystems.Drivetrain;
-import org.team1515.botmitzvah.Utils.Utilities;
 
 import com.team364.swervelib.util.SwerveConstants;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveDistProfiled extends CommandBase {
     private Drivetrain drivetrainSubsystem;
-    private double targetDist;
     private double direction;
 
     private double initalDist;
