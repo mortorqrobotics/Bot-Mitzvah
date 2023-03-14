@@ -18,7 +18,7 @@ public class ClawIn extends CommandBase {
     }
 
     @Override
-    public boolean isFinished() {
-        return true;
+    public void end(boolean interrupted) {
+        claw.end();
     }
 }

@@ -52,7 +52,7 @@ public class RobotContainer {
     autonomousChooser.setDefaultOption("None", Commands.print("No auto command"));
     autonomousChooser.addOption("Leave", new AutoCommandLeave(drivetrain));
     autonomousChooser.addOption("Balance", new AutoCommandBalance(drivetrain));
-    //autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, claw, armPivot, arm));
+    autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, armPivot, claw, arm));
     SmartDashboard.putData("Auto Choices", autonomousChooser);
 
     configureBindings();
@@ -70,17 +70,18 @@ public class RobotContainer {
 
     Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
 
-    Controls.GRAB.onTrue(new ClawIn(claw));
-    Controls.RELEASE.onTrue(new ClawOut(claw));
+    Controls.GRAB.whileTrue(new ClawIn(claw));
+    Controls.RELEASE.whileTrue(new ClawOut(claw));
 
-    Controls.MANUAL_UP.whileTrue(new PivotRaise(armPivot));
-    Controls.MANUAL_DOWN.whileTrue(new PivotLower(armPivot));
+    Controls.MANUAL_PIVOT.whileTrue(new PivotManual(armPivot, Controls.MANUAL_PIVOT_VALUE));
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
     Controls.MANUAL_BACKWARD.whileTrue(new ArmRetract(arm));
 
     // Controls.B.whileTrue(new AutoBalance(drivetrain));
 
-    //Controls.DRIVE.onTrue(new DriveDist(drivetrain, 2, 1));
+    Controls.PIVOT_LOW.onTrue(new AutoPivotSet(armPivot, -40));
+    Controls.PIVOT_MID.onTrue(new AutoPivotSet(armPivot, 3));
+    Controls.PIVOT_HIGH.onTrue(new AutoPivotSet(armPivot, 15));
   }
 
   public Command getAutonomousCommand() {
@@ -88,7 +89,7 @@ public class RobotContainer {
   }
 
   public static double getRobotSpeed() {
-    return Controls.getLeftTrigger() ? 0.45 : 0.7;
+    return Controls.getLeftTriggerMain() ? 0.45 : 0.7;
     // return 0.7;
   }
 

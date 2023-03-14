@@ -25,9 +25,9 @@ public class AutoCommandScore extends SequentialCommandGroup {
      */
     public AutoCommandScore(Drivetrain drivetrain, ArmPivot pivot, Claw claw, Arm arm) { // add params
         addCommands(
-            new AutoArmSet(arm, RobotMap.ARM_RETRACTED_POS),
+            // new AutoArmSet(arm, RobotMap.ARM_RETRACTED_POS),
             new AutoPivotSet(pivot, RobotMap.ARM_PIVOT_MID_ANGLE),
-            new ClawOut(claw),
+            // new ClawOut(claw),
             new DriveDistProfiled(drivetrain, 170, -1)
         );
     }

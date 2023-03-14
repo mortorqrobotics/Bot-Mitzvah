@@ -1,5 +1,6 @@
 package org.team1515.botmitzvah.Subsystems;
 
+import org.team1515.botmitzvah.Controls;
 import org.team1515.botmitzvah.RobotContainer;
 import org.team1515.botmitzvah.RobotMap;
 import org.team1515.botmitzvah.Utils.Utilities;
@@ -19,13 +20,15 @@ import com.revrobotics.SparkMaxPIDController.ArbFFUnits;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ArmPivot extends SubsystemBase {
     private CANSparkMax pivotMotor;
     private CANCoder encoder;
 
-    public static double speed = RobotMap.ARM_PIVOT_SPEED;
+    public static double upSpeed = RobotMap.ARM_PIVOT_UP_SPEED;
+    public static double downSpeed = RobotMap.ARM_PIVOT_DOWN_SPEED;
 
     public ArmPivot() {
         pivotMotor = new CANSparkMax(RobotMap.ARM_PIVOT_ID, MotorType.kBrushless);
@@ -52,16 +55,29 @@ public class ArmPivot extends SubsystemBase {
     }
 
     public void raise() {
-        pivotMotor.set(speed);
-    }
-
-    public void setSpeed(double speed) {
-        pivotMotor.set(speed);
+        if(getCancoderAngle() > 45) {
+            end();
+            return;
+        };
+        pivotMotor.set(upSpeed * RobotContainer.secondController.getRightY());
     }
 
     public void lower() {
-        pivotMotor.set(-speed);
+        pivotMotor.set(-downSpeed * RobotContainer.secondController.getRightY());
     }
+
+    public void setSpeed(double speed) {
+        if(getCancoderAngle() > 45 && speed > 0) {
+            end();
+            return;
+        };
+        if(getCancoderAngle() < -50 && speed < 0) {
+            end();
+            return;
+        }
+        pivotMotor.set(speed);
+    }
+
     public boolean getOverLimit() {
         return false;
         //return encoder.getPosition() > RobotMap.ARM_PIVOT_UPPER_LIMIT;
@@ -74,5 +90,10 @@ public class ArmPivot extends SubsystemBase {
 
     public void end() {
         pivotMotor.set(0);
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("angle", encoder.getAbsolutePosition());
     }
 }
