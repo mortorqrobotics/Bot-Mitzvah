@@ -34,25 +34,17 @@ public class Arm extends SubsystemBase {
     }
 
     public void extend() {
-        arm.set(speed);
+        // if (getArmPosition()<RobotMap.ARM_MAX_POS){
+        arm.set(speed);//}
     }
 
     public void retract() {
-        arm.set(-speed);
+        // if (getArmPosition()>RobotMap.ARM_MIN_POS){
+        arm.set(-speed);//}
     }
 
-    public void setSpeed(double speed) {
-        arm.set(speed);
-    }
-
-    public boolean getOverExtended() {
-        return false;
-        //return arm.getEncoder().getPosition() > RobotMap.ARM_UPPER_LIMIT;
-    }
-
-    public boolean getUnderExtended() {
-        return false;
-        //return arm.getEncoder().getPosition() < RobotMap.ARM_LOWER_LIMIT;
+    public void setSpeed(double velocity) {
+        arm.set(velocity);
     }
 
     public double getArmPosition() {

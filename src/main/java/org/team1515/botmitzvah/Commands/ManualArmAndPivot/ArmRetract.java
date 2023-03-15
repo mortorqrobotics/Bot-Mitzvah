@@ -22,8 +22,8 @@ public class ArmRetract extends CommandBase {
         arm.end();
     }
 
-    @Override
-    public boolean isFinished() {
-        return arm.getUnderExtended();
-    }
+    // @Override
+    // public boolean isFinished() {
+    //     return arm.getUnderExtended();
+    // }
 }
