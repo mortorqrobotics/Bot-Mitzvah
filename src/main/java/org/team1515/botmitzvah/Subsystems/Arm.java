@@ -16,6 +16,7 @@ public class Arm extends SubsystemBase {
     private RelativeEncoder encoder;
 
     public static double speed;
+    public static boolean useLimits = true;
 
     public Arm() {
         arm = new CANSparkMax(RobotMap.ARM_ID, MotorType.kBrushless);
@@ -28,18 +29,20 @@ public class Arm extends SubsystemBase {
         encoder = arm.getEncoder();
         resetArmPosition(0);
         SmartDashboard.putData("set arm to 0", new InstantCommand(() -> resetArmPosition(0)));
+        SmartDashboard.putData("UseLimits", new InstantCommand(()->useLimits = !useLimits));
         // encoder.setInverted(false);
 
         speed = RobotMap.ARM_SPEED;
     }
 
     public void extend() {
-        // if (getArmPosition()<RobotMap.ARM_MAX_POS){
-        arm.set(speed);//}
+        // if (useLimits && getArmPosition()<RobotMap.ARM_MAX_POS){
+            arm.set(speed);
+        // }
     }
 
     public void retract() {
-        // if (getArmPosition()>RobotMap.ARM_MIN_POS){
+        // if (useLimits && getArmPosition()>RobotMap.ARM_MIN_POS){
         arm.set(-speed);//}
     }
 

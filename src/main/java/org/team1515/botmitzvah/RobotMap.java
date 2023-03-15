@@ -43,7 +43,12 @@ public class RobotMap {
         public static final double ARM_PIVOT_DOWN_SPEED = 0.25;
         public static final double ARM_PIVOT_MAX_VELOCITY = -1; // replace (in radians per second)
         public static final double ARM_PIVOT_MAX_ACCELERATION = -1; // replace (in radians per second per second)
-        public static final double ARM_PIVOT_MID_ANGLE = 3; // replace (in radians per second per second)
+        public static final double ARM_PIVOT_UPPER_LIMIT = 0;
+        public static final double ARM_PIVOT_LOWER_LIMIT = 0;
+        public static final double ARM_PIVOT_TOP_ANGLE = 15;
+        public static final double ARM_PIVOT_MID_ANGLE = 3;
+        public static final double ARM_PIVOT_BOTTOM_ANGLE = -40;
+        public static final double ARM_PIVOT_STOWED_ANGLE = -70;
 
         // swerve pids
         public static final double BALANCE_KP = 3; // replace
@@ -59,11 +64,4 @@ public class RobotMap {
         public static final double ALIGN_ANGLE_KD = 1; // replace
 
         public static final double CHARGING_STATION_DISTANCE = (48 + 2 * 9.125) / 12; // units in feet
-
-        public static final double ARM_LOWER_LIMIT = 0;
-        public static final double ARM_UPPER_LIMIT = 0;
-		public static final double ARM_PIVOT_UPPER_LIMIT = 0;
-        public static final double ARM_PIVOT_LOWER_LIMIT = 0;
-        public static final double ARM_PIVOT_STOWED_ANGLE = 0;
-        public static final double ARM_EXTENSION_OFFSET = 0;
 }

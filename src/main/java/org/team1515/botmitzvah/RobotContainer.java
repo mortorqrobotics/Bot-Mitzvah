@@ -35,6 +35,7 @@ public class RobotContainer {
   public static ArmPivot armPivot;
   public static Arm arm;
 
+
   private static SendableChooser<Command> autonomousChooser = new SendableChooser<>();
 
   public RobotContainer() {
@@ -53,8 +54,6 @@ public class RobotContainer {
     autonomousChooser.addOption("Balance", new AutoCommandBalance(drivetrain));
     autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, armPivot, claw, arm));
     SmartDashboard.putData("Auto Choices", autonomousChooser);
-    SmartDashboard.putData("Reset Arm Extension", new InstantCommand(()->arm.resetArmPosition(RobotMap.ARM_EXTENSION_OFFSET)));
-
 
     configureBindings();
   }
