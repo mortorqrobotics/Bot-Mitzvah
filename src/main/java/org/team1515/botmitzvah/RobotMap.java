@@ -1,12 +1,5 @@
 package org.team1515.botmitzvah;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.geometry.Transform3d;
-import edu.wpi.first.math.geometry.Translation3d;
-import edu.wpi.first.math.util.Units;
-
 public class RobotMap {
 
         // Conversion factors
@@ -68,10 +61,8 @@ public class RobotMap {
         public static final double CHARGING_STATION_DISTANCE = (48 + 2 * 9.125) / 12; // units in feet
 
         public static final double ARM_LOWER_LIMIT = 0;
-
         public static final double ARM_UPPER_LIMIT = 0;
-
 		public static final double ARM_PIVOT_UPPER_LIMIT = 0;
-
         public static final double ARM_PIVOT_LOWER_LIMIT = 0;
+        public static final double ARM_PIVOT_STOWED_ANGLE = 0;
 }

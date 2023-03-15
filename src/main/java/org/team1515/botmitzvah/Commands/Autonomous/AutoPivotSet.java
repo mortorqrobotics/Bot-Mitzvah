@@ -2,7 +2,6 @@ package org.team1515.botmitzvah.Commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import org.team1515.botmitzvah.Subsystems.Arm;
 import org.team1515.botmitzvah.Subsystems.ArmPivot;
 import org.team1515.botmitzvah.Utils.Utilities;
 

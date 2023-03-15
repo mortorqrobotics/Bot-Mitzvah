@@ -5,6 +5,7 @@ import org.team1515.botmitzvah.RobotMap;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase {
@@ -32,5 +33,11 @@ public class Claw extends SubsystemBase {
     public void end() {
         lClaw.set(0);
         rClaw.set(0);
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("left current draw", lClaw.getOutputCurrent());
+        SmartDashboard.putNumber("right current draw", rClaw.getOutputCurrent());
     }
 }

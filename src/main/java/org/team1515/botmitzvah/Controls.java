@@ -8,6 +8,7 @@ public class Controls {
     // change botton maps later
     public static final Trigger RESET_GYRO = new Trigger(RobotContainer.mainController::getBackButton);
     public static final Trigger DRIVE_ROBOT_ORIENTED = new Trigger(RobotContainer.mainController::getLeftBumper);
+    public static final Trigger CANCEL_ALL = new Trigger(RobotContainer.secondController::getBackButton);
 
     public static final Trigger MANUAL_PIVOT = new Trigger(RobotContainer.secondController::getRightStickButton);
     public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getLeftTriggerSecond);

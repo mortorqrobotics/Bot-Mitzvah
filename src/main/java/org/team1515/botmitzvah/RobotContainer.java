@@ -11,12 +11,11 @@ import org.team1515.botmitzvah.Commands.Autonomous.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandLeave;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandScore;
-import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
-import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -67,6 +66,8 @@ public class RobotContainer {
             () -> Controls.DRIVE_ROBOT_ORIENTED.getAsBoolean()));
 
     Controls.RESET_GYRO.onTrue(new InstantCommand(() -> drivetrain.zeroGyro()));
+
+    Controls.CANCEL_ALL.onTrue(new InstantCommand(() -> CommandScheduler.getInstance().cancelAll()));
 
     Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
 

@@ -4,9 +4,6 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.Commands.ClawOut;
-import org.team1515.botmitzvah.Utils.*;
-
 import com.team364.swervelib.util.CTREConfigs;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -49,7 +46,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    // new StartupCommand(RobotContainer.arm, RobotContainer.armPivot).schedule();
     // new ClawClose(RobotContainer.claw).schedule();
     m_autonomousCommand = robotContainer.getAutonomousCommand();
 

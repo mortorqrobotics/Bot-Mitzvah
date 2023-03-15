@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
@@ -26,6 +27,7 @@ public class Arm extends SubsystemBase {
 
         encoder = arm.getEncoder();
         resetArmPosition(0);
+        SmartDashboard.putData("set arm to 0", new InstantCommand(() -> resetArmPosition(0)));
         // encoder.setInverted(false);
 
         speed = RobotMap.ARM_SPEED;
