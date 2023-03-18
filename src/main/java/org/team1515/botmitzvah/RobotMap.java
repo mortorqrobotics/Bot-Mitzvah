@@ -25,10 +25,8 @@ public class RobotMap {
         public final static int ARM_ID = 15;// replace
         public final static double ARM_SPEED = 0.95;// replace
 
-        public static final double ARM_RETRACTED_POS = -1; // replace
-        public static final double ARM_EXTENDED_POS = -1; // replace
-        public static final double ARM_MAX_POS = -1; // replace
-        public static final double ARM_MIN_POS = -1; // replace
+        public static final double ARM_MAX_POS = 252; // replace
+        public static final double ARM_MIN_POS = 0; // replace
         public static final double ARM_TOLERANCE = -1; // replace
 
         // ArmPivot Constants
@@ -48,7 +46,7 @@ public class RobotMap {
         public static final double ARM_PIVOT_TOP_ANGLE = 15;
         public static final double ARM_PIVOT_MID_ANGLE = 3;
         public static final double ARM_PIVOT_BOTTOM_ANGLE = -40;
-        public static final double ARM_PIVOT_STOWED_ANGLE = -70;
+        public static final double ARM_PIVOT_STOWED_ANGLE = -78;
 
         // swerve pids
         public static final double BALANCE_KP = 3; // replace

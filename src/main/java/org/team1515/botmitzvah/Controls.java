@@ -11,10 +11,11 @@ public class Controls {
     public static final Trigger CANCEL_ALL = new Trigger(RobotContainer.secondController::getBackButton);
 
     public static final Trigger MANUAL_PIVOT = new Trigger(RobotContainer.secondController::getRightStickButton);
-    public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getLeftTriggerSecond);
-    public static final Trigger MANUAL_BACKWARD = new Trigger(Controls::getRightTriggerSecond);
+    public static final Trigger MANUAL_FORWARD = new Trigger(Controls::getRightTriggerSecond);
+    public static final Trigger MANUAL_BACKWARD = new Trigger(Controls::getLeftTriggerSecond);
     public static final Trigger GRAB = new Trigger(RobotContainer.secondController::getRightBumper);
     public static final Trigger RELEASE = new Trigger(RobotContainer.secondController::getLeftBumper);
+    public static final Trigger USE_LIMIT = new Trigger(RobotContainer.secondController::getStartButton);
 
     // public static final Trigger B = new Trigger(RobotContainer.mainController::getYButton);
 
@@ -26,6 +27,7 @@ public class Controls {
     public static final Trigger PIVOT_LOW = new Trigger(RobotContainer.secondController::getAButton);
     public static final Trigger PIVOT_MID = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger PIVOT_HIGH = new Trigger(RobotContainer.secondController::getYButton);
+    public static final Trigger PIVOT_STOW = new Trigger(RobotContainer.secondController::getBButton);
     public static DoubleSupplier MANUAL_PIVOT_VALUE = RobotContainer.secondController::getRightY;
 
     public static boolean getLeftTriggerMain() {

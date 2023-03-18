@@ -35,6 +35,18 @@ public class DriveDistProfiled extends CommandBase {
         SmartDashboard.putNumber("target dist", targetDist);
         addRequirements(drivetrainSubsystem);
     }
+    public DriveDistProfiled(Drivetrain drivetrainSubsystem, double targetDist, double direction, double velocity, double acceleration) {
+        this.drivetrainSubsystem = drivetrainSubsystem;
+        this.direction = direction;
+        this.maxSpeed = 0.5 * SwerveConstants.Swerve.maxSpeed;
+
+        controller = new ProfiledPIDController(p, 0, 0, new Constraints(velocity, acceleration));
+        controller.setTolerance(0.04, 0.3);
+        controller.setGoal(targetDist);
+
+        SmartDashboard.putNumber("target dist", targetDist);
+        addRequirements(drivetrainSubsystem);
+    }
 
     @Override
     public void initialize() {

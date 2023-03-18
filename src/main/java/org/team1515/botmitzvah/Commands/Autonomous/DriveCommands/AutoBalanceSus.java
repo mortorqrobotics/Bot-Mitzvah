@@ -16,7 +16,7 @@ public class AutoBalanceSus extends CommandBase {
 
     public AutoBalanceSus(Drivetrain drivetrain, double direction) {
         this.drivetrain = drivetrain;
-        this.maxSpeed = 0.09 * SwerveConstants.Swerve.maxSpeed;
+        this.maxSpeed = 0.13 * SwerveConstants.Swerve.maxSpeed;
         this.direction = direction;
 
         addRequirements(drivetrain);

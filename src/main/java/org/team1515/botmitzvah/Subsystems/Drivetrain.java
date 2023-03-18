@@ -24,7 +24,7 @@ public class Drivetrain extends SubsystemBase {
     private Rotation2d realZero;
 
     public Drivetrain(Pose2d initialPos) {
-        realZero = initialPos.getRotation();
+        realZero = Rotation2d.fromDegrees(RobotContainer.gyro.getYaw());
 
         zeroGyro();
 

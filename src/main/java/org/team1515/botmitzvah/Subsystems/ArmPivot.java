@@ -63,10 +63,10 @@ public class ArmPivot extends SubsystemBase {
             end();
             return;
         };
-        if(getCancoderAngle() < -50 && speed < 0) {
-            end();
-            return;
-        }
+        // if(getCancoderAngle() < -50 && speed < 0) {
+        //     end();
+        //     return;
+        // }
         pivotMotor.set(speed);
     }
 

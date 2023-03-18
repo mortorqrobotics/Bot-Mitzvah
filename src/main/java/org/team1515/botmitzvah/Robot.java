@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     // new ClawClose(RobotContainer.claw).schedule();
     m_autonomousCommand = robotContainer.getAutonomousCommand();
-
+    RobotContainer.arm.resetArmPosition(0);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

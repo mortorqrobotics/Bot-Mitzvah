@@ -22,7 +22,7 @@ public class PivotManual extends CommandBase {
 
   @Override
   public void execute() {
-    double speed = speedSupplier.getAsDouble();
+    double speed = -speedSupplier.getAsDouble();
     if(speed > 0) {
         speed *= upSpeed;
     }

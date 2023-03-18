@@ -53,6 +53,7 @@ public class RobotContainer {
     autonomousChooser.addOption("Leave", new AutoCommandLeave(drivetrain));
     autonomousChooser.addOption("Balance", new AutoCommandBalance(drivetrain));
     autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, armPivot, claw, arm));
+    autonomousChooser.addOption("Andrew", new AutoCommandBalance(drivetrain));
     SmartDashboard.putData("Auto Choices", autonomousChooser);
 
     configureBindings();
@@ -74,6 +75,7 @@ public class RobotContainer {
 
     Controls.GRAB.whileTrue(new ClawIn(claw));
     Controls.RELEASE.whileTrue(new ClawOut(claw));
+    Controls.USE_LIMIT.onTrue(new InstantCommand(() -> arm.useLimits = !arm.useLimits));
 
     Controls.MANUAL_PIVOT.whileTrue(new PivotManual(armPivot, Controls.MANUAL_PIVOT_VALUE));
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
@@ -81,9 +83,10 @@ public class RobotContainer {
 
     // Controls.B.whileTrue(new AutoBalance(drivetrain));
 
-    Controls.PIVOT_LOW.onTrue(new AutoPivotSet(armPivot, -40));
+    Controls.PIVOT_LOW.onTrue(new AutoPivotSet(armPivot, -35));
     Controls.PIVOT_MID.onTrue(new AutoPivotSet(armPivot, 3));
     Controls.PIVOT_HIGH.onTrue(new AutoPivotSet(armPivot, 15));
+    Controls.PIVOT_STOW.onTrue(new AutoPivotSet(armPivot, RobotMap.ARM_PIVOT_STOWED_ANGLE));
   }
 
   public Command getAutonomousCommand() {

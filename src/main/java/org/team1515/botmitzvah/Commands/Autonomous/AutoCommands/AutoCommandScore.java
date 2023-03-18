@@ -22,13 +22,16 @@ public class AutoCommandScore extends SequentialCommandGroup {
      */
     public AutoCommandScore(Drivetrain drivetrain, ArmPivot pivot, Claw claw, Arm arm) { // add params
         addCommands(
-            new AutoArmSet(arm, RobotMap.ARM_RETRACTED_POS),
+            new InstantCommand(()->claw.intake()),
+            // new AutoArmSet(arm, RobotMap.ARM_RETRACTED_POS),
             new AutoPivotSet(pivot, RobotMap.ARM_PIVOT_MID_ANGLE),
+            new WaitCommand(0.25),
             new InstantCommand(() -> claw.outtake()),
             new WaitCommand(0.5),
-            new InstantCommand(() -> claw.end()),
-            Commands.parallel(new AutoPivotSet(pivot, RobotMap.ARM_PIVOT_STOWED_ANGLE),
-            new DriveDistProfiled(drivetrain, Units.inchesToMeters(170), -1))
+            new InstantCommand(() -> claw.end())
+            // new DriveDistProfiled(drivetrain, Units.inchesToMeters(140), 1)
+            // Commands.parallel(new AutoPivotSet(pivot, RobotMap.ARM_PIVOT_STOWED_ANGLE),
+            // new DriveDistProfiled(drivetrain, Units.inchesToMeters(170), -1))
         );
     }
 }

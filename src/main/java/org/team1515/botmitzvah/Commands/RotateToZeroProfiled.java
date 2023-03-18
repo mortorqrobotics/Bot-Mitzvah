@@ -28,7 +28,7 @@ public class RotateToZeroProfiled extends ProfiledPIDCommand {
                 // Close loop on heading
                 () -> Math.toRadians(RobotContainer.gyro.getYaw()),
                 // Set reference to target
-                0,
+                drivetrainSubsystem.getRealZero().getRadians(),
                 // Pipe output to turn robot
                 (output, setpoint) -> drivetrainSubsystem.drive(new Translation2d(0.0, 0.0), output + Math.copySign(ff, output), true, true),
                 // Require the drive
