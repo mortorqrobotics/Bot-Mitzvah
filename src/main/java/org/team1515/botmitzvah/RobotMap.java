@@ -34,7 +34,7 @@ public class RobotMap {
         public static final int ARM_PIVOT_CANCODER_ID = 13;
 
         /** degrees */
-        public static final double ARM_PIVOT_OFFSET = 63; // MEASURE (ZERO SHOULD BE REFERENCE FROM HORIZONTAL)
+        public static final double ARM_PIVOT_OFFSET = 69; // MEASURE (ZERO SHOULD BE REFERENCE FROM HORIZONTAL)
         public static final double ARM_PIVOT_GEAR_RATIO = 90; // replace
 
         public static final double ARM_PIVOT_UP_SPEED = 0.3;
@@ -46,7 +46,7 @@ public class RobotMap {
         public static final double ARM_PIVOT_TOP_ANGLE = 15;
         public static final double ARM_PIVOT_MID_ANGLE = 3;
         public static final double ARM_PIVOT_BOTTOM_ANGLE = -40;
-        public static final double ARM_PIVOT_STOWED_ANGLE = -78;
+        public static final double ARM_PIVOT_STOWED_ANGLE = -81;
 
         // swerve pids
         public static final double BALANCE_KP = 3; // replace

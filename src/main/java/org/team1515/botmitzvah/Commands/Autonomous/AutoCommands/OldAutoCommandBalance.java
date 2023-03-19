@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-public class AutoCommandBalance extends SequentialCommandGroup {
+public class OldAutoCommandBalance extends SequentialCommandGroup {
 
     /**
      * Runs auto one command after another (finished when the isFinished method
@@ -21,7 +21,7 @@ public class AutoCommandBalance extends SequentialCommandGroup {
      * 
      * @param # add params
      */
-    public AutoCommandBalance(Drivetrain drivetrain) { // add params
+    public OldAutoCommandBalance(Drivetrain drivetrain) { // add params
         addCommands(
                 new InstantCommand(() -> RobotContainer.gyro.zeroRoll()),
                 new DriveDistProfiled(drivetrain, Units.inchesToMeters(170), 1, 1, 7),

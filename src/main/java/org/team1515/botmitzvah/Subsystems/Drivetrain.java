@@ -22,6 +22,7 @@ public class Drivetrain extends SubsystemBase {
     public SwerveModule[] mSwerveMods;
 
     private Rotation2d realZero;
+    private double gyroOffset = 0;
 
     public Drivetrain(Pose2d initialPos) {
         realZero = Rotation2d.fromDegrees(RobotContainer.gyro.getYaw());
@@ -107,8 +108,17 @@ public class Drivetrain extends SubsystemBase {
      * @return Rotation2d yaw of the robot in radians
      */
     public Rotation2d getYaw() {
-        return (SwerveConstants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - RobotContainer.gyro.getYaw())
+        return (SwerveConstants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - RobotContainer.gyro.getYaw() + gyroOffset)
                 : Rotation2d.fromDegrees(RobotContainer.gyro.getYaw());
+    }
+
+    public void flipGyro() {
+        if(gyroOffset == 0) {
+            gyroOffset = 180;
+        }
+        else {
+            gyroOffset = 0;
+        }
     }
 
     public void resetModulesToAbsolute() {

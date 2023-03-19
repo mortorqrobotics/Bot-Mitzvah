@@ -11,6 +11,7 @@ import org.team1515.botmitzvah.Commands.Autonomous.*;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandLeave;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandScore;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.OldAutoCommandBalance;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
 
@@ -51,9 +52,10 @@ public class RobotContainer {
 
     autonomousChooser.setDefaultOption("None", Commands.print("No auto command"));
     autonomousChooser.addOption("Leave", new AutoCommandLeave(drivetrain));
-    autonomousChooser.addOption("Balance", new AutoCommandBalance(drivetrain));
+    // autonomousChooser.addOption("GyroBalance", new AutoCommandBalance(drivetrain));
+    autonomousChooser.addOption("Balance", new OldAutoCommandBalance(drivetrain));
     autonomousChooser.addOption("Score", new AutoCommandScore(drivetrain, armPivot, claw, arm));
-    autonomousChooser.addOption("Andrew", new AutoCommandBalance(drivetrain));
+    // autonomousChooser.addOption("Andrew", new AutoCommandBalance(drivetrain));
     SmartDashboard.putData("Auto Choices", autonomousChooser);
 
     configureBindings();
@@ -72,10 +74,12 @@ public class RobotContainer {
     Controls.CANCEL_ALL.onTrue(new InstantCommand(() -> CommandScheduler.getInstance().cancelAll()));
 
     Controls.ZERO_ROBOT.onTrue(new RotateToZero(drivetrain));
+    Controls.FLIP_DRIVE_FORWARD.onTrue(new InstantCommand(() -> drivetrain.flipGyro()));
 
     Controls.GRAB.whileTrue(new ClawIn(claw));
     Controls.RELEASE.whileTrue(new ClawOut(claw));
     Controls.USE_LIMIT.onTrue(new InstantCommand(() -> arm.useLimits = !arm.useLimits));
+    // Controls.RESET_WINCH.onTrue(new InstantCommand(()->arm.resetArmPosition(0)));
 
     Controls.MANUAL_PIVOT.whileTrue(new PivotManual(armPivot, Controls.MANUAL_PIVOT_VALUE));
     Controls.MANUAL_FORWARD.whileTrue(new ArmExtend(arm));
@@ -83,7 +87,7 @@ public class RobotContainer {
 
     // Controls.B.whileTrue(new AutoBalance(drivetrain));
 
-    Controls.PIVOT_LOW.onTrue(new AutoPivotSet(armPivot, -35));
+    Controls.PIVOT_LOW.onTrue(new AutoPivotSet(armPivot, -38));
     Controls.PIVOT_MID.onTrue(new AutoPivotSet(armPivot, 3));
     Controls.PIVOT_HIGH.onTrue(new AutoPivotSet(armPivot, 15));
     Controls.PIVOT_STOW.onTrue(new AutoPivotSet(armPivot, RobotMap.ARM_PIVOT_STOWED_ANGLE));
@@ -94,7 +98,7 @@ public class RobotContainer {
   }
 
   public static double getRobotSpeed() {
-    return Controls.getLeftTriggerMain() ? 0.45 : 0.7;
+    return Controls.getLeftTriggerMain() ? 0.45 : 0.75;
     // return 0.7;
   }
 

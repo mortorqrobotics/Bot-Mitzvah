@@ -24,10 +24,12 @@ public class Controls {
     // public static final Trigger ALIGN_LIGHT = new
     // Trigger(RobotContainer.mainController::getStartButton);
     public static final Trigger ZERO_ROBOT = new Trigger(RobotContainer.mainController::getStartButton);
+    public static final Trigger FLIP_DRIVE_FORWARD = new Trigger(RobotContainer.mainController::getYButton);
     public static final Trigger PIVOT_LOW = new Trigger(RobotContainer.secondController::getAButton);
     public static final Trigger PIVOT_MID = new Trigger(RobotContainer.secondController::getXButton);
     public static final Trigger PIVOT_HIGH = new Trigger(RobotContainer.secondController::getYButton);
     public static final Trigger PIVOT_STOW = new Trigger(RobotContainer.secondController::getBButton);
+    public static final Trigger RESET_WINCH = new Trigger(RobotContainer.secondController::getRightStickButton);
     public static DoubleSupplier MANUAL_PIVOT_VALUE = RobotContainer.secondController::getRightY;
 
     public static boolean getLeftTriggerMain() {

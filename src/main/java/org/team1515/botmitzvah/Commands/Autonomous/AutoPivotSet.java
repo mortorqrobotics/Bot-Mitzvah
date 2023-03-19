@@ -8,8 +8,8 @@ import org.team1515.botmitzvah.Utils.Utilities;
 public class AutoPivotSet extends CommandBase {
     private final ArmPivot pivot;
     private final double angle;
-    private final double upSpeed = 0.25;
-    private final double downSpeed = -0.20;
+    private final double upSpeed = 0.30;
+    private final double downSpeed = -0.25;
 
     public AutoPivotSet(ArmPivot pivot, double angle) {
         this.pivot = pivot;

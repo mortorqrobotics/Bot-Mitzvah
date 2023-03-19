@@ -1,6 +1,7 @@
 package org.team1515.botmitzvah.Commands.Autonomous.AutoCommands;
 
 import org.team1515.botmitzvah.RobotContainer;
+import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalance;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.AutoBalanceSus;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDist;
 import org.team1515.botmitzvah.Commands.Autonomous.DriveCommands.DriveDistProfiled;
@@ -24,7 +25,7 @@ public class AutoCommandBalance extends SequentialCommandGroup {
     public AutoCommandBalance(Drivetrain drivetrain) { // add params
         addCommands(
                 new InstantCommand(() -> RobotContainer.gyro.zeroRoll()),
-                new DriveDistProfiled(drivetrain, Units.inchesToMeters(95), 1, 1, 7),
+                new DriveDistProfiled(drivetrain, Units.inchesToMeters(93.5), 1, 1, 7),
                 new InstantCommand(()-> drivetrain.drive(new Translation2d(0,0),1, false, true ))
         );
     }
