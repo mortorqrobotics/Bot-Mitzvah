@@ -11,12 +11,12 @@ public class driveLine extends CommandBase {
     private double ti; //initial time parameter
     private double tf; //final time parameter
     private double realTime; //actial system time
-    public ArmExtend(double i double j, double ti, double tf) {
-        this.arm = arm;
-        addRequirements(i);
-        addRequirements(j);
-        addRequirements(ti);
-        addRequirements(tf);
+    public driveLine(Drivetrain drivetrain, double i double j, double ti, double tf) {
+        this.drivetrain = drivetrain;
+        this.i = i;
+        this.j = j;
+        this.ti = ti;
+        this.tf = tf;
         realTime = System.currentTimeMillis();
     }
 
