@@ -92,7 +92,7 @@ public class RobotContainer {
     Controls.PIVOT_HIGH.onTrue(new AutoPivotSet(armPivot, 15));
     Controls.PIVOT_STOW.onTrue(new AutoPivotSet(armPivot, RobotMap.ARM_PIVOT_STOWED_ANGLE));
   }
-
+  
   public Command getAutonomousCommand() {
     return autonomousChooser.getSelected();
   }
