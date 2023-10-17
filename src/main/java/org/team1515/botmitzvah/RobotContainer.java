@@ -12,6 +12,7 @@ import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandBalan
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandLeave;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandScore;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.OldAutoCommandBalance;
+import org.team1515.botmitzvah.Commands.Autonomous.CalcCommands.driveLine;
 import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
 import org.team1515.botmitzvah.Subsystems.*;
 
@@ -94,7 +95,8 @@ public class RobotContainer {
   }
   
   public Command getAutonomousCommand() {
-    return autonomousChooser.getSelected();
+    // return autonomousChooser.getSelected();
+    return new driveLine(drivetrain, 1, 1, 0, 1);
   }
 
   public static double getRobotSpeed() {
