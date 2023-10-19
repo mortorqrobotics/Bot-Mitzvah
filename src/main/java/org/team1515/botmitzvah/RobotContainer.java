@@ -4,27 +4,35 @@
 
 package org.team1515.botmitzvah;
 
-import org.team1515.botmitzvah.Utils.*;
-
-import org.team1515.botmitzvah.Commands.*;
-import org.team1515.botmitzvah.Commands.Autonomous.*;
-import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandBalance;
+import org.team1515.botmitzvah.Commands.ClawIn;
+import org.team1515.botmitzvah.Commands.ClawOut;
+import org.team1515.botmitzvah.Commands.DefaultDriveCommand;
+import org.team1515.botmitzvah.Commands.RotateToZero;
+import org.team1515.botmitzvah.Commands.Autonomous.AutoPivotSet;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandLeave;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.AutoCommandScore;
 import org.team1515.botmitzvah.Commands.Autonomous.AutoCommands.OldAutoCommandBalance;
+import org.team1515.botmitzvah.Commands.Autonomous.CalcCommands.driveCircle;
 import org.team1515.botmitzvah.Commands.Autonomous.CalcCommands.driveLine;
-import org.team1515.botmitzvah.Commands.ManualArmAndPivot.*;
-import org.team1515.botmitzvah.Subsystems.*;
+import org.team1515.botmitzvah.Commands.ManualArmAndPivot.ArmExtend;
+import org.team1515.botmitzvah.Commands.ManualArmAndPivot.ArmRetract;
+import org.team1515.botmitzvah.Commands.ManualArmAndPivot.PivotManual;
+import org.team1515.botmitzvah.Subsystems.Arm;
+import org.team1515.botmitzvah.Subsystems.ArmPivot;
+import org.team1515.botmitzvah.Subsystems.Claw;
+import org.team1515.botmitzvah.Subsystems.Drivetrain;
+import org.team1515.botmitzvah.Utils.Gyroscope;
+import org.team1515.botmitzvah.Utils.Utilities;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Commands;
-
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class RobotContainer {
   public static XboxController mainController;
@@ -96,7 +104,9 @@ public class RobotContainer {
   
   public Command getAutonomousCommand() {
     // return autonomousChooser.getSelected();
-    return new driveLine(drivetrain, 1, 1, 0, 1);
+    // return new driveLine(drivetrain, -0.5, 0.5, 0, 3);
+    return new SequentialCommandGroup(new driveLine(drivetrain, Math.PI*(2), -1, 1, 0,1), new driveLine(drivetrain,Math.PI*(2), 1,0,0,1), new driveLine(drivetrain,Math.PI*(2), 0,1,0,1), new driveCircle(drivetrain, Math.PI*(-2), 0.75, 0, 2*Math.PI, false));
+    // return new DriveDist(drivetrain, 1);
   }
 
   public static double getRobotSpeed() {
